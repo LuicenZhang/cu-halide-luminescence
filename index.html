@@ -2,714 +2,637 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>铜光纪 · 有机-无机杂化铜(I)卤化物发光探险（2023–2026）</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>铜光工坊 · Cu(I) 卤化物发光小游戏</title>
+<meta name="description" content="一个关于铜(I)基卤化物发光的网页小游戏：动手合成、点亮样品、看动画理解自陷激子发光。">
 <style>
-:root{
-  --bg:#07090d; --bg2:#0d1118; --panel:rgba(18,22,30,.78); --line:#b8935a; --gold:#d8b46a; --gold2:#f1d9a0;
-  --ink:#e8e2d4; --mute:#8d8a82; --dim:#5d5b56;
-  --ste:#6fa8ff; --cc:#f0a640; --xl:#b48cff; --tadf:#4fd1c5; --app:#e7c66b; --warn:#ff7a6b; --ok:#7ddc9a;
-  --serif:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;
-  --sans:"PingFang SC","Noto Sans SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;
-  --mono:"SFMono-Regular","JetBrains Mono",Menlo,Consolas,monospace;
-}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65}
-body{background:
-  radial-gradient(1200px 600px at 80% -10%,rgba(216,180,106,.08),transparent 60%),
-  radial-gradient(900px 500px at -10% 110%,rgba(111,168,255,.06),transparent 60%),var(--bg);min-height:100vh}
-a{color:var(--gold2);text-decoration:none;border-bottom:1px dotted rgba(241,217,160,.4)}
-a:hover{color:#fff;border-bottom-color:#fff}
-button{font-family:inherit}
-header{position:sticky;top:0;z-index:20;backdrop-filter:blur(8px);background:rgba(7,9,13,.82);border-bottom:1px solid rgba(184,147,90,.35)}
-.hwrap{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:10px 22px;flex-wrap:wrap}
-.brand{font-family:var(--serif);font-size:20px;letter-spacing:.12em;color:var(--gold2);white-space:nowrap}
-.brand small{display:block;font-family:var(--sans);font-size:10.5px;letter-spacing:.24em;color:var(--mute)}
-nav{display:flex;gap:2px;flex-wrap:wrap;flex:1}
-nav button{background:none;border:none;color:var(--mute);padding:7px 12px;cursor:pointer;font-size:14px;letter-spacing:.06em;border-bottom:1px solid transparent}
-nav button:hover{color:var(--ink)}
-nav button.on{color:var(--gold2);border-bottom-color:var(--gold)}
-.photons{font-family:var(--mono);color:var(--gold2);font-size:13px;border:1px solid rgba(184,147,90,.5);padding:4px 10px;border-radius:2px;white-space:nowrap}
-.photons b{font-size:16px}
-main{max-width:1240px;margin:0 auto;padding:26px 22px 60px}
-section{display:none;animation:fade .45s ease}
-section.on{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.06em;margin:0}
-h2{font-size:26px;color:var(--gold2)}
-h2 .en{font-family:var(--sans);font-size:11px;letter-spacing:.3em;color:var(--mute);margin-left:12px;text-transform:uppercase}
-h3{font-size:17px;color:var(--ink)}
-.lead{color:#bdb6a6;max-width:860px;margin:10px 0 20px}
-.rule{height:1px;background:linear-gradient(90deg,var(--line),rgba(184,147,90,.0));margin:14px 0 22px}
-.grid{display:grid;gap:16px}
-.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
-@media(max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}}
-.card{background:var(--panel);border:1px solid rgba(184,147,90,.28);padding:16px 18px;position:relative}
-.card:before{content:"";position:absolute;left:-1px;top:-1px;width:14px;height:14px;border-left:1px solid var(--gold);border-top:1px solid var(--gold)}
-.card:after{content:"";position:absolute;right:-1px;bottom:-1px;width:14px;height:14px;border-right:1px solid var(--gold);border-bottom:1px solid var(--gold)}
-.tag{display:inline-block;font-size:11px;letter-spacing:.12em;padding:1px 7px;border:1px solid currentColor;margin-right:6px;border-radius:1px}
-.t-ste{color:var(--ste)}.t-cc{color:var(--cc)}.t-xl{color:var(--xl)}.t-tadf{color:var(--tadf)}.t-app{color:var(--app)}.t-mute{color:var(--mute)}
+:root{--bg:#070910;--panel:#111622;--panel2:#171e2d;--line:#2a3550;--ink:#e9e6dc;--mute:#8f96a8;--gold:#f2c86b;--ok:#7ddc9a;--warn:#ff8a73;--uv:#9d6bff;
+--sans:"PingFang SC","Noto Sans SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;--mono:Menlo,Consolas,monospace}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6}
+body{background:radial-gradient(900px 500px at 85% -10%,rgba(157,107,255,.12),transparent 60%),radial-gradient(800px 500px at -10% 110%,rgba(242,200,107,.08),transparent 60%),var(--bg);min-height:100vh}
+a{color:var(--gold)}
+button{font-family:inherit;cursor:pointer}
+header{position:sticky;top:0;z-index:30;background:rgba(7,9,16,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hw{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 14px;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:.08em;color:var(--gold);font-size:18px;white-space:nowrap}
+nav{display:flex;gap:4px;flex:1;flex-wrap:wrap}
+nav button{background:none;border:1px solid transparent;color:var(--mute);padding:6px 10px;border-radius:20px;font-size:14px}
+nav button.on{color:#fff;border-color:var(--gold);background:rgba(242,200,107,.12)}
+.score{font-family:var(--mono);color:var(--gold);font-size:13px;white-space:nowrap}
+main{max-width:1100px;margin:0 auto;padding:16px 14px 60px}
+section{display:none}section.on{display:block;animation:fd .35s}
+@keyframes fd{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+h2{margin:4px 0 4px;font-size:22px}
+.sub{color:var(--mute);font-size:13.5px;margin:0 0 12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.col{flex:1;min-width:280px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
+.chip{background:var(--panel2);border:1px solid var(--line);color:var(--ink);padding:6px 11px;border-radius:999px;font-size:13.5px;transition:.15s}
+.chip:hover{border-color:#4a5a80}
+.chip.on{border-color:var(--gold);background:rgba(242,200,107,.16);color:#fff;box-shadow:0 0 12px rgba(242,200,107,.25)}
+.chip small{color:var(--mute);margin-left:4px}
+.btn{background:linear-gradient(180deg,#f2c86b,#d79f3a);color:#1b1305;border:none;padding:9px 18px;border-radius:999px;font-weight:700;font-size:14.5px;box-shadow:0 4px 18px rgba(242,200,107,.25)}
+.btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold);box-shadow:none;font-weight:500}
+.btn.uv{background:linear-gradient(180deg,#b28cff,#7b4fe0);color:#fff;box-shadow:0 4px 18px rgba(157,107,255,.35)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+canvas{display:block;width:100%;border-radius:12px;background:#05070c;touch-action:manipulation}
+.lbl{font-size:12.5px;color:var(--mute);letter-spacing:.05em}
+.schem{display:inline-block;font-size:11px;color:#ffb35c;border:1px dashed rgba(255,179,92,.6);padding:0 6px;border-radius:6px;margin-left:4px;vertical-align:middle}
+.cap{font-size:14px;min-height:3.2em;margin-top:8px}
+.cap b{color:var(--gold)}
+.ref{font-size:12px;color:var(--mute)}
+.ref a{color:#9fb4ff}
+input[type=range]{width:100%;accent-color:var(--gold)}
+.sl{display:grid;grid-template-columns:5.5em 1fr 4.5em;align-items:center;gap:8px;font-size:13px;margin:4px 0}
+.sl output{font-family:var(--mono);color:var(--gold);text-align:right}
+.order{display:flex;gap:12px;align-items:flex-start;background:linear-gradient(90deg,rgba(242,200,107,.14),rgba(242,200,107,.02));border:1px solid rgba(242,200,107,.45);border-radius:14px;padding:10px 14px;margin-bottom:12px}
+.order .ic{font-size:30px;line-height:1}
+.order h3{margin:0;font-size:16px;color:var(--gold)}
+.order p{margin:2px 0 0;font-size:13.5px}
+.prog{display:flex;gap:4px;margin-top:6px}.prog i{width:18px;height:6px;border-radius:3px;background:#2a3550}.prog i.d{background:var(--ok)}.prog i.c{background:var(--gold)}
+.result{margin-top:10px;border-radius:12px;padding:10px 12px;background:var(--panel2);border:1px solid var(--line);font-size:14px}
+.result.new{border-color:var(--ok);box-shadow:0 0 20px rgba(125,220,154,.18)}
+.result h4{margin:0 0 4px;font-size:16px}
+.kv{font-family:var(--mono);font-size:12.5px;color:var(--gold)}
+.toast{position:fixed;left:50%;top:70px;transform:translateX(-50%) translateY(-20px);background:#1c2a1f;border:1px solid var(--ok);color:#dfffe8;padding:10px 18px;border-radius:999px;opacity:0;transition:.35s;z-index:50;pointer-events:none;font-size:14px;max-width:92vw;text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.dex{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.dx{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center;font-size:13px;position:relative;overflow:hidden}
+.dx .gem{width:56px;height:56px;margin:4px auto 6px;border-radius:12px;transform:rotate(45deg);background:#1a2030;border:1px solid #2f3a55}
+.dx.lock{opacity:.55}.dx.lock .nm{filter:blur(4px)}
+.dx .nm{font-weight:700;font-size:13.5px}
+.city-wrap{position:relative}
+.bld{cursor:pointer}
+.bld:hover .roof{filter:brightness(1.4)}
+.chal{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:10px}
+.flip{perspective:800px;height:118px;cursor:pointer}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;padding:10px 12px;border:1px solid var(--line);font-size:13px}
+.flip .f{background:linear-gradient(135deg,#2a1414,#151a26);display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:15px;text-align:center}
+.flip .b{background:var(--panel2);transform:rotateY(180deg);overflow:auto}
+.bars{display:flex;flex-direction:column;gap:7px;margin:8px 0}
+.bar{display:grid;grid-template-columns:11em 1fr;gap:8px;align-items:center;font-size:12.5px}
+.bar .t{height:16px;border-radius:8px;background:#1a2132;overflow:hidden;position:relative}
+.bar .t i{display:block;height:100%;width:0;border-radius:8px;transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+.bar .t span{position:absolute;right:6px;top:-1px;font-family:var(--mono);font-size:11.5px;color:#fff;text-shadow:0 0 3px #000,0 0 3px #000,0 0 2px #000}
 .note{font-size:12px;color:var(--mute)}
-.schem{font-size:11px;color:var(--cc);letter-spacing:.1em;border:1px dashed rgba(240,166,64,.6);padding:1px 6px}
-.btn{background:transparent;border:1px solid var(--line);color:var(--gold2);padding:7px 16px;cursor:pointer;letter-spacing:.1em;font-size:13px;transition:.2s}
-.btn:hover{background:rgba(216,180,106,.12);color:#fff}
-.btn.solid{background:linear-gradient(180deg,rgba(216,180,106,.25),rgba(216,180,106,.08))}
-.btn:disabled{opacity:.35;cursor:not-allowed}
-.kv{font-family:var(--mono);font-size:12.5px;color:var(--gold2)}
-ul.tight{margin:6px 0;padding-left:18px}ul.tight li{margin:3px 0}
-/* intro */
-.steps{counter-reset:s}
-.step h3:before{counter-increment:s;content:"0" counter(s);font-family:var(--mono);color:var(--gold);margin-right:10px;font-size:13px}
-.motifs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
-@media(max-width:900px){.motifs{grid-template-columns:repeat(2,1fr)}}
-.motif{border:1px solid rgba(184,147,90,.22);padding:10px;text-align:center;background:rgba(10,13,19,.6);cursor:default}
-.motif svg{width:100%;height:110px}
-.motif .nm{font-family:var(--serif);color:var(--gold2);font-size:14px}
-.motif .ds{font-size:11.5px;color:var(--mute);line-height:1.5;min-height:52px}
-/* timeline */
-.track{position:relative;margin:18px 0 26px;padding:6px 0 0}
-.track .axis{position:absolute;left:0;right:0;top:34px;height:1px;background:linear-gradient(90deg,var(--line),rgba(184,147,90,.25))}
-.years{display:grid;grid-template-columns:repeat(4,1fr);position:relative}
-.yr{text-align:center;cursor:pointer;padding-top:4px}
-.yr .dot{width:16px;height:16px;border:1px solid var(--gold);border-radius:50%;margin:20px auto 8px;background:var(--bg);position:relative}
-.yr.open .dot{background:radial-gradient(circle,var(--gold2),var(--gold) 50%,transparent 70%);box-shadow:0 0 14px rgba(241,217,160,.6)}
-.yr.lock{opacity:.35;cursor:not-allowed}
-.yr .y{font-family:var(--mono);font-size:22px;color:var(--gold2);letter-spacing:.08em}
-.yr .t{font-family:var(--serif);font-size:13px;color:var(--mute)}
-.yr.cur .t{color:var(--ink)}
-.yr .prog{font-family:var(--mono);font-size:11px;color:var(--dim)}
-.nodes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-@media(max-width:1000px){.nodes{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.node{border:1px solid rgba(184,147,90,.25);background:rgba(12,15,22,.75);padding:12px;cursor:pointer;transition:.25s;position:relative}
-.node:hover{border-color:var(--gold);transform:translateY(-2px)}
-.node svg{width:100%;height:104px;display:block}
-.node .j{font-size:11px;color:var(--mute);letter-spacing:.06em;margin-top:6px}
-.node .tt{font-family:var(--serif);font-size:14px;color:var(--ink);line-height:1.45;margin-top:2px}
-.node .seen{position:absolute;right:8px;top:6px;font-size:11px;color:var(--gold)}
-.node:not(.visited) .seen{display:none}
-.gate{margin-top:18px}
-.opts{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-.opt{text-align:left;background:rgba(255,255,255,.02);border:1px solid rgba(184,147,90,.25);color:var(--ink);padding:9px 12px;cursor:pointer;font-size:14px}
-.opt:hover{border-color:var(--gold)}
-.opt.right{border-color:var(--ok);color:var(--ok)}
-.opt.wrong{border-color:var(--warn);color:var(--warn)}
-.fb{margin-top:10px;font-size:13.5px;color:#cfc8b8;border-left:2px solid var(--gold);padding:4px 10px;display:none}
-/* modal */
-#modal{position:fixed;inset:0;background:rgba(3,4,7,.78);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
-#modal.on{display:flex}
-#modal .box{max-width:860px;width:100%;max-height:90vh;overflow:auto;background:#0c0f15;border:1px solid var(--line);padding:22px 26px;position:relative}
-#modal .x{position:absolute;right:12px;top:8px;background:none;border:none;color:var(--mute);font-size:22px;cursor:pointer}
-#modal .art{display:grid;grid-template-columns:260px 1fr;gap:20px}
-@media(max-width:700px){#modal .art{grid-template-columns:1fr}}
-#modal .art svg{width:100%;height:220px;border:1px solid rgba(184,147,90,.2);background:radial-gradient(circle at 50% 40%,rgba(216,180,106,.07),transparent 70%)}
-.datatab{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.5px}
-.datatab td{border-bottom:1px solid rgba(184,147,90,.15);padding:5px 4px;vertical-align:top}
-.datatab td:first-child{color:var(--mute);width:34%}
-.src{font-size:12px;color:var(--mute);margin-top:12px;border-top:1px solid rgba(184,147,90,.2);padding-top:8px}
-/* lab */
-.labwrap{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px}
-@media(max-width:1000px){.labwrap{grid-template-columns:1fr}}
-canvas{display:block;width:100%;background:#090b10;border:1px solid rgba(184,147,90,.25)}
-.modes{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.modes button{background:none;border:1px solid rgba(184,147,90,.3);color:var(--mute);padding:6px 12px;cursor:pointer;font-size:13px}
-.modes button.on{color:var(--gold2);border-color:var(--gold);background:rgba(216,180,106,.08)}
-.ctrl{margin:10px 0}
-.ctrl label{display:flex;justify-content:space-between;font-size:13px;color:#cfc8b8}
-.ctrl label span{font-family:var(--mono);color:var(--gold2)}
-input[type=range]{width:100%;accent-color:#d8b46a}
-.seg{display:flex;gap:0;margin-top:4px}
-.seg button{flex:1;background:none;border:1px solid rgba(184,147,90,.3);color:var(--mute);padding:5px;cursor:pointer;font-family:var(--mono)}
-.seg button.on{color:#0a0a0a;background:var(--gold);border-color:var(--gold)}
-.readout{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-size:12.5px;margin-top:10px}
-.readout div{border-bottom:1px solid rgba(184,147,90,.12);padding:3px 0}
-.readout b{font-family:var(--mono);color:var(--gold2);font-weight:400;float:right}
-.swatch{height:30px;border:1px solid rgba(255,255,255,.15);margin-top:8px;box-shadow:0 0 24px 2px var(--sw,transparent)}
-.goals li{list-style:none;margin:5px 0;font-size:13px;color:var(--mute)}
-.goals li:before{content:"◇ ";color:var(--gold)}
-.goals li.done{color:var(--ok)}.goals li.done:before{content:"◆ ";color:var(--ok)}
-.explain{font-size:13.5px;color:#cfc8b8;margin-top:10px;min-height:80px}
-/* forge */
-.order{border:1px solid rgba(184,147,90,.3);padding:12px 14px;margin-bottom:10px;cursor:pointer;background:rgba(12,15,22,.6)}
-.order.on{border-color:var(--gold);background:rgba(216,180,106,.07)}
-.order .stars{float:right;color:var(--gold);font-family:var(--mono)}
-.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-@media(max-width:900px){.slots{grid-template-columns:1fr}}
-.slot h4{margin:0 0 6px;font-weight:400;font-size:12px;letter-spacing:.2em;color:var(--mute)}
-.chip{display:block;width:100%;text-align:left;background:rgba(255,255,255,.02);border:1px solid rgba(184,147,90,.22);color:var(--ink);padding:7px 10px;margin:5px 0;cursor:pointer;font-size:13px}
-.chip:hover{border-color:var(--gold)}
-.chip.on{border-color:var(--gold2);background:rgba(216,180,106,.12);color:var(--gold2)}
-.chip.good{border-color:var(--ok)}.chip.bad{border-color:var(--warn)}
-#forgeArt{width:100%;height:230px;border:1px solid rgba(184,147,90,.22);background:radial-gradient(circle at 50% 50%,rgba(216,180,106,.06),transparent 70%)}
-/* map */
-#mapSvg{width:100%;height:auto;border:1px solid rgba(184,147,90,.22);background:#080a0f}
-#mapSvg .mn rect{fill:#0e121a;stroke:rgba(184,147,90,.45);transition:.2s}
-#mapSvg .mn text{fill:#e8e2d4;font-size:13px;font-family:var(--sans)}
-#mapSvg .mn.hl rect{stroke:#f1d9a0;stroke-width:2;fill:#17140d}
-#mapSvg .mn.fade{opacity:.25}
-#mapSvg path.lk{fill:none;stroke:rgba(184,147,90,.35);stroke-width:1.2;transition:.2s}
-#mapSvg path.lk.hl{stroke:#f1d9a0;stroke-width:2.2}
-#mapSvg path.lk.fade{opacity:.08}
-.refs li{margin:8px 0;font-size:13.5px;color:#cfc8b8}
-.refs li .d{font-size:12px;color:var(--mute)}
-.refs ol{padding-left:26px}
-footer{max-width:1240px;margin:0 auto;padding:16px 22px 40px;color:var(--dim);font-size:12px;border-top:1px solid rgba(184,147,90,.15)}
-.toast{position:fixed;right:22px;bottom:22px;background:#12100b;border:1px solid var(--gold);color:var(--gold2);padding:10px 16px;z-index:60;opacity:0;transform:translateY(10px);transition:.35s;font-size:13.5px;pointer-events:none}
-.toast.on{opacity:1;transform:none}
-.quizq{font-family:var(--serif);font-size:17px;color:var(--ink)}
-.qbar{height:2px;background:rgba(184,147,90,.2);margin:12px 0}.qbar i{display:block;height:100%;background:var(--gold);transition:.3s}
-.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:6px 0 22px}
-.chips span{border:1px solid var(--c);color:var(--c);padding:4px 14px;font-size:13px;letter-spacing:.08em}
-#introSvg{width:100%;height:auto;display:block}
-.oneline{font-size:14px;color:#cfc8b8;margin:0 0 12px;border-left:2px solid var(--gold);padding-left:10px}
-.kn{font-family:var(--mono);font-size:12.5px;color:var(--gold2);margin-top:4px}
-.big{font-family:var(--mono);font-size:26px;color:var(--gold2);line-height:1.3}
-@keyframes flow{to{stroke-dashoffset:-40}}
-@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
-.flow{stroke-dasharray:6 8;animation:flow 1.4s linear infinite}
-.pulse{animation:pulse 1.8s ease-in-out infinite}
-.motif .ds{min-height:0}
+.intro{position:fixed;inset:0;z-index:60;background:rgba(5,6,10,.94);display:flex;align-items:center;justify-content:center;padding:20px}
+.intro .box{max-width:520px;text-align:center}
+.intro h1{font-size:30px;color:var(--gold);margin:6px 0;letter-spacing:.1em}
+.intro canvas{background:transparent;height:150px}
+.hide{display:none!important}
+.mixer{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+select{background:var(--panel2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px;font-size:13.5px;width:100%}
+.lamp{width:110px;height:110px;border-radius:50%;margin:8px auto;background:#222;transition:.4s}
+.ink{position:relative;height:120px;border-radius:12px;background:linear-gradient(135deg,#e8e0c8,#cfc4a6);overflow:hidden;color:#6b5f45;display:flex;align-items:center;justify-content:center;font-size:13px;transition:.4s}
+.ink.dark{background:#0d0b16;color:#3a3550}
+.ink .sec{position:absolute;font-size:30px;font-weight:900;letter-spacing:.2em;opacity:0;transition:.6s}
+.ink.dark .sec{opacity:1}
+.foot{margin-top:30px;font-size:12px;color:var(--mute);text-align:center}
+@media(max-width:600px){nav{order:3;flex-basis:100%;flex-wrap:nowrap;overflow-x:auto}.bar{grid-template-columns:8em 1fr}h2{font-size:19px}.brand{font-size:16px}nav button{padding:5px 8px;font-size:13px}}
 </style>
 </head>
 <body>
-<header><div class="hwrap">
-  <div class="brand">铜 光 纪<small>CU(I) HALIDE HYBRIDS · 2023–2026</small></div>
+<div class="intro" id="intro"><div class="box">
+  <canvas id="introCv" width="520" height="150"></canvas>
+  <h1>铜光工坊</h1>
+  <p style="color:#c9c3b3">你是一名新来的发光材料工匠。<br>用 <b style="color:#f2c86b">一价铜 Cu⁺</b>、<b style="color:#c9a2ff">卤素</b> 和 <b style="color:#9fe0ff">阳离子/配体</b> 拼出晶体，<br>用紫外灯把它们 <b>点亮</b>，完成订单，收集图鉴，点亮整座城市。</p>
+  <button class="btn" id="startBtn">开始游戏 ▶</button>
+  <p class="note" style="margin-top:14px">动画里的能级、晶格属于示意；凡写出具体数字的，都来自公开文献，可在「图鉴」页底部查出处。</p>
+</div></div>
+
+<header><div class="hw">
+  <div class="brand">⚗ 铜光工坊</div>
   <nav id="nav">
-    <button data-s="intro" class="on">序章</button>
-    <button data-s="timeline">时间线</button>
-    <button data-s="lab">实验台</button>
-    <button data-s="forge">拼装台</button>
-    <button data-s="map">地图</button>
-    <button data-s="refs">文献</button>
+    <button data-s="lab" class="on">⚗ 合成工坊</button>
+    <button data-s="theory">🔬 原理剧场</button>
+    <button data-s="city">🌃 点亮城市</button>
+    <button data-s="dex">📖 图鉴</button>
   </nav>
-  <div class="photons" title="探索获得的光子">✦ <b id="ph">0</b></div>
+  <div class="score">⭐ <b id="stars">0</b> · 图鉴 <b id="dexN">0</b>/<span id="dexT">11</span></div>
 </div></header>
+
 <main>
-
-<section id="s-intro" class="on">
-  <svg id="introSvg" viewBox="0 0 1180 400"></svg>
-  <div class="chips">
-    <span style="--c:var(--gold2)">近 100% PLQY</span><span style="--c:var(--ste)">大斯托克斯位移</span><span style="--c:var(--cc)">宽带</span><span style="--c:var(--tadf)">μs 三重态</span><span style="--c:var(--ok)">无铅 · 低毒 · 可溶液加工</span>
-  </div>
-  <div class="motifs" id="motifs"></div>
-  <div style="text-align:center;margin-top:22px"><button class="btn solid" onclick="go('timeline')">开始 →</button></div>
-</section>
-
-<section id="s-timeline">
-  <div class="track"><div class="axis"></div><div class="years" id="years"></div></div>
-  <div class="nodes" id="nodes"></div>
-  <div style="text-align:right;margin-top:16px" id="nextYr"></div>
-</section>
-
-<section id="s-lab">
-  <div class="modes" id="modes">
-    <button data-m="ste" class="on">自陷激子 STE</button>
-    <button data-m="cc">Cu₄I₄ 热致变色</button>
-    <button data-m="tadf">TADF</button>
-    <span class="schem" style="margin-left:auto;align-self:center">示意 · 非实测</span>
-  </div>
-  <div class="oneline" id="oneline"></div>
-  <div class="labwrap">
-    <div>
-      <canvas id="cv" width="760" height="430"></canvas>
-      <canvas id="sp" width="760" height="190" style="margin-top:10px"></canvas>
+<!-- ============ 合成工坊 ============ -->
+<section id="s-lab" class="on">
+  <div class="order" id="order"></div>
+  <div class="row">
+    <div class="col card" style="flex:1.1">
+      <div class="lbl">① 阳离子 / 有机配体 <span class="note">（负责把无机发光单元隔开）</span></div>
+      <div class="chips" id="pickA"></div>
+      <div class="lbl">② 卤素 X</div>
+      <div class="chips" id="pickX"></div>
+      <div class="lbl">③ Cu–X 无机骨架</div>
+      <div class="chips" id="pickC"></div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <button class="btn" id="synBtn">🔥 加热溶解 → 降温结晶</button>
+        <span class="note" id="pickHint"></span>
+      </div>
+      <div id="special"></div>
     </div>
-    <div class="card">
-      <div id="ctrls"></div>
-      <div style="display:flex;gap:8px;margin-top:10px"><button class="btn solid" id="fire">✦ 激发</button><button class="btn" id="burst">×20</button></div>
-      <div class="readout" id="readout"></div>
-      <div class="swatch" id="swatch"></div>
+    <div class="col card">
+      <canvas id="labCv" height="260"></canvas>
+      <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
+        <button class="btn uv" id="uvBtn" disabled>💡 打开紫外灯</button>
+        <span class="note" id="uvNote">先合成一块晶体</span>
+      </div>
+      <canvas id="specCv" height="110" style="margin-top:8px"></canvas>
+      <div id="result"></div>
     </div>
   </div>
 </section>
 
-<section id="s-forge">
-  <div class="grid" style="grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px">
-    <div class="card"><svg id="forgeArt" viewBox="0 0 600 230"></svg><div class="slots" id="slots" style="margin-top:12px"></div></div>
-    <div class="card" id="forgeRes"></div>
+<!-- ============ 原理剧场 ============ -->
+<section id="s-theory">
+  <h2>原理剧场</h2>
+  <p class="sub">四幕小动画：点按钮、拖滑块、直接点画面都会有反应。<span class="schem">示意</span> 动画只表现趋势，不对应某个具体材料的数值。</p>
+  <div class="chips" id="actPick"></div>
+  <div class="card">
+    <canvas id="thCv" height="340"></canvas>
+    <div id="thCtl" style="margin-top:8px"></div>
+    <div class="cap" id="thCap"></div>
   </div>
 </section>
 
-<section id="s-map">
-  <svg id="mapSvg" viewBox="0 0 1180 560"></svg>
-  <div class="card" id="mapInfo" style="margin-top:12px"><span class="note">点节点看一句话解释</span></div>
+<!-- ============ 点亮城市 ============ -->
+<section id="s-city">
+  <h2>点亮城市 · 这个方向现在走到哪了</h2>
+  <p class="sub">点城市里的建筑，把它「点亮」，看看铜(I)卤化物已经在哪些地方派上用场。亮起 <b id="litN">0</b>/5</p>
+  <div class="card city-wrap"><svg id="city" viewBox="0 0 800 330" style="width:100%;display:block;border-radius:12px"></svg></div>
+  <div class="card" id="cityPanel" style="margin-top:10px"><span class="note">👆 先点一栋楼</span></div>
+  <h2 style="margin-top:18px;font-size:18px">还没打完的「Boss」 <span class="note">（点卡片翻面）</span></h2>
+  <div class="chal" id="chal"></div>
 </section>
 
-<section id="s-refs">
-  <p class="note" style="margin:0 0 10px">DOI 经 Crossref 核对（2026-11-20）。† = 数据仅来自期刊摘要页转述。</p>
-  <div class="refs" id="refList"></div>
+<!-- ============ 图鉴 ============ -->
+<section id="s-dex">
+  <h2>样品图鉴</h2>
+  <p class="sub">在工坊里合成出来的真实材料会收进这里。没解锁的只给提示。</p>
+  <div class="dex" id="dex"></div>
+  <details style="margin-top:18px" class="card"><summary style="cursor:pointer">📚 参考文献（游戏里所有具体数字的出处）</summary><ol id="refs" class="ref" style="padding-left:20px"></ol></details>
+  <p style="text-align:center;margin-top:14px"><button class="btn ghost" id="resetBtn">重新开始（清空进度）</button></p>
 </section>
+<div class="foot">铜光工坊 v3 · 纯前端单页，无外部依赖 · 动画为示意，数字均附文献</div>
 </main>
-
-<div id="modal"><div class="box"><button class="x" onclick="closeModal()">×</button><div id="mbody"></div></div></div>
 <div class="toast" id="toast"></div>
-<footer>示意图均为定性示意 · 数据以原文为准 · 离线可用</footer>
 <script>
 "use strict";
-/* ================= 文献库（DOI 经 Crossref 核对） ================= */
-const REFS = {
- chemmater:{au:"Banerjee D., Saparov B.",t:"Ultrabright Light Emission Properties of All-Inorganic and Hybrid Organic–Inorganic Copper(I) Halides",j:"Chem. Mater.",y:"2023",v:"35, 3364–3385",doi:"10.1021/acs.chemmater.3c00071",kind:"综述"},
- cjl:{au:"张家贝 等",t:"有机-无机杂化铜(Ⅰ)基卤化物闪烁体研究进展",j:"发光学报",y:"2023",v:"44(10), 1705–1720",doi:"10.37188/CJL.20230108",kind:"中文综述"},
- jmccrev:{au:"Popy D. A., Saparov B.",t:"“This or that” – light emission from hybrid organic–inorganic vs. coordination Cu(I) halides",j:"J. Mater. Chem. C",y:"2025（2024-12 在线）",v:"13, 521–560",doi:"10.1039/d4tc04153d",kind:"综述"},
- tea23:{au:"Gust D., …, Lenzer T.",t:"Excited-State Dynamics of Bis(tetraethylammonium) Di-µ-bromo-dibromodicuprate(I) Thin Films",j:"Molecules",y:"2023",v:"28, 7841",doi:"10.3390/molecules28237841"},
- small23:{au:"Chen J., …, Mao L.",t:"One-Dimensional Chiral Copper Iodide Chain-Like Structure Cu4I4(R/S-3-quinuclidinol)3 with Near-Unity PLQY and Efficient CPL",j:"Small",y:"2023",v:"19, 2300938",doi:"10.1002/smll.202300938"},
- adom23:{au:"Ji X., …, Mao L.",t:"Mono- and Bi-Dentate Chiral Ligands Lead to Efficient Circularly Polarized Luminescence in 0D and 3D Semiconducting Copper(I) Iodides",j:"Adv. Opt. Mater.",y:"2023",v:"11, 2300541",doi:"10.1002/adom.202300541"},
- anie23:{au:"Hu Q., …, Sun",t:"Highly Effective Hybrid Copper(I) Iodide Cluster Emitter with Negative Thermal Quenched Phosphorescence for X-Ray Imaging",j:"Angew. Chem. Int. Ed.",y:"2023",v:"62, e202217784",doi:"10.1002/anie.202217784"},
- chemsci23:{au:"Zhou S., …, He R.",t:"Photophysical studies for Cu(I)-based halides: broad excitation bands and highly efficient single-component warm white-light-emitting diodes",j:"Chem. Sci.",y:"2023",v:"14, 5415–5424",doi:"10.1039/d3sc01762a"},
- acsel23:{au:"Yuan P., …, Bakr O. M.",t:"Hybrid Thermally Activated Nanocluster Fluorophores for X-ray Scintillators",j:"ACS Energy Lett.",y:"2023",v:"8, 5088–5097",doi:"10.1021/acsenergylett.3c02050"},
- pccp:{au:"Gao Y., …, Zhuang",t:"A zero-dimensional hybrid copper(I) bromide single crystal with highly efficient green emission",j:"Phys. Chem. Chem. Phys.",y:"2024（2023-12 在线）",v:"26, 2472–2477",doi:"10.1039/d3cp05140d"},
- ic23:{au:"Zhou …, Jiang",t:"Syntheses, Structures, and Photoluminescence of Copper-Based Halides",j:"Inorg. Chem.",y:"2023",v:"62, 7376–7384",doi:"10.1021/acs.inorgchem.3c00580"},
- adma24:{au:"Lin S., …, Shi",t:"Efficient Large-Area (81 cm²) Ternary Copper Halides Light-Emitting Diodes with External Quantum Efficiency Exceeding 13% via Host-Guest Strategy",j:"Adv. Mater.",y:"2024",v:"36, 2313570",doi:"10.1002/adma.202313570"},
- ncomms24:{au:"Sun J., …, Xu",t:"Ligand-mediate exciton allocation enables efficient cluster-based white light-emitting diodes via single and heavy doping",j:"Nat. Commun.",y:"2024",v:"15, 4997",doi:"10.1038/s41467-024-49394-8"},
- lsa24:{au:"Zhang D., …, Ye",t:"Efficient and bright broadband electroluminescence based on environment-friendly metal halide nanoclusters",j:"Light Sci. Appl.",y:"2024",v:"13, 82",doi:"10.1038/s41377-024-01427-z"},
- jacs24:{au:"Song K.-H., …, Yao",t:"Copper-Iodide Hybrid Clusters with Partial Distortion Enable High-Performance Full-Visible-Spectrum White-Light-Emitting Diodes",j:"J. Am. Chem. Soc.",y:"2024",v:"146, 34199–34208",doi:"10.1021/jacs.4c14545"},
- adom24:{au:"Li H., …, Ouyang G.",t:"Ligand Detachment—New Insight into the Mechanochromic Luminescence Mechanism of Copper Iodide Complexes with TADF",j:"Adv. Opt. Mater.",y:"2024",v:"12, 2400364",doi:"10.1002/adom.202400364"},
- cc24:{au:"Liu X., …, Xu",t:"Solvent-induced structural regulation and luminescence switching of hybrid copper(I) halides for encryption and anti-counterfeiting applications",j:"Chem. Commun.",y:"2024",v:"60, 9034–9037",doi:"10.1039/d4cc03540b"},
- anieml:{au:"Wang Y., …, Huang",t:"Machine Learning-Guided Discovery of Copper(I)-Iodide Cluster Scintillators for Efficient X-ray Luminescence Imaging",j:"Angew. Chem. Int. Ed.",y:"2025（2024-11 在线）",v:"64, e202413672",doi:"10.1002/anie.202413672"},
- afm25:{au:"Zeng H., …, Chen",t:"Chiral Copper(I) Iodide Cluster Hybrids Enabling Highly Efficient Circularly Polarized Electroluminescence",j:"Adv. Funct. Mater.",y:"2025",v:"35, 2424704",doi:"10.1002/adfm.202424704"},
- chemsci25:{au:"Chen J., …, Li",t:"Strongly photoluminescent and radioluminescent copper(I) iodide hybrid materials made of coordinated ionic chains",j:"Chem. Sci.",y:"2025（2024-11 登记）",v:"16, 1106–1114",doi:"10.1039/d4sc06242f"},
- icf25:{au:"Zou Q.-H., …, Li J.-R.",t:"Ionothermal synthesis of a stable three-dimensional [Cu4I4] cluster scintillator with near-unity quantum efficiency and weak thermal quenching",j:"Inorg. Chem. Front.",y:"2025（2024-11 在线）",v:"12, 692–700",doi:"10.1039/d4qi02590c"},
- lam25:{au:"Li D., …, Chang",t:"Large-area, high-resolution, flexible X-ray scintillator film based on a novel 0D hybrid cuprous halide",j:"Light Adv. Manuf.",y:"2025",v:"6",doi:"10.37188/lam.2025.044"},
- matter25:{au:"Li B.-H., …, Xia Z.",t:"Hybrid Cu(I)-based glassy cluster gel scintillator film by in situ UV photopolymerization",j:"Matter",y:"2025",v:"8, 102214",doi:"10.1016/j.matt.2025.102214",dag:true},
- ic26:{au:"Zhou W., …, Chen",t:"Zero-Dimensional Hybrid Cuprous Iodide Clusters for X-ray Imaging",j:"Inorg. Chem.",y:"2026（2025-12-31 在线）",v:"65, 1593–1600",doi:"10.1021/acs.inorgchem.5c05228"},
- jmcc26:{au:"Wang B., …, Lyu",t:"Efficient and stable deep-blue emission from lead-free (TEA)2Cu2Br4 for white LEDs",j:"J. Mater. Chem. C",y:"2026（2025-12 登记）",v:"14, 2928–2935",doi:"10.1039/d5tc04024h"},
- perr11:{au:"Perruchas S., …, Boilot J.-P.",t:"Thermochromic Luminescence of Copper Iodide Clusters: The Case of Phosphine Ligands",j:"Inorg. Chem.",y:"2011（经典背景）",v:"50, 10682–10692",doi:"10.1021/ic201128a"}
+const $=id=>document.getElementById(id);
+/* ===================== 文献（DOI 已经 Crossref 核对） ===================== */
+const REFS={
+ jun18:{c:"Jun T. 等. Lead-Free Highly Efficient Blue-Emitting Cs₃Cu₂I₅ with 0D Electronic Structure. Adv. Mater. 2018, 30, 1804547",d:"10.1002/adma.201804547"},
+ cm20a:{c:"Photophysics in Cs₃Cu₂X₅ (X = Cl, Br, or I): Highly Luminescent Self-Trapped Excitons from Local Structure Symmetrization. Chem. Mater. 2020, 32, 3462–3468",d:"10.1021/acs.chemmater.9b05321"},
+ cm20b:{c:"Room Temperature Synthesis of Stable, Printable Cs₃Cu₂X₅ (X = I, Br/I, Br, Br/Cl, Cl) Colloidal Nanocrystals with Near-Unity Quantum Yield Green Emitters (X = Cl). Chem. Mater. 2020, 32, 5515–5524",d:"10.1021/acs.chemmater.0c00280"},
+ smll19:{c:"0D Cs₃Cu₂X₅ (X = I, Br, and Cl) Nanocrystals: Colloidal Syntheses and Optical Properties. Small 2020, 16, 1905226",d:"10.1002/smll.201905226"},
+ ami21:{c:"Non-Hygroscopic, Self-Absorption Free, and Efficient 1D CsCu₂I₃ Perovskite Single Crystal for Radiation Detection. ACS Appl. Mater. Interfaces 2021, 13, 12198–12202",d:"10.1021/acsami.0c22505"},
+ cm23:{c:"Scintillation and Optical Characterization of CsCu₂I₃ Single Crystals from 10 to 400 K. Chem. Mater. 2023, 35, 9623–9631",d:"10.1021/acs.chemmater.3c01810"},
+ nano20:{c:"Stable Yellow Light-Emitting Devices Based on Ternary Copper Halides with Broadband Emissive Self-Trapped Excitons. ACS Nano 2020, 14, 4475–4486",d:"10.1021/acsnano.9b10148"},
+ jmcc26:{c:"Wang B. 等. Efficient and stable deep-blue emission from lead-free (TEA)₂Cu₂Br₄ for white LEDs. J. Mater. Chem. C 2026, 14, 2928–2935",d:"10.1039/d5tc04024h"},
+ li26:{c:"Li Y. 等. Tunable broadband luminescence in lead-free hybrid copper halides. J. Energy Chem. 2026, 114, 362–369（读的是 OSTI 公开的作者接受稿）",d:"10.1016/j.jechem.2025.10.026"},
+ lam25:{c:"Li D. 等. Large-area, high-resolution, flexible X-ray scintillator film based on a novel 0D hybrid cuprous halide. Light: Adv. Manuf. 2025, 6",d:"10.37188/lam.2025.044"},
+ ic26:{c:"Zhou W. 等. Zero-Dimensional Hybrid Cuprous Iodide Clusters for X-ray Imaging. Inorg. Chem. 2026, 65, 1593–1600（及其 SI 表 S2）",d:"10.1021/acs.inorgchem.5c05228"},
+ afm25:{c:"Zeng H. 等. Chiral Copper(I) Iodide Cluster Hybrids Enabling Highly Efficient Circularly Polarized Electroluminescence. Adv. Funct. Mater. 2025, 35, 2424704",d:"10.1002/adfm.202424704"},
+ adma24:{c:"Lin S. 等. Efficient Large-Area (81 cm²) Ternary Copper Halides Light-Emitting Diodes with External Quantum Efficiency Exceeding 13% via Host-Guest Strategy. Adv. Mater. 2024, 36, 2313570",d:"10.1002/adma.202313570"},
+ adom24:{c:"Li H. 等. Ligand Detachment—New Insight into the Mechanochromic Luminescence Mechanism of Copper Iodide Complexes with TADF. Adv. Opt. Mater. 2024, 12, 2400364",d:"10.1002/adom.202400364"},
+ cc24:{c:"Liu X. 等. Solvent-induced structural regulation and luminescence switching of hybrid copper(I) halides for encryption and anti-counterfeiting applications. Chem. Commun. 2024, 60, 9034–9037",d:"10.1039/d4cc03540b"},
+ perr11:{c:"Perruchas S. 等. Thermochromic Luminescence of Copper Iodide Clusters: The Case of Phosphine Ligands. Inorg. Chem. 2011, 50, 10682–10692",d:"10.1021/ic201128a"},
+ anm23:{c:"Enhancing the Green Luminescence Efficiency and Stability of Cs₃Cu₂Cl₅ Nanocrystals by Na⁺ Substitutional Doping. ACS Appl. Nano Mater. 2023, 6, 22104–22116",d:"10.1021/acsanm.3c04311"},
+ chemsci23:{c:"Zhou S. 等. Photophysical studies for Cu(I)-based halides: broad excitation bands and highly efficient single-component warm white-light-emitting diodes. Chem. Sci. 2023, 14, 5415–5424",d:"10.1039/d3sc01762a"}
 };
-const REF_ORDER = Object.keys(REFS);
-function refNo(k){return REF_ORDER.indexOf(k)+1}
-function cite(k){const r=REFS[k];return `<a href="https://doi.org/${r.doi}" target="_blank" rel="noopener">[${refNo(k)}] ${r.j} ${r.y.split("（")[0]}</a>`}
+const RK=Object.keys(REFS);
+const cite=(...ks)=>ks.map(k=>`<a href="https://doi.org/${REFS[k].d}" target="_blank" rel="noopener" title="${REFS[k].c.replace(/"/g,'')}">[${RK.indexOf(k)+1}]</a>`).join("");
 
-/* ================= SVG 绘图工具 ================= */
-const C_CU="#f0a640", C_X="#b48cff", C_L="#4fd1c5", C_B="rgba(216,180,106,.55)";
-let gid=0;
-function atom(x,y,r,c){gid++;return `<defs><radialGradient id="ag${gid}" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset=".35" stop-color="${c}"/><stop offset="1" stop-color="${c}" stop-opacity=".55"/></radialGradient></defs><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="url(#ag${gid})" stroke="${c}" stroke-width=".6"/>`}
-function bond(a,b,c,w,dash){return `<line x1="${a[0].toFixed(1)}" y1="${a[1].toFixed(1)}" x2="${b[0].toFixed(1)}" y2="${b[1].toFixed(1)}" stroke="${c||C_B}" stroke-width="${w||1.6}" ${dash?'stroke-dasharray="3 3"':''}/>`}
-function proj(p,ang,s,cx,cy){const ca=Math.cos(ang),sa=Math.sin(ang);let x=p[0]*ca-p[2]*sa,z=p[0]*sa+p[2]*ca,y=p[1];const t=0.42;let y2=y*Math.cos(t)-z*Math.sin(t),z2=y*Math.sin(t)+z*Math.cos(t);return [cx+x*s,cy+y2*s,z2]}
-function cubane(cx,cy,s,ang,cuCu){ // cuCu: 0..1 强度
-  const V=[];for(const x of[-1,1])for(const y of[-1,1])for(const z of[-1,1])V.push([x,y,z]);
-  const P=V.map(v=>proj(v,ang,s,cx,cy));let out="";
-  for(let i=0;i<8;i++)for(let j=i+1;j<8;j++){const d=V[i].reduce((a,_,k)=>a+Math.abs(V[i][k]-V[j][k]),0);if(d===2)out+=bond(P[i],P[j]);}
-  const cu=[],xi=[];V.forEach((v,i)=>(v[0]*v[1]*v[2]>0?cu:xi).push(i));
-  const a=cuCu==null?.6:cuCu;
-  for(let i=0;i<4;i++)for(let j=i+1;j<4;j++)out+=`<line x1="${P[cu[i]][0]}" y1="${P[cu[i]][1]}" x2="${P[cu[j]][0]}" y2="${P[cu[j]][1]}" stroke="${C_CU}" stroke-opacity="${(0.15+0.8*a).toFixed(2)}" stroke-width="${(0.6+1.8*a).toFixed(2)}" stroke-dasharray="2 3"/>`;
-  const order=[...Array(8).keys()].sort((i,j)=>P[i][2]-P[j][2]);
-  order.forEach(i=>{out+=atom(P[i][0],P[i][1],cu.includes(i)?s*0.2:s*0.3,cu.includes(i)?C_CU:C_X)});
-  return {svg:out,P,cu};
-}
-function motifSVG(type){
-  let o="";
-  switch(type){
-  case "CuX4":{const c=[100,62],X=[[100,18],[56,84],[146,82],[112,104]];X.forEach(p=>o+=bond(c,p));o+=atom(...c,10,C_CU);X.forEach(p=>o+=atom(...p,13,C_X));break;}
-  case "Cu2X4":{const a=[72,60],b=[128,60],X=[[100,30],[100,90],[28,60],[172,60]];[[a,X[0]],[a,X[1]],[b,X[0]],[b,X[1]],[a,X[2]],[b,X[3]]].forEach(e=>o+=bond(...e));o+=atom(...a,9,C_CU)+atom(...b,9,C_CU);X.forEach(p=>o+=atom(...p,13,C_X));break;}
-  case "Cu2I2":{const a=[78,60],b=[122,60],X=[[100,30],[100,90]],L=[[40,38],[40,82],[160,38],[160,82]];[[a,X[0]],[a,X[1]],[b,X[0]],[b,X[1]],[a,L[0]],[a,L[1]],[b,L[2]],[b,L[3]]].forEach(e=>o+=bond(...e));o+=bond(a,b,C_CU,1.2,true);L.forEach(p=>o+=atom(...p,8,C_L));o+=atom(...a,9,C_CU)+atom(...b,9,C_CU);X.forEach(p=>o+=atom(...p,13,C_X));break;}
-  case "Cu4I4":{const r=cubane(100,62,30,0.6,0.7);o+=r.svg;break;}
-  case "Cu4X6":{const T=[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]].map(v=>v.map(x=>x*0.75));const Xs=[];const B=[];
-    for(let i=0;i<4;i++)for(let j=i+1;j<4;j++){const m=T[i].map((x,k)=>(x+T[j][k])/2);const n=Math.hypot(...m);const p=m.map(x=>x/n*1.45);Xs.push(p);B.push([i,Xs.length-1]);B.push([j,Xs.length-1]);}
-    const PT=T.map(v=>proj(v,0.5,34,100,62)),PX=Xs.map(v=>proj(v,0.5,34,100,62));
-    B.forEach(([i,k])=>o+=bond(PT[i],PX[k]));
-    const all=[...PT.map((p,i)=>({p,c:C_CU,r:8})),...PX.map(p=>({p,c:C_X,r:11}))].sort((a,b)=>a.p[2]-b.p[2]);all.forEach(a=>o+=atom(a.p[0],a.p[1],a.r,a.c));break;}
-  case "chain":{const pts=[];for(let i=0;i<7;i++){pts.push({p:[20+i*27,44],c:i%2?C_X:C_CU});pts.push({p:[20+i*27,80],c:i%2?C_CU:C_X});}
-    for(let i=0;i<7;i++){o+=bond(pts[2*i].p,pts[2*i+1].p);if(i<6){o+=bond(pts[2*i].p,pts[2*i+2].p);o+=bond(pts[2*i+1].p,pts[2*i+3].p);}}
-    pts.forEach(a=>o+=atom(...a.p,a.c===C_CU?7:10,a.c));o+=`<text x="100" y="112" fill="#8d8a82" font-size="10" text-anchor="middle">… 无限延伸 …</text>`;break;}
-  case "layer":{for(let r=0;r<4;r++)for(let c=0;c<7;c++){const x=22+c*26+(r%2)*13,y=22+r*26;if(c<6)o+=bond([x,y],[x+26,y]);if(r<3)o+=bond([x,y],[x+13,y+26]);}
-    for(let r=0;r<4;r++)for(let c=0;c<7;c++){const x=22+c*26+(r%2)*13,y=22+r*26;o+=atom(x,y,(r+c)%2?9:6,(r+c)%2?C_X:C_CU);}break;}
-  case "3D":{const a=cubane(55,60,17,0.6,0.6),b=cubane(145,60,17,0.6,0.6);o+=bond([72,60],[128,60],C_L,2.4)+bond([55,40],[55,10],C_L,2.4)+bond([145,80],[145,112],C_L,2.4);o+=a.svg+b.svg;o+=atom(100,60,6,C_L);break;}
-  case "nanocl":{const r=cubane(100,62,24,0.9,0.5);for(let k=0;k<8;k++){const t=k*Math.PI/4;o+=bond([100+34*Math.cos(t),62+34*Math.sin(t)],[100+52*Math.cos(t),62+48*Math.sin(t)],C_L,1.4);o+=atom(100+52*Math.cos(t),62+48*Math.sin(t),5,C_L);}o+=r.svg;break;}
-  }
-  return o;
-}
-function icon(app){
-  let o="";const g="#e7c66b";
-  switch(app){
-  case "led": o=`<path d="M30 10a14 14 0 0 1 8 25v6H22v-6a14 14 0 0 1 8-25z" fill="none" stroke="${g}" stroke-width="1.4"/><line x1="23" y1="45" x2="37" y2="45" stroke="${g}"/>${[0,1,2,3,4].map(i=>{const t=-Math.PI*(0.15+i*0.175);return `<line x1="${30+20*Math.cos(t)}" y1="${24+20*Math.sin(t)}" x2="${30+27*Math.cos(t)}" y2="${24+27*Math.sin(t)}" stroke="${g}" stroke-width="1"/>`}).join("")}`;break;
-  case "white": o=`<defs><linearGradient id="wg${++gid}"><stop offset="0" stop-color="#6b5cff"/><stop offset=".3" stop-color="#3fb7ff"/><stop offset=".5" stop-color="#5de08a"/><stop offset=".7" stop-color="#ffd54a"/><stop offset="1" stop-color="#ff5a3c"/></linearGradient></defs><rect x="4" y="22" width="52" height="10" fill="url(#wg${gid})" opacity=".9"/><path d="M4 50 Q30 6 56 50" fill="none" stroke="#fff" stroke-width="1.2"/>`;break;
-  case "xray": o=`<rect x="40" y="8" width="5" height="44" fill="${g}" opacity=".7"/>${[14,24,34,44].map(y=>`<line x1="2" y1="${y}" x2="36" y2="${y}" stroke="#9fb7ff" stroke-width="1" stroke-dasharray="4 2"/>`).join("")}<circle cx="52" cy="30" r="4" fill="#fff" opacity=".85"/><text x="2" y="58" font-size="9" fill="#9fb7ff">X-ray</text>`;break;
-  case "flex": o=`<path d="M4 40 C18 10, 42 54, 56 20" fill="none" stroke="${g}" stroke-width="5" opacity=".75"/>${[12,22,32].map(x=>`<line x1="${x}" y1="0" x2="${x}" y2="18" stroke="#9fb7ff" stroke-dasharray="3 2"/>`).join("")}`;break;
-  case "cpl": {let p="M4 30";for(let x=4;x<=56;x+=2)p+=` L${x} ${30+12*Math.sin(x/4)}`;o=`<path d="${p}" fill="none" stroke="${g}" stroke-width="1.3"/><path d="M50 18 L58 30 L48 34" fill="none" stroke="${g}"/><ellipse cx="30" cy="30" rx="8" ry="14" fill="none" stroke="#4fd1c5" stroke-dasharray="2 2"/>`;break;}
-  case "el": o=["#4fd1c5","#f0a640","#b48cff","#d8b46a"].map((c,i)=>`<rect x="8" y="${10+i*9}" width="44" height="7" fill="none" stroke="${c}"/>`).join("")+`<text x="54" y="22" font-size="11" fill="${g}">+</text><text x="54" y="46" font-size="11" fill="${g}">−</text>`;break;
-  case "ink": o=`<rect x="10" y="10" width="40" height="40" fill="none" stroke="${g}"/><path d="M16 40 L26 22 L34 34 L44 18" fill="none" stroke="#ff8a5b" stroke-width="2"/><text x="10" y="58" font-size="9" fill="${g}">UV 下显影</text>`;break;
-  case "book": o=`<path d="M8 12 h20 v38 h-20z M32 12 h20 v38 h-20z" fill="none" stroke="${g}"/>${[20,26,32,38].map(y=>`<line x1="12" y1="${y}" x2="24" y2="${y}" stroke="${g}" opacity=".5"/><line x1="36" y1="${y}" x2="48" y2="${y}" stroke="${g}" opacity=".5"/>`).join("")}`;break;
-  case "temp": o=`<rect x="24" y="6" width="10" height="36" rx="5" fill="none" stroke="${g}"/><circle cx="29" cy="46" r="8" fill="none" stroke="${g}"/><rect x="27" y="22" width="4" height="22" fill="#ff7a6b"/><text x="40" y="20" font-size="9" fill="#6fa8ff">冷</text><text x="40" y="44" font-size="9" fill="#ff7a6b">热</text>`;break;
-  case "ml": o=`${[[10,14],[10,30],[10,46],[30,22],[30,38],[50,30]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="none" stroke="${g}"/>`).join("")}${[[10,14,30,22],[10,30,30,22],[10,46,30,38],[10,30,30,38],[30,22,50,30],[30,38,50,30]].map(l=>`<line x1="${l[0]}" y1="${l[1]}" x2="${l[2]}" y2="${l[3]}" stroke="${g}" opacity=".5"/>`).join("")}`;break;
-  case "shield": o=`<path d="M30 6 L52 14 V30 C52 44 42 52 30 56 C18 52 8 44 8 30 V14z" fill="none" stroke="${g}"/><path d="M20 30 l7 7 l13 -14" fill="none" stroke="#7ddc9a" stroke-width="2"/>`;break;
-  case "q": o=`<text x="30" y="40" font-size="34" fill="${g}" text-anchor="middle" font-family="serif">?</text>`;break;
-  }
-  return o;
-}
-function nodeArt(motif,app,h){
-  return `<svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet" style="${h?'height:'+h+'px':''}"><g transform="translate(0,14) scale(.68)">${motifSVG(motif)}</g><g transform="translate(138,30)">${icon(app)}</g></svg>`;
-}
-/* ================= 结构图鉴（只留名字） ================= */
-const MOTIFS=[{m:"CuX4",n:"[CuX₄] 四面体",d:"0D"},{m:"Cu2X4",n:"[Cu₂X₄]²⁻ 双核",d:"0D"},{m:"Cu4I4",n:"[Cu₄I₄] 立方烷",d:"0D"},
- {m:"Cu4X6",n:"[Cu₄X₆]²⁻ 簇",d:"0D"},{m:"chain",n:"链",d:"1D"},{m:"layer",n:"层 / 骨架",d:"2D / 3D"}];
+/* ===================== 积木 ===================== */
+const AS=[
+ {k:"cs",n:"Cs⁺",s:"铯离子·全无机"},
+ {k:"tea",n:"TEA⁺",s:"四乙基铵"},
+ {k:"ha",n:"HA⁺",s:"正己铵"},
+ {k:"oa",n:"OA⁺",s:"正辛铵"},
+ {k:"mtp",n:"MTP⁺",s:"甲基三苯基鏻"},
+ {k:"popy",n:"4-popy",s:"苯氧基吡啶·配体"}];
+const XS=[{k:"Cl",n:"Cl",s:"氯"},{k:"Br",n:"Br",s:"溴"},{k:"I",n:"I",s:"碘"}];
+const CS=[{k:"mono",n:"孤立四面体",s:"[CuX₄]"},{k:"dimer",n:"二聚体",s:"Cu₂"},{k:"tetra",n:"四核簇",s:"Cu₄"},{k:"chain",n:"一维链",s:"1D"}];
 
-/* ================= 时间线节点：一句话 + 1–2 个关键数字 ================= */
-const LEVELS=[{y:"2023",t:"看清光从哪来"},{y:"2024",t:"走向器件"},{y:"2025",t:"做大 · 做柔 · 手性"},{y:"2025末–2026",t:"向实用逼近"}];
-const NODES=[
- {L:0,id:"n1",ref:"chemmater",m:"Cu2X4",a:"book",tag:["ste"],title:"综述：为何超亮",s:"低维 → 激子局域 → 室温自陷激子",k:["PLQY 近 100%"]},
- {L:0,id:"n2",ref:"tea23",m:"Cu2X4",a:"temp",tag:["ste"],title:"(TEA)₂Cu₂Br₄",s:"蓝光来自三重态 T₁ 磷光",k:["283 → 467 nm · 1.38 eV","τ 57 μs"]},
- {L:0,id:"n3",ref:"small23",m:"chain",a:"cpl",tag:["cc","app"],title:"手性 1D 链",s:"刚性 + 手性：又亮又圆偏振",k:["PLQY 99.9%","g_lum ≈ 4×10⁻³"]},
- {L:0,id:"n4",ref:"adom23",m:"Cu4I4",a:"cpl",tag:["cc"],title:"手性 0D vs 3D",s:"同一 Cu₄I₄，0D 更亮",k:["PLQY ≈ 95%","Cu⋯Cu < 2.8 Å"]},
- {L:0,id:"n5",ref:"anie23",m:"Cu4I4",a:"xray",tag:["cc","app"],title:"(DBA)₄Cu₄I₄",s:"升温反而更亮（负热猝灭）",k:["PLQY > 94.9%","> 10⁴ photons/MeV"]},
- {L:0,id:"n6",ref:"chemsci23",m:"Cu4X6",a:"white",tag:["cc","xl"],title:"DPCu₄X₆",s:"碘版双带发射 → 单组分白光",k:["CRI 85.1"]},
- {L:0,id:"n7",ref:"acsel23",m:"Cu2I2",a:"xray",tag:["tadf","app"],title:"TADF Cu₂X₂ 闪烁体",s:"回收三重态激子",k:["175,000 photons/MeV","~30 lp/mm"]},
- {L:0,id:"n8",ref:"pccp",m:"CuX4",a:"led",tag:["ste"],title:"0D 溴化亚铜绿光",s:"自陷激子绿光",k:["510 nm · PLQY 90.5%","Stokes 220 nm"]},
- {L:1,id:"n9",ref:"adma24",m:"Cu2I2",a:"el",tag:["app"],title:"81 cm² 绿光 LED",s:"主客体掺杂让铜簇通电发光",k:["EQE 13.39%","81 cm² · 10.02%"]},
- {L:1,id:"n10",ref:"ncomms24",m:"Cu4I4",a:"el",tag:["tadf","app"],title:"白光簇 LED",s:"咔唑配体当能量天线",k:["EQE 23.5%"]},
- {L:1,id:"n11",ref:"lsa24",m:"nanocl",a:"el",tag:["tadf","app"],title:"超宽带电致发光",s:"一个发光体覆盖宽光谱",k:["EQE 13% · ~50,000 cd/m²","FWHM ~120 nm"]},
- {L:1,id:"n12",ref:"jacs24",m:"Cu4I4",a:"white",tag:["cc","app"],title:"Cu₄I₄ 全光谱白光",s:"两个三重态共存（作者假设）",k:["400–800 nm · PLQY 97%","CRI ≈ 88 / 1000 h"]},
- {L:1,id:"n13",ref:"adom24",m:"layer",a:"ink",tag:["tadf","app"],title:"研磨变色",s:"配体脱附，1D→2D，黄绿 → 橙红",k:["紫外下显影防伪"]},
- {L:1,id:"n14",ref:"cc24",m:"chain",a:"ink",tag:["app"],title:"溶剂发光开关",s:"甲醇触发相变，发光切换",k:["加密 / 防伪"]},
- {L:1,id:"n15",ref:"anieml",m:"3D",a:"ml",tag:["app"],title:"机器学习选闪烁体",s:"数据驱动挑组合",k:["56× PbWO₄","20 lp/mm"]},
- {L:1,id:"n16",ref:"jmccrev",m:"Cu2I2",a:"book",tag:["ste","cc","xl"],title:"综述：离子型 vs 配位型",s:"两类机理与器件策略不同",k:[]},
- {L:2,id:"n17",ref:"afm25",m:"Cu2I2",a:"cpl",tag:["cc","app"],title:"圆偏振电致发光",s:"Cu(I) 卤化物簇首次实现 CPEL",k:["EQE 20.5%","g_EL 1.36×10⁻³"]},
- {L:2,id:"n18",ref:"chemsci25",m:"chain",a:"shield",tag:["xl","app"],title:"AIO 双成键",s:"离子键 + 配位键 → 更稳",k:["PLQY 84.8%","377 nGy/s"]},
- {L:2,id:"n19",ref:"icf25",m:"3D",a:"shield",tag:["cc","app"],title:"3D [Cu₄I₄] 闪烁体",s:"3D 骨架换稳定，效率不丢",k:["近 100% 量子效率"]},
- {L:2,id:"n20",ref:"lam25",m:"Cu4X6",a:"flex",tag:["ste","app"],title:"(MTP)₂Cu₄I₆ 柔性膜",s:"大斯托克斯位移 → 不自吸收",k:["PLQY 99.9% · 43,800 photons/MeV","10.2 lp/mm"]},
- {L:2,id:"n21",ref:"matter25",m:"nanocl",a:"flex",tag:["app"],title:"团簇凝胶闪烁膜 †",s:"紫外光聚合约 30 s 成大膜 †",k:["20 × 12 cm †","透过率 ~90% †"]},
- {L:3,id:"n22",ref:"ic26",m:"Cu4I4",a:"flex",tag:["cc","app"],title:"(4-popy)₄Cu₄I₄ 柔性膜",s:"立方烷更致密，X 射线吸收更强",k:["52,000 photons/MeV","20 lp/mm"]},
- {L:3,id:"n23",ref:"jmcc26",m:"Cu2X4",a:"led",tag:["ste","app"],title:"深蓝 (TEA)₂Cu₂Br₄",s:"蓝光开始看器件寿命",k:["PLQY 98%","20 天保持 93.8%"]},
- {L:3,id:"n24",ref:null,m:"Cu4I4",a:"q",tag:["app"],title:"待解问题",s:"离子型 EL 仍弱，器件寿命短（据上述文献归纳）",k:["高 EQE 均靠主客体","T₅₀ 137 h"]}
+/* ===================== 真实样品（数字均来自文献；flag=峰位为示意） ===================== */
+const MATS=[
+ {id:"cs3cu2i5",A:"cs",X:"I",C:"dimer",f:"Cs₃Cu₂I₅",st:"0D：[Cu₂I₅]³⁻ 二聚体被 Cs⁺ 隔开",pk:[445],fw:null,q:0.9,qt:"≈90%（单晶）/≈60%（薄膜）",
+  facts:["蓝光峰约 445 nm，无铅、在空气里稳定","激子结合能约 490 meV，约为室温热能（≈26 meV）的近 20 倍，激子很难被热拆散"],r:["jun18"]},
+ {id:"cs3cu2br5",A:"cs",X:"Br",C:"dimer",f:"Cs₃Cu₂Br₅",st:"0D：与 Cs₃Cu₂I₅ 同一家族",pk:[470],flag:true,fw:null,q:0.2,qt:"纳米晶约 20%",
+  facts:["颜色介于氯版（绿）和碘版（蓝）之间；家族整体覆盖约 440–530 nm","同一家族里溴版效率最低"],r:["cm20b","smll19"]},
+ {id:"cs3cu2cl5",A:"cs",X:"Cl",C:"dimer",f:"Cs₃Cu₂Cl₅",st:"0D：与 Cs₃Cu₂I₅ 同一家族",pk:[520],fw:null,q:0.92,qt:"＞90%",
+  facts:["绿光峰约 520 nm","反直觉：卤素从 I→Br→Cl，发光反而红移，和铅卤钙钛矿正好相反","短板：Cu⁺ 容易被氧化成 Cu²⁺，是它稳定性的主要瓶颈之一"],r:["cm20a","cm20b","anm23"]},
+ {id:"cscu2i3",A:"cs",X:"I",C:"chain",f:"CsCu₂I₃",st:"1D：共棱 [CuI₄] 四面体连成链，链之间夹着 Cs⁺",pk:[570],fw:null,q:null,qt:"未收录",
+  facts:["黄光峰约 570 nm；斯托克斯位移 1.54 eV，几乎不吸收自己发的光","室温下发光已被热猝灭约一半，降温能更亮","做成过黄光 LED（2020 年，外量子效率 0.17%）"],r:["ami21","cm23","nano20"]},
+ {id:"tea",A:"tea",X:"Br",C:"dimer",f:"(TEA)₂Cu₂Br₄",st:"0D：[Cu₂Br₄]²⁻ 二聚体被有机阳离子隔开",pk:[455],flag:true,fw:null,q:0.98,qt:"98%",
+  facts:["深蓝光（游戏里的峰位为示意）","斯托克斯位移 166 nm","当蓝色荧光粉做白光 LED，20 天后电致发光强度还剩 93.8%"],r:["jmcc26"]},
+ {id:"oa_br",A:"oa",X:"Br",C:"mono",f:"(OA)₄CuBr₅",st:"0D：孤立 [CuBr₄]³⁻ 四面体 + 游离 Br⁻",pk:[587],fw:107,q:0.002,qt:"约 0.2%（室温）",
+  facts:["黄光峰 587 nm，半峰宽约 107 nm","颜色好看，但室温量子产率只有约 0.2%：绝大部分激子没发光就回到了基态"],r:["li26"]},
+ {id:"oa_i",A:"oa",X:"I",C:"mono",f:"(OA)₄CuI₅",st:"0D：推测与溴版次相同构（单晶结构未解出）",pk:[493,616],fw:null,q:0.002,qt:"约 0.2%（室温）",
+  facts:["单一材料双峰发光（493 nm + 616 nm），色坐标 (0.38, 0.38) 暖白光","同样很暗：室温量子产率约 0.2%"],r:["li26"]},
+ {id:"ha_i",A:"ha",X:"I",C:"dimer",f:"(HA)₂CuI₃",st:"0D：[Cu₂I₆]⁴⁻ 共棱二聚体被正己铵隔开",pk:[573],fw:null,q:0.002,qt:"约 0.2%（室温）",
+  facts:["宽带黄光，峰 573 nm","无色片状晶体，用 HI + H₃PO₂ 热溶液降温长出来（H₃PO₂ 防止 Cu⁺ 被氧化）"],r:["li26"]},
+ {id:"mtp",A:"mtp",X:"I",C:"tetra",f:"(MTP)₂Cu₄I₆",st:"0D：[Cu₄I₆]²⁻ 簇被 MTP⁺ 隔开",pk:[618],fw:209,q:0.999,qt:"99.9%",
+  facts:["峰 618 nm 的宽带发光，斯托克斯位移 185 nm","X 射线光产额 43,800 光子/MeV；做成柔性膜，成像分辨率 10.2 lp/mm"],r:["lam25"],ly:43800},
+ {id:"popy2",A:"popy",X:"I",C:"dimer",f:"(4-popy)₄Cu₂I₂",st:"0D：[Cu₂I₂] 菱形二聚体，铜直接和吡啶配位",pk:[466],fw:null,q:0.99,qt:"99.0%",
+  facts:["蓝光峰 466 nm","X 射线光产额 23,000 光子/MeV"],r:["ic26"],ly:23000},
+ {id:"popy4",A:"popy",X:"I",C:"tetra",f:"(4-popy)₄Cu₄I₄",st:"0D：[Cu₄I₄] 立方烷簇，铜直接和吡啶配位",pk:[580],fw:null,q:0.961,qt:"96.1%",
+  facts:["同一种配体，换成立方烷核：峰移到 580 nm（黄）","骨架更致密、含碘更多，X 射线光产额 52,000 光子/MeV，柔性膜分辨率 20 lp/mm"],r:["ic26"],ly:52000}
 ];
-/* ================= 拼装台（自由拼装，无对错） ================= */
-const CORES=[{k:"CuX4",n:"[CuX₄]"},{k:"Cu2X4",n:"[Cu₂Br₄]²⁻"},{k:"Cu2I2",n:"[Cu₂I₂]"},{k:"Cu4I4",n:"[Cu₄I₄]"},{k:"Cu4X6",n:"[Cu₄I₆]²⁻"},{k:"chain",n:"[CuI]∞ 链"}];
-const ORGS=[{k:"tea",n:"TEA⁺ 铵"},{k:"mtp",n:"MTP⁺ 鏻"},{k:"chiral",n:"手性配体"},{k:"carb",n:"膦 / 咔唑配体"},{k:"dmpz",n:"dmpz 小配体"},{k:"pyr",n:"4-popy 吡啶"}];
-const FORMS=[{k:"phosphor",n:"荧光粉 + UV 芯片"},{k:"film",n:"柔性聚合物膜"},{k:"hostguest",n:"主客体薄膜器件"},{k:"ink",n:"油墨 / 涂层"}];
-const APPS=[
- {t:"柔性 X 射线成像",a:"flex",ok:{core:["Cu4X6","Cu4I4"],org:["mtp","pyr"],form:["film"]},r:["(MTP)₂Cu₄I₆ / PDMS · 10.2 lp/mm","(4-popy)₄Cu₄I₄ / PVA · 20 lp/mm"],refs:["lam25","ic26"]},
- {t:"蓝光荧光粉 → 白光 LED",a:"led",ok:{core:["Cu2X4"],org:["tea"],form:["phosphor"]},r:["(TEA)₂Cu₂Br₄ · PLQY 98%"],refs:["tea23","jmcc26"]},
- {t:"圆偏振发光",a:"cpl",ok:{core:["Cu4I4","chain","Cu2I2"],org:["chiral"],form:["phosphor","hostguest"]},r:["手性链 · g_lum ≈ 4×10⁻³","手性 Cu₂I₂ · CPEL EQE 20.5%"],refs:["small23","afm25"]},
- {t:"电致发光 LED",a:"el",ok:{core:["Cu2I2","Cu4I4"],org:["carb"],form:["hostguest"]},r:["[dppb]₂Cu₂I₂ · EQE 13.39%","[tBCzDppy]₂Cu₄I₄ · EQE 23.5%"],refs:["adma24","ncomms24"]},
- {t:"单组分白光",a:"white",ok:{core:["Cu4I4","Cu4X6"],org:["carb","pyr"],form:["phosphor"]},r:["Cu₄I₄(NP-tBu)₂ · PLQY 97%","DPCu₄I₆ · CRI 85.1"],refs:["jacs24","chemsci23"]},
- {t:"防伪油墨",a:"ink",ok:{core:["chain"],org:["dmpz"],form:["ink"]},r:["CuI(dmpz) 研磨 · 黄绿 → 橙红"],refs:["adom24","cc24"]}
+const MBY={};MATS.forEach(m=>MBY[m.A+"|"+m.X+"|"+m.C]=m);
+const MID={};MATS.forEach(m=>MID[m.id]=m);
+
+/* ===================== 颜色：光谱 → CIE → sRGB ===================== */
+function g3(l,m,s1,s2){const s=l<m?s1:s2;return Math.exp(-0.5*((l-m)/s)**2)}
+function cmf(l){return[1.056*g3(l,599.8,37.9,31)+0.362*g3(l,442,16,26.7)-0.065*g3(l,501.1,20.4,26.2),
+ 0.821*g3(l,568.8,46.9,40.5)+0.286*g3(l,530.9,16.3,31.1),1.217*g3(l,437,11.8,36)+0.681*g3(l,459,26,13.8)]}
+function specOf(m,w){w=w||1;const fw=m.fw||100,sg=fw/2.355;return l=>m.pk.reduce((a,p)=>a+w*Math.exp(-0.5*((l-p)/sg)**2),0)/m.pk.length}
+function specColor(fn){let X=0,Y=0,Z=0;for(let l=380;l<=780;l+=2){const v=fn(l),c=cmf(l);X+=v*c[0];Y+=v*c[1];Z+=v*c[2]}
+ const S=X+Y+Z||1;const x=X/S,y=Y/S;
+ let r=3.2406*X-1.5372*Y-0.4986*Z,g=-0.9689*X+1.8758*Y+0.0415*Z,b=0.0557*X-0.2040*Y+1.0570*Z;
+ r=Math.max(0,r);g=Math.max(0,g);b=Math.max(0,b);const mx=Math.max(r,g,b)||1;
+ const gm=v=>{v/=mx;return Math.round(255*(v<=0.0031308?12.92*v:1.055*Math.pow(v,1/2.4)-0.055))};
+ return{rgb:[gm(r),gm(g),gm(b)],x,y}}
+const wlColor=nm=>specColor(l=>Math.exp(-0.5*((l-nm)/12)**2)).rgb;
+const rgbs=(c,a)=>a==null?`rgb(${c[0]},${c[1]},${c[2]})`:`rgba(${c[0]},${c[1]},${c[2]},${a})`;
+MATS.forEach(m=>{m.col=specColor(specOf(m))});
+
+/* ===================== 存档 ===================== */
+const SKEY="cuGlow_v3";
+let S={dex:{},ord:0,done:{},city:{},stars:0};
+try{const o=JSON.parse(localStorage.getItem(SKEY));if(o&&o.dex)S=Object.assign(S,o)}catch(e){}
+const save=()=>{try{localStorage.setItem(SKEY,JSON.stringify(S))}catch(e){}};
+function toast(t){const e=document.getElementById("toast");e.innerHTML=t;e.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("on"),2600)}
+function addStar(n,why){S.stars+=n;save();updHUD();if(why)toast("⭐ +"+n+"　"+why)}
+function updHUD(){document.getElementById("stars").textContent=S.stars;document.getElementById("dexN").textContent=Object.keys(S.dex).length;document.getElementById("dexT").textContent=MATS.length}
+
+/* ===================== 画布工具 ===================== */
+function fitCv(cv){const r=cv.getBoundingClientRect(),d=window.devicePixelRatio||1,h=+cv.getAttribute("height");
+ const w=Math.max(200,r.width);if(cv._w!==w||cv._d!==d){cv._w=w;cv._d=d;cv.width=w*d;cv.height=h*d;cv.style.height=h+"px"}
+ const c=cv.getContext("2d");c.setTransform(d,0,0,d,0,0);return{c,w,h}}
+function glow(c,x,y,r,col,a){const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,rgbs(col,a));g.addColorStop(1,rgbs(col,0));c.fillStyle=g;c.beginPath();c.arc(x,y,r,0,7);c.fill()}
+function wave(c,x1,y1,x2,y2,col,ph,amp,lw){const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;c.strokeStyle=col;c.lineWidth=lw||2;c.beginPath();
+ for(let s=0;s<=L;s+=2){const o=Math.sin(s/7+ph)*(amp||5);c.lineTo(x1+ux*s-uy*o,y1+uy*s+ux*o)}c.stroke()}
+function drawSpec(cv,fn,opt){opt=opt||{};const{c,w,h}=fitCv(cv);c.clearRect(0,0,w,h);
+ const L=38,R=w-10,T=8,B=h-22;
+ for(let l=380;l<=780;l+=4){c.fillStyle=rgbs(wlColor(l),.18);c.fillRect(L+(l-380)/400*(R-L),B,(R-L)/100+1,6)}
+ c.strokeStyle="#33405c";c.lineWidth=1;c.beginPath();c.moveTo(L,B);c.lineTo(R,B);c.stroke();
+ c.fillStyle="#8f96a8";c.font="11px sans-serif";[400,500,600,700].forEach(l=>{c.fillText(l,L+(l-380)/400*(R-L)-10,h-4)});c.fillText("nm",R-16,h-4);
+ c.save();c.translate(10,B);c.rotate(-Math.PI/2);c.fillText("强度",0,0);c.restore();
+ if(!fn){c.fillStyle="#5d667c";c.fillText("发光光谱会显示在这里",L+10,T+40);return}
+ let mx=0;for(let l=380;l<=780;l+=2)mx=Math.max(mx,fn(l));mx=mx||1;const sc=opt.scale==null?1:opt.scale;
+ const grd=c.createLinearGradient(L,0,R,0);for(let l=380;l<=780;l+=20)grd.addColorStop((l-380)/400,rgbs(wlColor(l),.85));
+ c.beginPath();c.moveTo(L,B);for(let l=380;l<=780;l+=2){c.lineTo(L+(l-380)/400*(R-L),B-(B-T)*fn(l)/mx*sc)}c.lineTo(R,B);c.closePath();c.fillStyle=grd;c.globalAlpha=.75;c.fill();c.globalAlpha=1;
+ c.strokeStyle="#fff";c.lineWidth=1.2;c.beginPath();for(let l=380;l<=780;l+=2){const X=L+(l-380)/400*(R-L),Y=B-(B-T)*fn(l)/mx*sc;l===380?c.moveTo(X,Y):c.lineTo(X,Y)}c.stroke();
+ if(opt.tag){c.fillStyle="#ffb35c";c.font="11px sans-serif";c.fillText(opt.tag,R-c.measureText(opt.tag).width-4,T+12)}}
+/* ===================== 合成工坊 ===================== */
+const has=id=>!!S.dex[id];
+const ORDERS=[
+ {ic:"🔵",t:"订单 1 · 无铅蓝光",d:"显示屏厂想要一块<b>不含铅、发蓝光、效率高</b>的全无机晶体。",h:"试试 Cs⁺ + 碘 + 二聚体。",chk:()=>has("cs3cu2i5")},
+ {ic:"🟢",t:"订单 2 · 反直觉的绿",d:"同一个 Cs₃Cu₂X₅ 家族，客户要<b>绿光</b>。在铅卤钙钛矿里换成氯会更蓝……这里呢？",h:"保持 Cs⁺ + 二聚体，只换卤素。",chk:()=>has("cs3cu2cl5")},
+ {ic:"🟡",t:"订单 3 · 连成一条链",d:"把 Cs–Cu–I 的发光单元<b>连成一维链</b>，看看颜色怎么变。",h:"Cs⁺ + 碘 + 一维链。",chk:()=>has("cscu2i3")},
+ {ic:"❄️",t:"订单 4 · 冷一点更亮",d:"CsCu₂I₃ 在室温下约一半激子被「热」浪费掉了。拧下面的温控旋钮，找到它在高能射线下<b>最亮</b>的温度。",h:"往低温拧，但不是越冷越好。",special:"cold",chk:()=>!!S.done.cold},
+ {ic:"🩻",t:"订单 5 · X 射线之眼",d:"医院要做柔性 X 光成像膜：要<b>含碘多、几乎 100% 发光、光产额 ≥ 40,000 光子/MeV</b> 的样品。",h:"大体积有机阳离子或吡啶配体 + 碘 + 四核簇。",special:"xray",chk:()=>has("mtp")||has("popy4")},
+ {ic:"🎭",t:"订单 6 · 同一个配体，两种颜色",d:"只用 4-popy 配体和碘，做出<b>一蓝一黄</b>两块晶体。差别只在铜–碘核的形状。",h:"二聚体和四核簇各做一次。",chk:()=>has("popy2")&&has("popy4")},
+ {ic:"🧪",t:"订单 7 · 长链铵三兄弟",d:"用直链烷基铵（HA⁺、OA⁺）做出 <b>3 种</b>图鉴样品，在紫外灯下比比它们有多亮。",h:"OA⁺+Br 孤立四面体、OA⁺+I 孤立四面体、HA⁺+I 二聚体。",chk:()=>["oa_br","oa_i","ha_i"].every(has)},
+ {ic:"💡",t:"订单 8 · 一盏白灯",d:"把图鉴里的样品放进灯座、调配比，调出<b>又白又亮</b>的光（色点靠近白点，平均发光效率 ≥ 50%）。",h:"单一白光材料够白但不够亮；试试蓝 + 黄两块高效晶体拼起来。",special:"lamp",chk:()=>!!S.done.lamp}
 ];
+let pick={A:null,X:null,C:null},cur=null,uv=false,phase="idle",t0=0;
+function chips(id,arr,key){const el=document.getElementById(id);
+ el.innerHTML=arr.map(o=>`<button class="chip" data-k="${o.k}">${o.n}<small>${o.s}</small></button>`).join("");
+ el.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{pick[key]=b.dataset.k;el.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===b));updPick()})}
+function updPick(){const ok=pick.A&&pick.X&&pick.C;document.getElementById("synBtn").disabled=!ok||phase==="syn";
+ document.getElementById("pickHint").textContent=ok?"":"三样各选一个"}
+function renderOrder(){const el=document.getElementById("order");const i=S.ord;
+ const prog=ORDERS.map((o,j)=>`<i class="${S.done["o"+j]?"d":j===i?"c":""}"></i>`).join("");
+ if(i>=ORDERS.length){el.innerHTML=`<div class="ic">🏆</div><div><h3>全部订单完成！</h3><p>工坊已出师。继续自由合成把图鉴集齐（${Object.keys(S.dex).length}/${MATS.length}），或去「点亮城市」看看这些材料用在哪。</p><div class="prog">${prog}</div></div>`;renderSpecial();return}
+ const o=ORDERS[i];el.innerHTML=`<div class="ic">${o.ic}</div><div style="flex:1"><h3>${o.t}</h3><p>${o.d}</p><p class="note" id="ordHint" style="display:none">💡 ${o.h}</p><div class="prog">${prog}</div></div><button class="btn ghost" style="padding:4px 10px;font-size:12px" onclick="document.getElementById('ordHint').style.display='block'">提示</button>`;
+ renderSpecial()}
+function checkOrders(){let moved=false;while(S.ord<ORDERS.length&&ORDERS[S.ord].chk()){S.done["o"+S.ord]=1;S.ord++;moved=true;addStar(2,"订单完成！")}
+ if(moved){save();setTimeout(renderOrder,500)}}
 
-/* ================= 总结地图 ================= */
-const MAPN={
- s0:{c:0,r:0,t:"Cu⁺(d¹⁰) + 卤素：无铅、储量丰富",e:"铜(I) 是 3d¹⁰ 闭壳层，元素无毒、便宜。",refs:["chemmater"]},
- s1:{c:0,r:1,t:"0D 孤立单元 [Cu₂X₄]/[Cu₄I₄]/[Cu₄X₆]",e:"无机发光单元被有机部分完全隔开，是近三年高 PLQY 材料的主力结构。",refs:["tea23","adom23","lam25"]},
- s2:{c:0,r:2,t:"1D 链 / 2D 层 / 3D 骨架",e:"单元连起来，局域变弱但稳定性可能更好；维度变化还能触发变色。",refs:["small23","adom24","icf25"]},
- s3:{c:0,r:3,t:"有机部分：阳离子 / 配体 / 手性",e:"阳离子负责隔开；配体可直接参与电荷转移、当能量天线；手性配体传递手性。",refs:["ncomms24","small23","jmccrev"]},
- s4:{c:0,r:4,t:"Cu⋯Cu＜2.8 Å（亲铜作用）",e:"铜原子靠得够近，产生簇中心态；距离越短，低能带越红。",refs:["adom23","perr11"]},
- s5:{c:0,r:5,t:"刚性环境：氢键 / AIO 双成键",e:"骨架越刚，振动耗散越少；离子键 + 配位键叠加还提高稳定性。",refs:["small23","chemsci25"]},
- s6:{c:0,r:6,t:"重原子 I、致密簇（高 Z）",e:"碘多、簇致密 → X 射线吸收强。",refs:["ic26","anie23"]},
- m1:{c:1,r:0,t:"强量子限域 → 激子局域",e:"激子被关在单个簇里。",refs:["chemmater"]},
- m2:{c:1,r:1,t:"激发态结构重组 → 自陷激子 STE",e:"激发后簇变形，能量下降，形成自陷态，再发光。",refs:["chemmater","pccp","anie23"]},
- m3:{c:1,r:2,t:"³CC 簇中心态",e:"Cu₄I₄ 等簇中，卤→金属电荷转移与 Cu d¹⁰→d⁹s¹ 混合的三重态。",refs:["adom23","perr11"]},
- m4:{c:1,r:3,t:"(M+X)LCT / XLCT 电荷转移态",e:"金属+卤素 → 配体的电荷转移，常见于配位型；与 ³CC 共存时出现双发射。",refs:["chemsci23","chemsci25","perr11"]},
- m5:{c:1,r:4,t:"TADF：小 ΔE_ST，RISC 回收三重态",e:"单重–三重能差小，热能把 T₁ 推回 S₁，延迟荧光。",refs:["acsel23","lsa24","adom24"]},
- m6:{c:1,r:5,t:"非辐射衰减被抑制",e:"刚性 + 隔离：激发能少变热。",refs:["small23","adom23"]},
- p1:{c:2,r:0,t:"近 100% PLQY",e:"例：99.9%（Small 2023；Light Adv. Manuf. 2025），98%（JMCC 2026），97%（JACS 2024）。",refs:["small23","lam25","jacs24"]},
- p2:{c:2,r:1,t:"大斯托克斯位移 → 低自吸收",e:"例：1.38 eV（TEA₂Cu₂Br₄），185 nm（MTP₂Cu₄I₆），220 nm（绿光溴化物）。",refs:["tea23","lam25","pccp"]},
- p3:{c:2,r:2,t:"宽带 / 双发射",e:"半峰宽常 100 nm 以上；双发射可覆盖 400–800 nm。",refs:["jacs24","chemsci23","lsa24"]},
- p4:{c:2,r:3,t:"热致 / 力致 / 溶剂致变色",e:"两个发光态此消彼长，或结构相变、Cu–Cu 距离改变。",refs:["perr11","adom24","cc24"]},
- p5:{c:2,r:4,t:"圆偏振发光 CPL",e:"g_lum ~10⁻³ 量级。",refs:["small23","adom23","afm25"]},
- p6:{c:2,r:5,t:"强 X 射线吸收 + 高光产额",e:"10⁴–10⁵ photons/MeV 量级。",refs:["acsel23","ic26","lam25"]},
- a1:{c:3,r:0,t:"白光 LED / 照明",e:"单组分白光：CRI 85.1（2023）→ CRI≈88 保持 1000 h（2024）。",refs:["chemsci23","jacs24","jmcc26"]},
- a2:{c:3,r:1,t:"X 射线闪烁体、柔性成像",e:"光产额从 >10⁴ 到 1.75×10⁵ photons/MeV；柔性复合膜分辨率 10–20 lp/mm（2024–2026）。",refs:["anie23","anieml","ic26"]},
- a3:{c:3,r:2,t:"电致发光 LED（主客体）",e:"EQE 13.39% → 23.5%；最高亮度约 5 万 cd/m²。",refs:["adma24","ncomms24","lsa24"]},
- a4:{c:3,r:3,t:"防伪与信息加密",e:"研磨、溶剂、温度都能当“钥匙”。",refs:["adom24","cc24"]},
- a5:{c:3,r:4,t:"CPL / 圆偏振电致发光",e:"2025 年首次实现 Cu(I) 卤化物簇的 CPEL，EQE 20.5%。",refs:["afm25"]},
- a6:{c:3,r:5,t:"无铅、低毒、低成本替代",e:"替代铅卤钙钛矿的主要动机。",refs:["chemmater"]}
-};
-const MAPL=[["s0","m3"],["s0","a6"],["s1","m1"],["s2","m1"],["s2","p4"],["s3","m1"],["s3","m4"],["s3","m5"],["s3","p5"],["s4","m3"],["s5","m6"],["s6","p6"],
- ["m1","m2"],["m1","p1"],["m2","p2"],["m2","p3"],["m3","p3"],["m4","p3"],["m3","p4"],["m4","p4"],["m5","p4"],["m5","p6"],["m6","p1"],
- ["p1","a1"],["p1","a2"],["p1","a3"],["p2","a2"],["p3","a1"],["p4","a4"],["p5","a5"],["p6","a2"],["m5","a3"]];
-/* ================= 状态 ================= */
-const KEY="cuhalide_game_v2";
-let ST={ph:0,seen:{},gate:{},goals:{},forge:{},quiz:{}};
-try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s)ST=Object.assign(ST,s);}catch(e){}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}}
-function gain(n){ST.ph+=n;save();document.getElementById("ph").textContent=ST.ph;toast(`✦ +${n}`)}
-let tt=null;function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2200)}
-document.getElementById("ph").textContent=ST.ph;
+function synth(){if(phase==="syn")return;phase="syn";t0=performance.now();uv=false;cur=MBY[pick.A+"|"+pick.X+"|"+pick.C]||null;
+ document.getElementById("uvBtn").disabled=true;document.getElementById("result").innerHTML="";drawSpec(document.getElementById("specCv"),null);updPick();
+ setTimeout(()=>{phase=cur?"xtal":"fail";updPick();
+  const ub=document.getElementById("uvBtn");ub.disabled=!cur;ub.textContent="💡 打开紫外灯";document.getElementById("uvNote").textContent=cur?"晶体长好了，打开紫外灯看看":"";
+  if(!cur){document.getElementById("result").innerHTML=`<div class="result"><h4>🌫 没长出图鉴里的晶体</h4>这个组合在游戏收录的文献里还没有对应的已核实样品——不代表它做不出来，真实实验室里还有大量组合等人去试。<br><span class="note">当前订单提示：${S.ord<ORDERS.length?ORDERS[S.ord].h:"自由探索"}</span></div>`}
+ },2400)}
+function lightUp(){if(!cur)return;uv=!uv;const ub=document.getElementById("uvBtn");ub.textContent=uv?"🌙 关灯":"💡 打开紫外灯";
+ if(!uv){document.getElementById("uvNote").textContent="";return}
+ const m=cur,isNew=!S.dex[m.id];S.dex[m.id]=1;save();updHUD();
+ drawSpec(document.getElementById("specCv"),specOf(m),{tag:m.flag?"峰位为示意":(m.fw?"":"峰形示意")});
+ const pkTxt=m.pk.map(p=>m.flag?"示意色":"≈"+p+" nm").join(" + ");
+ document.getElementById("uvNote").innerHTML=`发光 ${pkTxt}　量子产率 <span class="kv">${m.qt}</span>`;
+ document.getElementById("result").innerHTML=`<div class="result ${isNew?"new":""}"><h4>${isNew?"✨ 新发现：":""}${m.f}</h4><div class="note">${m.st}</div><ul style="margin:6px 0;padding-left:18px">${m.facts.map(f=>`<li>${f}</li>`).join("")}</ul><div class="ref">出处 ${cite(...m.r)}</div></div>`;
+ if(isNew)addStar(1,"图鉴 +1："+m.f);
+ if(m.q!=null&&m.q<0.01)setTimeout(()=>toast("😮 好暗！颜色对了，但量子产率只有约 0.2%"),900);
+ checkOrders();renderSpecial()}
 
-/* ================= 导航 ================= */
-function go(s){document.querySelectorAll("section").forEach(x=>x.classList.toggle("on",x.id==="s-"+s));
-  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.s===s));
-  window.scrollTo({top:0});if(s==="lab")labResize();}
-document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>go(b.dataset.s));
+/* ---------- 订单附加面板 ---------- */
+let coldT=300,lampA="",lampB="",lampR=50;
+function renderSpecial(){const el=document.getElementById("special");const o=ORDERS[S.ord]||{special:"lamp"};
+ if(!o||!o.special){el.innerHTML="";return}
+ if(o.special==="cold"){
+  if(!has("cscu2i3")){el.innerHTML=`<div class="result">先在图鉴里收录 CsCu₂I₃。</div>`;return}
+  el.innerHTML=`<div class="result"><b>❄️ 温控台：CsCu₂I₃</b><div class="sl"><span>温度</span><input type="range" id="coldR" min="10" max="400" step="5" value="${coldT}"><output id="coldO">${coldT} K</output></div>
+   <div style="display:flex;gap:12px;align-items:center"><div id="coldGem" style="width:54px;height:54px;border-radius:10px;transform:rotate(45deg)"></div><div style="flex:1"><div class="bars"><div class="bar"><span>光产额</span><div class="t"><i id="coldBar" style="background:${rgbs(MID.cscu2i3.col.rgb)}"></i><span id="coldV"></span></div></div></div><div class="note" id="coldN"></div></div></div>
+   <div class="ref">只有 300 K（约 36,000 光子/MeV）和 200 K（最高约 60,000）两个点来自文献 ${cite("cm23")}，其余温度的条长只是示意趋势。</div></div>`;
+  const R=document.getElementById("coldR");R.oninput=()=>{coldT=+R.value;updCold()};updCold();return}
+ if(o.special==="xray"){const L=MATS.filter(m=>m.ly&&has(m.id));
+  el.innerHTML=`<div class="result"><b>🩻 光产额排行</b>（你已收录的闪烁体）<div class="bars">${L.length?L.map(m=>`<div class="bar"><span>${m.f}</span><div class="t"><i style="width:${m.ly/60000*100}%;background:${rgbs(m.col.rgb)}"></i><span>${m.ly.toLocaleString()}</span></div></div>`).join(""):'<span class="note">还没有收录闪烁体</span>'}</div><div class="note">单位：光子/MeV。不同论文测试条件不同，只能粗略比较。</div></div>`;return}
+ if(o.special==="lamp"){const L=MATS.filter(m=>has(m.id));const opts=v=>`<option value="">（空）</option>`+L.map(m=>`<option value="${m.id}" ${v===m.id?"selected":""}>${m.f}</option>`).join("");
+  el.innerHTML=`<div class="result"><b>💡 白光灯座</b><div class="mixer" style="margin-top:6px"><select id="lpA">${opts(lampA)}</select><select id="lpB">${opts(lampB)}</select></div>
+   <div class="sl"><span>配比 A:B</span><input type="range" id="lpR" min="0" max="100" value="${lampR}"><output id="lpO"></output></div>
+   <div style="display:flex;gap:12px;align-items:center"><div class="lamp" id="lpL"></div><div style="flex:1;font-size:13px" id="lpT"></div></div><canvas id="lpS" height="90"></canvas></div>`;
+  const a=document.getElementById("lpA"),b=document.getElementById("lpB"),r=document.getElementById("lpR");
+  a.onchange=()=>{lampA=a.value;updLamp()};b.onchange=()=>{lampB=b.value;updLamp()};r.oninput=()=>{lampR=+r.value;updLamp()};updLamp()}}
+function coldLY(T){return T>=200?60000*(1-(T-200)/100*0.4):60000*(0.45+0.55*T/200)}
+function updCold(){const T=coldT,ly=coldLY(T),f=Math.max(0.05,ly/60000);
+ document.getElementById("coldO").textContent=T+" K";document.getElementById("coldBar").style.width=(f*100)+"%";
+ const exact=Math.abs(T-300)<=5?"≈36,000":Math.abs(T-200)<=5?"≈60,000":"示意";document.getElementById("coldV").textContent=exact;
+ const c=MID.cscu2i3.col.rgb;document.getElementById("coldGem").style.cssText+=`;background:${rgbs(c,f)};box-shadow:0 0 ${30*f}px ${rgbs(c,f)}`;
+ let n="";if(T>=190&&T<=210){n="🎯 找到了！约 200 K 最亮：热猝灭减弱，激子大多走发光通道。";if(!S.done.cold){S.done.cold=1;save();setTimeout(checkOrders,600)}}
+ else if(T>210)n="还在被热猝灭：激子借热能翻过能垒，变成热量而不是光。";else n="太冷了反而变暗——文献里把它和低温下带隙异常增大联系起来。";
+ document.getElementById("coldN").textContent=n}
+function updLamp(){const A=MID[lampA],B=MID[lampB],r=lampR/100;document.getElementById("lpO").textContent=A&&B?`${lampR}:${100-lampR}`:"—";
+ const T=document.getElementById("lpT"),L=document.getElementById("lpL");
+ if(!A&&!B){T.innerHTML="选一到两种样品放进灯座";L.style.background="#222";L.style.boxShadow="none";drawSpec(document.getElementById("lpS"),null);return}
+ const parts=[];if(A)parts.push([A,B?r:1]);if(B)parts.push([B,A?1-r:1]);
+ const fn=l=>parts.reduce((s,[m,w])=>s+w*(m.q==null?0.5:m.q)*specOf(m)(l),0);
+ const shape=l=>parts.reduce((s,[m,w])=>s+w*specOf(m)(l),0);
+ const bright=parts.reduce((s,[m,w])=>s+w*(m.q==null?0.5:m.q),0);
+ const cc=specColor(fn),dist=Math.hypot(cc.x-0.3127,cc.y-0.329);
+ const vis=Math.max(0.08,Math.sqrt(bright));L.style.background=rgbs(cc.rgb,vis);L.style.boxShadow=`0 0 ${50*vis}px ${rgbs(cc.rgb,vis)}`;
+ drawSpec(document.getElementById("lpS"),fn,{tag:parts.some(([m])=>m.flag||!m.fw)?"峰形示意":""});
+ const unk=parts.some(([m])=>m.q==null),white=dist<0.06,brightOK=!unk&&bright>=0.5;
+ T.innerHTML=`色点 (x, y) ≈ <span class="kv">(${cc.x.toFixed(2)}, ${cc.y.toFixed(2)})</span><br>平均发光效率 <span class="kv">${(bright*100).toFixed(bright<0.01?1:0)}%</span>${unk?'<span class="schem">含效率未收录的样品，按 50% 估算显示</span>':''}<br>`+
+  (white&&brightOK?"✅ 又白又亮！":white&&unk?"⚪ 够白，但有样品的效率文献里没给，没法验收亮度——换两块效率已知的试试":white?"⚪ 够白，但太暗":"🎨 还不够白：看光谱哪段缺了");
+ if(white&&brightOK&&!S.done.lamp){S.done.lamp=1;save();setTimeout(checkOrders,600)}}
 
-/* ================= 序章图鉴 ================= */
-document.getElementById("motifs").innerHTML=MOTIFS.map(m=>`<div class="motif"><svg viewBox="0 0 200 120">${motifSVG(m.m)}</svg><div class="nm">${m.n}</div><div class="kn">${m.d}</div></div>`).join("");
-/* ---- 序章一屏图示（动画） ---- */
-function introStatic(){
-  const T=(x,y,t,c,sz)=>`<text x="${x}" y="${y}" fill="${c||'#e8e2d4'}" font-size="${sz||15}" text-anchor="middle" font-family="serif" letter-spacing="2">${t}</text>`;
-  const A=(x1,x2,y,lab)=>`<path class="flow" d="M${x1} ${y} L${x2} ${y}" stroke="#d8b46a" stroke-width="1.6" fill="none"/><path d="M${x2} ${y} l-8 -5 v10z" fill="#d8b46a"/>${T((x1+x2)/2,y-12,lab,'#8d8a82',12)}`;
-  let o=`<defs><radialGradient id="exg"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#6fa8ff"/><stop offset="1" stop-color="#6fa8ff" stop-opacity="0"/></radialGradient>
-   <linearGradient id="spg" x1="0" x2="1"><stop offset="0" stop-color="#7b5cff"/><stop offset=".3" stop-color="#3fb7ff"/><stop offset=".5" stop-color="#5de08a"/><stop offset=".7" stop-color="#ffd54a"/><stop offset="1" stop-color="#ff5a3c"/></linearGradient></defs>`;
-  // 1 簇 + 有机
-  o+=`<g id="introCube"></g>`;for(let i=0;i<8;i++){const t=i/8*Math.PI*2;o+=`<circle cx="${130+92*Math.cos(t)}" cy="${190+80*Math.sin(t)}" r="11" fill="none" stroke="#9fb7ff" stroke-width="1.2"/><text x="${130+92*Math.cos(t)}" y="${194+80*Math.sin(t)}" fill="#9fb7ff" font-size="11" text-anchor="middle">+</text>`}
-  o+=T(130,320,"Cu–X 簇 + 有机部分")+T(130,342,"有机部分把簇隔开","#8d8a82",12);
-  o+=A(240,320,190,"隔开");
-  // 2 激子局域
-  o+=`<circle cx="400" cy="190" r="56" fill="none" stroke="rgba(216,180,106,.5)" stroke-dasharray="3 4"/><circle class="pulse" cx="400" cy="190" r="34" fill="url(#exg)"/>`+T(400,320,"激子被关在一个簇里")+T(400,342,"强局域","#8d8a82",12);
-  o+=A(470,550,190,"变形");
-  // 3 位形坐标
-  const px=(q)=>560+q*48,py=(e)=>270-e*55;let g="",x="";for(let q=-.2;q<=3.6;q+=.1){g+=(q<=-.15?"M":"L")+px(q).toFixed(1)+" "+py(.22*q*q).toFixed(1)+" ";x+=(q<=-.15?"M":"L")+px(q).toFixed(1)+" "+py(3.2-.22*2.2*2.2+.22*(q-2.2)**2).toFixed(1)+" "}
-  o+=`<path d="${g}" stroke="#cfc8b8" fill="none" stroke-width="1.6"/><path d="${x}" stroke="#6fa8ff" fill="none" stroke-width="1.6"/>`;
-  o+=`<line x1="${px(0)}" y1="${py(0)}" x2="${px(0)}" y2="${py(3.2)}" stroke="#b48cff" stroke-width="2.4"/><line x1="${px(2.2)}" y1="${py(3.2-.22*4.84)}" x2="${px(2.2)}" y2="${py(.22*4.84)}" stroke="#3fb7ff" stroke-width="2.4"/>`;
-  o+=`<circle id="introE" r="6" fill="#fff"/>`;
-  o+=T(650,320,"激发态变形 → 放掉一截能量")+T(650,342,"自陷激子 STE","#8d8a82",12);
-  o+=A(760,830,190,"发光");
-  // 4 宽带光谱
-  let b="M850 250";for(let l=0;l<=160;l+=4){b+=` L${850+l} ${250-120*Math.exp(-.5*((l-80)/32)**2)}`}b+=" L1010 250 Z";
-  o+=`<path d="${b}" fill="url(#spg)" opacity=".85"/><line x1="850" y1="250" x2="1010" y2="250" stroke="#8d8a82"/><path d="M842 250 q6 -110 12 0" fill="none" stroke="#b48cff" stroke-dasharray="3 3"/>`;
-  o+=`<path d="M848 150 L930 150" stroke="#f1d9a0" stroke-width="1"/>`+T(890,142,"斯托克斯位移","#f1d9a0",11);
-  o+=T(930,320,"宽带 · 大位移 · 近 100%")+T(930,342,"三重态，μs 寿命","#8d8a82",12);
-  // 5 应用
-  [["led","照明"],["xray","X 射线"],["el","LED"],["cpl","CPL"],["ink","防伪"]].forEach(([a,n],i)=>{o+=`<g transform="translate(1060,${40+i*66}) scale(.8)">${icon(a)}</g>`+T(1150,70+i*66,n,"#e7c66b",12)});
-  return o;
-}
-const IS=document.getElementById("introSvg");IS.innerHTML=introStatic();
-let introT=0;
-function introTick(dt){introT+=dt;const c=document.getElementById("introCube");if(!c)return;c.innerHTML=cubane(130,190,40,introT*.6,.5+.5*Math.sin(introT*2)).svg;
-  const e=document.getElementById("introE");const ph=(introT%3)/3;let q,E;const px=q=>560+q*48,py=v=>270-v*55;
-  if(ph<.2){q=0;E=3.2*ph/.2}else if(ph<.6){const f=(ph-.2)/.4;q=2.2*f;E=3.2-.22*2.2*2.2+.22*(q-2.2)**2}else if(ph<.75){q=2.2;const f=(ph-.6)/.15;E=(3.2-1.0648)+((1.0648)-(3.2-1.0648))*f}else{const f=(ph-.75)/.25;q=2.2*(1-f);E=.22*q*q}
-  e.setAttribute("cx",px(q));e.setAttribute("cy",py(E));}
+/* ---------- 工坊画布 ---------- */
+let parts=[];
+function drawLab(now){const cv=document.getElementById("labCv");const{c,w,h}=fitCv(cv);c.clearRect(0,0,w,h);
+ const cx=w/2,base=h-30;c.fillStyle="#141a28";c.fillRect(cx-90,base,180,14);
+ const t=(now-t0)/1000;
+ if(phase==="idle"){beaker(c,cx,base,0,0,now);c.fillStyle="#8f96a8";c.font="13px sans-serif";c.textAlign="center";c.fillText("选好三样，点「加热溶解 → 降温结晶」",cx,30);c.textAlign="left";return}
+ if(phase==="syn"){const heat=Math.min(1,t/1.2),cool=Math.max(0,(t-1.2)/1.2);
+  if(t<1.2){glow(c,cx,base+8,70,[255,120,40],0.5*heat);}
+  beaker(c,cx,base,heat*(1-cool),cool,now);
+  c.fillStyle="#cfd6e6";c.font="13px sans-serif";c.textAlign="center";c.fillText(t<1.2?"🔥 在 HX / H₃PO₂ 热溶液里溶解……":"❄️ 慢慢降温，晶体析出……",cx,30);c.textAlign="left";return}
+ if(phase==="fail"){c.fillStyle="#3a3f4c";c.beginPath();c.ellipse(cx,base-6,60,14,0,0,7);c.fill();c.fillStyle="#555b6a";for(let i=0;i<30;i++){c.fillRect(cx-50+((i*37)%100),base-14+((i*13)%10),3,3)}
+  c.fillStyle="#8f96a8";c.font="14px sans-serif";c.textAlign="center";c.fillText("一堆不认识的粉末 ?",cx,base-40);c.textAlign="left";return}
+ const m=cur,v=uv?(m.q==null?0.6:Math.max(0.05,Math.sqrt(m.q))):0,col=m.col.rgb;
+ if(uv){c.fillStyle="#2a2140";c.fillRect(cx-40,8,80,14);const g=c.createLinearGradient(0,22,0,base);g.addColorStop(0,"rgba(157,107,255,.35)");g.addColorStop(1,"rgba(157,107,255,0)");c.fillStyle=g;c.beginPath();c.moveTo(cx-30,22);c.lineTo(cx+30,22);c.lineTo(cx+110,base);c.lineTo(cx-110,base);c.fill();
+  for(let i=0;i<3;i++){const y=22+((now/6+i*60)%120);wave(c,cx-18+i*18,y,cx-18+i*18,y+22,"rgba(190,150,255,.8)",now/80,3,1.5)}
+  glow(c,cx,base-60,150*v+30,col,0.55*v)}
+ gem(c,cx,base-58,m.C,uv?rgbs(col,0.25+0.75*v):"rgba(214,222,236,.85)",uv?rgbs(col,1):"#9aa4b8");
+ if(uv&&Math.random()<v*0.6)parts.push({x:cx,y:base-58,a:Math.random()*6.28,s:1.2+Math.random()*1.5,l:1});
+ parts=parts.filter(p=>p.l>0);parts.forEach(p=>{p.x+=Math.cos(p.a)*p.s;p.y+=Math.sin(p.a)*p.s;p.l-=0.012;c.fillStyle=rgbs(col,p.l);c.beginPath();c.arc(p.x,p.y,2.2,0,7);c.fill()});
+ c.fillStyle="#e9e6dc";c.font="bold 15px sans-serif";c.textAlign="center";c.fillText(m.f,cx,h-6>base+12?h-6:base+12);c.textAlign="left"}
+function beaker(c,cx,base,heat,cool,now){const bw=90,bh=110,x=cx-bw/2,y=base-bh;
+ c.fillStyle=`rgba(${200-60*cool},${190-20*cool},${120+60*cool},${0.18+0.1*heat})`;c.fillRect(x+4,y+30,bw-8,bh-32);
+ if(heat>0.05)for(let i=0;i<8;i++){const p=((now/600+i*0.37)%1);c.fillStyle="rgba(255,255,255,.5)";c.beginPath();c.arc(x+12+(i*11)%(bw-24),base-4-p*(bh-40),2+heat*2,0,7);c.fill()}
+ if(cool>0)for(let i=0;i<7;i++){const s=cool*(6+(i*5)%9);c.fillStyle="rgba(230,236,250,.85)";c.save();c.translate(x+14+i*11,base-6-(i%3)*5);c.rotate(i);c.fillRect(-s/2,-s/2,s,s*0.6);c.restore()}
+ c.strokeStyle="#9fb0d0";c.lineWidth=2;c.beginPath();c.moveTo(x,y);c.lineTo(x,base);c.lineTo(x+bw,base);c.lineTo(x+bw,y);c.stroke()}
+function gem(c,x,y,C,fill,stroke){c.save();c.translate(x,y);c.fillStyle=fill;c.strokeStyle=stroke;c.lineWidth=1.5;c.beginPath();
+ if(C==="chain"){c.moveTo(-70,8);c.lineTo(-60,-8);c.lineTo(70,-8);c.lineTo(78,4);c.lineTo(66,14);c.lineTo(-62,14);c.closePath()}
+ else if(C==="tetra"){c.moveTo(0,-46);c.lineTo(40,0);c.lineTo(0,46);c.lineTo(-40,0);c.closePath()}
+ else if(C==="mono"){c.moveTo(-34,-30);c.lineTo(24,-38);c.lineTo(40,10);c.lineTo(10,38);c.lineTo(-40,22);c.closePath()}
+ else{c.moveTo(-46,-20);c.lineTo(0,-40);c.lineTo(46,-20);c.lineTo(46,22);c.lineTo(0,40);c.lineTo(-46,22);c.closePath()}
+ c.fill();c.stroke();c.globalAlpha=.25;c.strokeStyle="#fff";c.beginPath();c.moveTo(-20,-20);c.lineTo(10,-26);c.stroke();c.restore()}
+/* ===================== 原理剧场 ===================== */
+const ACTS=[{k:"d10",n:"① 为什么是 Cu⁺"},{k:"dim",n:"② 激子去哪了"},{k:"cc",n:"③ 自陷激子与斯托克斯位移"},{k:"hal",n:"④ 卤素的反常"}];
+const TH={act:"d10",t:0,
+ d10:{st:"rest",t0:0,ox:false,n:0},
+ dim:{mode:"0D",ex:[],nin:0,nout:0,auto:0},
+ cc:{dq:0.6,T:300,ph:0,t0:0,quench:false,nL:0,nQ:0},
+ hal:{x:2}};
+function setAct(k){TH.act=k;document.querySelectorAll("#actPick .chip").forEach(b=>b.classList.toggle("on",b.dataset.k===k));renderThCtl()}
+function capSet(h){document.getElementById("thCap").innerHTML=h}
+function renderThCtl(){const el=document.getElementById("thCtl"),a=TH.act;
+ if(a==="d10"){el.innerHTML=`<div class="row" style="gap:8px"><button class="btn uv" id="d1">💡 照一束紫外光</button><button class="btn ghost" id="d2">⚠ 让它被氧化成 Cu²⁺</button><button class="btn ghost" id="d3">🧪 加 H₃PO₂ 还原回来</button></div>`;
+  $("d1").onclick=()=>{const s=TH.d10;if(s.st==="rest"){s.st="run";s.t0=performance.now()}};
+  $("d2").onclick=()=>{TH.d10.ox=true;TH.d10.st="rest";capD10()};$("d3").onclick=()=>{TH.d10.ox=false;capD10()};capD10()}
+ if(a==="dim"){el.innerHTML=`<div class="chips">${["3D","1D","0D"].map(m=>`<button class="chip ${TH.dim.mode===m?"on":""}" data-m="${m}">${m==="3D"?"3D 连成一片":m==="1D"?"1D 链":"0D 孤立单元"}</button>`).join("")}</div><div class="row" style="gap:8px"><button class="btn uv" id="m1">💡 发一个光子</button><button class="btn ghost" id="m2">⚡ 连发 20 个</button><span class="note" style="align-self:center">也可以直接点画面里的格子</span></div>`;
+  el.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{TH.dim={mode:b.dataset.m,ex:[],nin:0,nout:0,auto:0};renderThCtl()});
+  $("m1").onclick=()=>fireDim();$("m2").onclick=()=>{TH.dim.auto=20};capDim()}
+ if(a==="cc"){el.innerHTML=`<div class="sl"><span>晶格畸变 ΔQ</span><input type="range" id="c1" min="0.3" max="0.8" step="0.01" value="${TH.cc.dq}"><output id="c1o"></output></div><div class="sl"><span>温度</span><input type="range" id="c2" min="80" max="450" step="10" value="${TH.cc.T}"><output id="c2o"></output></div>`;
+  const c1=$("c1"),c2=$("c2"),c1o=$("c1o"),c2o=$("c2o");const u=()=>{TH.cc.dq=+c1.value;TH.cc.T=+c2.value;c1o.textContent=TH.cc.dq.toFixed(2);c2o.textContent=TH.cc.T+" K";TH.cc.nL=0;TH.cc.nQ=0;capCC()};c1.oninput=u;c2.oninput=u;u()}
+ if(a==="hal"){el.innerHTML=`<div class="chips">${["Cl","Br","I"].map((x,i)=>`<button class="chip ${TH.hal.x===i?"on":""}" data-x="${i}">${x}</button>`).join("")}</div>`;
+  el.querySelectorAll("[data-x]").forEach(b=>b.onclick=()=>{TH.hal.x=+b.dataset.x;renderThCtl()});capHal()}}
 
-/* ================= 时间线（无关卡题，年份随点随开） ================= */
-let curL=0;
-const TAGN={ste:["STE","t-ste"],cc:["³CC","t-cc"],xl:["(M+X)LCT","t-xl"],tadf:["TADF","t-tadf"],app:["应用","t-app"]};
-function renderTimeline(){
-  document.getElementById("years").innerHTML=LEVELS.map((l,i)=>{const ns=NODES.filter(n=>n.L===i),k=ns.filter(n=>ST.seen[n.id]).length;
-    return `<div class="yr open ${i===curL?'cur':''}" data-i="${i}"><div class="dot"></div><div class="y">${l.y}</div><div class="t">${l.t}</div><div class="prog">${k}/${ns.length}</div></div>`}).join("");
-  document.querySelectorAll(".yr").forEach(e=>e.onclick=()=>{curL=+e.dataset.i;renderTimeline()});
-  document.getElementById("nodes").innerHTML=NODES.filter(n=>n.L===curL).map(n=>{const r=n.ref?REFS[n.ref]:null;
-    return `<div class="node ${ST.seen[n.id]?'visited':''}" data-id="${n.id}"><span class="seen">✦</span>${nodeArt(n.m,n.a)}<div class="j">${r?`${r.j} · ${r.y.split("（")[0]}`:'归纳'}</div><div class="tt">${n.title}</div>${n.k[0]?`<div class="kn">${n.k[0]}</div>`:""}<div style="margin-top:6px">${n.tag.map(t=>`<span class="tag ${TAGN[t][1]}">${TAGN[t][0]}</span>`).join("")}</div></div>`}).join("");
-  document.querySelectorAll(".node").forEach(e=>e.onclick=()=>openNode(e.dataset.id));
-  document.getElementById("nextYr").innerHTML=curL<3?`<button class="btn" onclick="curL=${curL+1};renderTimeline();window.scrollTo({top:0})">${LEVELS[curL+1].y} →</button>`:`<button class="btn" onclick="go('map')">地图 →</button>`;
-}
-function openNode(id){
-  const n=NODES.find(x=>x.id===id),r=n.ref?REFS[n.ref]:null;
-  if(!ST.seen[id]){ST.seen[id]=true;gain(1)}
-  document.getElementById("mbody").innerHTML=`<h3 style="font-size:21px;color:var(--gold2);margin:4px 0 14px">${n.title}</h3>
-   <div class="art"><div>${nodeArt(n.m,n.a)}<div class="note" style="margin-top:4px"><span class="schem">示意</span></div></div>
-   <div><div style="font-size:16px;color:#e8e2d4;margin:6px 0 14px">${n.s}</div>${n.k.map(k=>`<div class="big">${k}</div>`).join("")}</div></div>
-   <div class="src">${r?`[${refNo(n.ref)}] ${r.j} ${r.y.split("（")[0]} · <a href="https://doi.org/${r.doi}" target="_blank" rel="noopener">${r.doi}</a>${r.dag?' †':''}`:''}</div>`;
-  document.getElementById("modal").classList.add("on");renderTimeline();
-}
-function closeModal(){document.getElementById("modal").classList.remove("on")}
-document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")closeModal()};
-document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
-renderTimeline();
+/* ---- ① d10 ---- */
+function capD10(){capSet(TH.d10.ox?
+ `<b>Cu²⁺ 是 3d⁹</b>：少了一个电子。在铜卤化物里，Cu⁺ 被氧化成 Cu²⁺ 往往会削弱发光、降低稳定性，这是这类材料的老大难之一 ${cite("anm23")}。合成时常在 HX 溶液里加 H₃PO₂ 当还原剂，就是为了护住 Cu⁺。<span class="schem">示意</span>`:
+ `<b>Cu⁺ 是 3d¹⁰</b>：5 个 d 轨道全填满。紫外光把一个电子激发上去后，铜在激发态里有点像「暂时变成了 d⁹」，原来舒服的 [CuX₄] 四面体变得不合身，于是<b>局部结构跟着变形</b>（常说「被压扁」；具体怎么变因材料而异，Cs₃Cu₂X₅ 里甚至变得更对称 ${cite("cm20a")}）。变形吃掉一部分能量，所以发出的光比吸收的光能量低、颜色更红。<span class="schem">示意</span>`)}
+function drawD10(c,w,h,now){const s=TH.d10,t=s.st==="run"?(now-s.t0)/1000:0;if(t>2.8){s.st="rest";s.n++}
+ const lx=Math.min(w*0.45,330),bw=Math.min(40,(lx-40)/5.6),y0=250,y1=80,x0=24;
+ c.fillStyle="#8f96a8";c.font="12px sans-serif";c.fillText(s.ox?"Cu²⁺  3d⁹":"Cu⁺  3d¹⁰",x0,y0+bw+18);c.fillText("激发态（含 Cu 4s/4p 成分）",x0,y1-14);
+ c.strokeStyle="#5a6a90";c.strokeRect(x0+bw*2.3,y1,bw,bw);
+ for(let i=0;i<5;i++){c.strokeRect(x0+i*bw*1.15,y0,bw,bw)}
+ const up=t>0&&t<2.2,eY=up?(t<0.5?y0+bw/2-(y0-y1)*(t/0.5):(t>1.8?y1+bw/2+(y0-y1)*Math.min(1,(t-1.8)/0.4):y1+bw/2)):null;
+ c.font=`${bw*0.6}px sans-serif`;c.textAlign="center";
+ for(let i=0;i<5;i++){const cx=x0+i*bw*1.15+bw/2;c.fillStyle="#f2c86b";c.fillText("↑",cx-bw*0.18,y0+bw*0.72);
+  const missing=(i===4&&(s.ox||up));if(!missing)c.fillText("↓",cx+bw*0.18,y0+bw*0.72)}
+ if(up&&!s.ox){const ex=t<0.5?x0+4*bw*1.15+bw/2+(x0+bw*2.3+bw/2-(x0+4*bw*1.15+bw/2))*(t/0.5):x0+bw*2.3+bw/2;
+  c.fillStyle="#fff";glow(c,ex,eY,18,[255,230,150],.6);c.fillStyle="#ffe9a8";c.fillText("●",ex,eY+bw*0.2);
+  if(t<0.5)wave(c,ex-120,eY+60,ex-10,eY+10,"rgba(180,140,255,.9)",now/60,4,2)}
+ c.textAlign="left";
+ if(s.ox&&s.st==="run"){c.fillStyle="#ff8a73";c.font="13px sans-serif";c.fillText("能量被耗散掉了……没有光",x0,y1+70)}
+ // 右：四面体
+ const cx=lx+(w-lx)/2,cy=170,R=Math.min(80,(w-lx)/3);let f=0;
+ if(s.st==="run"&&!s.ox){f=t<0.5?0:t<1.2?(t-0.5)/0.7:t<1.8?1:Math.max(0,1-(t-1.8)/0.6)}
+ const X=[[0,-1+0.45*f],[-0.95-0.15*f,0.45],[0.95+0.15*f,0.45],[0.15,0.25-0.1*f]];
+ c.strokeStyle="rgba(200,180,255,.5)";c.lineWidth=2;X.forEach(p=>{c.beginPath();c.moveTo(cx,cy);c.lineTo(cx+p[0]*R,cy+p[1]*R);c.stroke()});
+ c.beginPath();[0,1,2,0].forEach((k,i)=>{const p=X[k];i?c.lineTo(cx+p[0]*R,cy+p[1]*R):c.moveTo(cx+p[0]*R,cy+p[1]*R)});c.strokeStyle="rgba(200,180,255,.25)";c.stroke();
+ X.forEach((p,i)=>{glow(c,cx+p[0]*R,cy+p[1]*R,i===3?24:20,[170,120,255],.5);c.fillStyle="#b28cff";c.beginPath();c.arc(cx+p[0]*R,cy+p[1]*R,i===3?13:11,0,7);c.fill()});
+ c.fillStyle=s.ox?"#4fc3c9":"#e39a4f";c.beginPath();c.arc(cx,cy,10,0,7);c.fill();
+ c.fillStyle="#fff";c.font="11px sans-serif";c.fillText(s.ox?"Cu²⁺":"Cu⁺",cx-12,cy+26);c.fillText("X⁻",cx+X[2][0]*R+12,cy+X[2][1]*R);
+ c.fillStyle="#8f96a8";c.fillText("[CuX₄] 四面体",cx-36,cy+R+30);
+ if(f>0.3&&t<1.8){c.fillStyle="#f2c86b";c.font="13px sans-serif";c.fillText("变形中……（自陷）",cx-50,cy-R-14)}
+ if(t>1.8&&t<2.8&&!s.ox){const k=(t-1.8)/1;const col=wlColor(560);wave(c,cx+20,cy,cx+20+(w-cx)*k,cy-60*k,rgbs(col),now/50,5,2.5)}
+ c.fillStyle="#8f96a8";c.font="12px sans-serif";c.fillText("发出的光子："+s.n,w-120,h-10)}
 
-/* ================= 颜色：光谱 → sRGB（CIE 1931 解析近似） ================= */
-function g3(x,m,s1,s2){const t=(x-m)/(x<m?s1:s2);return Math.exp(-.5*t*t)}
-function cmf(l){return [1.056*g3(l,599.8,37.9,31)+.362*g3(l,442,16,26.7)-.065*g3(l,501.1,20.4,26.2),.821*g3(l,568.8,46.9,40.5)+.286*g3(l,530.9,16.3,31.1),1.217*g3(l,437,11.8,36)+.681*g3(l,459,26,13.8)]}
-function xyz2rgb(X,Y,Z){let r=3.2406*X-1.5372*Y-.4986*Z,g=-.9689*X+1.8758*Y+.0415*Z,b=.0557*X-.204*Y+1.057*Z;
-  const mn=Math.min(r,g,b);if(mn<0){r-=mn;g-=mn;b-=mn}const mx=Math.max(r,g,b)||1;
-  return [r,g,b].map(v=>{v/=mx;v=v<=.0031308?12.92*v:1.055*Math.pow(v,1/2.4)-.055;return Math.round(255*Math.max(0,Math.min(1,v)))})}
-function lamRGB(l){const c=cmf(l);const rgb=xyz2rgb(...c);const vis=l<380?Math.max(0,(l-330)/50):l>720?Math.max(0,(780-l)/60):1;return `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${Math.max(.25,vis).toFixed(2)})`}
-function specColor(spec){let X=0,Y=0,Z=0;spec.forEach(([l,v])=>{if(l<380||l>780)return;const c=cmf(l);X+=c[0]*v;Y+=c[1]*v;Z+=c[2]*v});const s=X+Y+Z||1;return {rgb:xyz2rgb(X,Y,Z),x:X/s,y:Y/s}}
+/* ---- ② 维度 ---- */
+const DCOL=9,DROW=5,DEF=[[2,1],[6,3],[4,0],[7,1],[1,4]];
+function dimGeo(w){const gx=(w-40)/DCOL,gy=56;return{gx,gy,ox:20+gx/2,oy:50}}
+function isDef(i,j){return DEF.some(d=>d[0]===i&&d[1]===j)}
+function fireDim(i,j){const d=TH.dim;if(i==null){i=Math.floor(Math.random()*DCOL);j=Math.floor(Math.random()*DROW)}d.nin++;d.ex.push({i,j,st:"in",t:performance.now(),last:performance.now(),path:[[i,j]]});capDim()}
+function capDim(){const d=TH.dim,eff=d.nin?Math.round(d.nout/Math.max(1,d.nin-d.ex.length)*100):0;
+ const txt={"3D":"无机骨架<b>连成一片</b>：激子（电子–空穴对）可以到处跑，很容易撞上缺陷（×）把能量变成热。",
+  "1D":"无机部分连成<b>一维链</b>：激子只能沿链跑，碰到缺陷的机会少了。",
+  "0D":"每个 Cu–X 单元被有机阳离子（灰色）<b>彼此隔开</b>：激子被关在一个单元里，跑不到缺陷那里，就地让结构变形（自陷）后发光。"}[d.mode];
+ capSet(`${txt}<br>吸收 <span class="kv">${d.nin}</span> 个光子，发出 <span class="kv">${d.nout}</span> 个（本模式下约 <span class="kv">${eff}%</span>）<span class="schem">示意</span><br><span class="note">低维、强限域是这类材料常见高效率的重要原因之一 ${cite("jun18","lam25")}，但不是唯一因素：CsCu₂I₃（1D）和长链铵的 0D 样品都有各自的损耗通道 ${cite("cm23","li26")}。</span>`)}
+function nbrs(i,j){const m=TH.dim.mode,n=[];if(m==="0D")return n;[[1,0],[-1,0]].concat(m==="3D"?[[0,1],[0,-1]]:[]).forEach(([a,b])=>{const x=i+a,y=j+b;if(x>=0&&x<DCOL&&y>=0&&y<DROW)n.push([x,y])});return n}
+function drawDim(c,w,h,now){const d=TH.dim,{gx,gy,ox,oy}=dimGeo(w),m=d.mode;
+ if(d.auto>0&&(!drawDim.la||now-drawDim.la>180)){drawDim.la=now;d.auto--;fireDim()}
+ const P=(i,j)=>[ox+i*gx,oy+j*gy];
+ if(m!=="3D"){c.fillStyle="rgba(120,130,150,.22)";for(let j=0;j<DROW;j++)for(let i=0;i<DCOL;i++){const[x,y]=P(i,j);
+  if(m==="1D"){if(j<DROW-1){c.beginPath();c.ellipse(x,y+gy/2,gx*0.45,8,0,0,7);c.fill()}}else{c.beginPath();c.arc(x+gx/2,y+gy/2,9,0,7);c.fill();c.beginPath();c.arc(x+gx/2,y,6,0,7);c.fill();c.beginPath();c.arc(x,y+gy/2,6,0,7);c.fill()}}}
+ c.strokeStyle="rgba(227,154,79,.55)";c.lineWidth=3;for(let j=0;j<DROW;j++)for(let i=0;i<DCOL;i++){const[x,y]=P(i,j);nbrs(i,j).forEach(([a,b])=>{if(a>i||b>j){const[x2,y2]=P(a,b);c.beginPath();c.moveTo(x,y);c.lineTo(x2,y2);c.stroke()}})}
+ const trap={};d.ex.forEach(e=>{if(e.st==="trap"||e.st==="emit")trap[e.i+","+e.j]=Math.min(1,(now-e.t)/400)});
+ for(let j=0;j<DROW;j++)for(let i=0;i<DCOL;i++){const[x,y]=P(i,j),tr=trap[i+","+j]||0,r=11-4*tr;
+  c.fillStyle="#b28cff";[[0,-1],[1,0],[0,1],[-1,0]].forEach(([a,b])=>{c.beginPath();c.arc(x+a*r,y+b*r,4.5,0,7);c.fill()});
+  c.fillStyle="#e39a4f";c.beginPath();c.arc(x,y,4,0,7);c.fill();
+  if(isDef(i,j)){c.strokeStyle="#ff5a4a";c.lineWidth=2;c.beginPath();c.moveTo(x-8,y-8);c.lineTo(x+8,y+8);c.moveTo(x+8,y-8);c.lineTo(x-8,y+8);c.stroke()}}
+ const col=wlColor(565);
+ d.ex.forEach(e=>{const[x,y]=P(e.i,e.j),age=now-e.t;
+  if(e.st==="in"){const k=Math.min(1,age/350);wave(c,x-60+60*k,y-50+50*k-20,x,y,"rgba(180,140,255,.9)",now/50,3,2);if(k>=1){e.st=isDef(e.i,e.j)?"dead":(m==="0D"?"trap":"walk");e.t=now;e.last=now}}
+  else if(e.st==="walk"){const R=m==="3D"?30:22;c.save();c.translate(x,y);if(m==="1D")c.scale(1.6,0.6);glow(c,0,0,R,[255,240,170],.55);c.restore();
+   if(now-e.last>160){e.last=now;if(Math.random()<(m==="3D"?0.1:0.2)){e.st="trap";e.t=now}else{const n=nbrs(e.i,e.j);const q=n[Math.floor(Math.random()*n.length)];e.i=q[0];e.j=q[1];if(isDef(e.i,e.j)){e.st="dead";e.t=now}}}}
+  else if(e.st==="trap"){glow(c,x,y,14,[255,240,170],.8);if(age>500){e.st="emit";e.t=now}}
+  else if(e.st==="emit"){const k=age/700;wave(c,x,y,x+50*k+10,y-70*k-10,rgbs(col,1-k*0.5),now/40,4,2.5);if(k>=1){e.st="gone";d.nout++;capDim()}}
+  else if(e.st==="dead"){const k=age/600;c.fillStyle=`rgba(255,110,80,${1-k})`;c.font="12px sans-serif";c.fillText("热 ~",x+6,y-10-14*k);if(k>=1){e.st="gone";capDim()}}});
+ d.ex=d.ex.filter(e=>e.st!=="gone");
+ c.fillStyle="#8f96a8";c.font="12px sans-serif";c.fillText("● Cu  ● X  ✕ 缺陷"+(m!=="3D"?"  灰色＝有机阳离子":""),14,h-12)}
 
-/* ================= 原理实验台 ================= */
-const kB=8.617e-5;
-const LAB={mode:"ste",p:{dim:0,T:300,rig:.5,d:2.65,T2:300,dE:.08,T3:300},els:[],photons:[],hist:{},t:0};
-const cv=document.getElementById("cv"),ctx=cv.getContext("2d"),sp=document.getElementById("sp"),sctx=sp.getContext("2d");
-let W=760,H=430,SW=760,SH=190;
-function labResize(){const dpr=window.devicePixelRatio||1;[[cv,ctx,760,430],[sp,sctx,760,190]].forEach(([c,x,w,h])=>{c.width=w*dpr;c.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0)})}
-labResize();
-function e2l(E){return 1239.84/E}
-function model(){
-  const p=LAB.p,m=LAB.mode;
-  if(m==="ste"){const loc=[1,.72,.45,.22][p.dim];const Eabs=4.05,S=.25+1.15*loc,Eem=Eabs-S;
-    const fw=.15+.33*loc+.0003*(p.T-80);const C=[60,300,1500,8000][p.dim]*Math.pow(10,1-2*p.rig);
-    const knr=C*Math.exp(-.2/(kB*p.T));const q=1/(1+knr);
-    return {Eabs,S,bands:[{E:Eem,w:fw,a:q,k:"ste"}],plqy:q,loc}}
-  if(m==="cc"){const dEff=p.d-.06*(300-p.T2)/220;const wcc=1/(1+Math.exp((dEff-2.8)/.05));
-    const Ecc=Math.max(1.85,Math.min(2.45,2.15+.9*(dEff-2.6)));const Exl=2.85;
-    const kconv=50*wcc*Math.exp(-.04/(kB*p.T2));const fHE=1/(1+kconv);
-    const q=.95/(1+20*Math.exp(-.25/(kB*p.T2)));
-    return {Eabs:3.75,dEff,wcc,Ecc,Exl,fHE,plqy:q,bands:[{E:Exl,w:.33,a:q*fHE,k:"xl"},{E:Ecc,w:.42+.0004*(p.T2-80),a:q*(1-fHE),k:"cc"}]}}
-  const S1=2.55,T1=S1-p.dE;const kr=300*Math.exp(-p.dE/(kB*p.T3));const fDF=kr/(kr+1);const q=.9/(1+5*Math.exp(-.22/(kB*p.T3)));
-  return {Eabs:3.6,S1,T1,fDF,plqy:q,bands:[{E:S1,w:.32,a:q*fDF,k:"tadf"},{E:T1,w:.32,a:q*(1-fDF),k:"ph"}]};
-}
-function spectrum(M){const out=[];for(let l=300;l<=800;l+=2){const E=e2l(l);let v=0;M.bands.forEach(b=>{const s=b.w/2.355;v+=b.a*Math.exp(-.5*((E-b.E)/s)**2)});out.push([l,v])}return out}
-function peakOf(sp){let b=sp[0];sp.forEach(x=>{if(x[1]>b[1])b=x});return b}
-function fwhmNm(sp){const p=peakOf(sp);const h=p[1]/2;const a=sp.filter(x=>x[1]>=h);return a.length?a[a.length-1][0]-a[0][0]:0}
+/* ---- ③ 位形坐标图 ---- */
+function ccModel(){const q=TH.cc.dq,T=TH.cc.T,f=(q*q-0.09)/0.55,Eem=3.2-1.1*f,Eab=3.5+0.7*f,Ea=(1-q*q)**2/(4*q*q)*0.5,kT=8.617e-5*T,z=30*Math.exp(-Ea/kT),pq=z/(1+z);
+ return{q,T,Eem,Eab,Ea,pq,lem:1240/Eem,lab:1240/Eab,wid:0.08+0.45*q*Math.sqrt(T/300)}}
+function capCC(){const M=ccModel();capSet(`横轴是原子位置（晶格畸变），纵轴是能量。小球＝电子状态：<b>吸收</b>（紫箭头，在基态位置竖直跳上去）→ 在激发态里<b>滚到新的最低点</b>（晶格变形＝自陷，放热）→ <b>发光</b>（彩箭头，竖直落下，能量更小）。
+ ΔQ 越大：斯托克斯位移越大、光谱越宽、吸收和发射几乎不重叠（不自吸收）；但两条曲线的交点也越低，<b>升温时激子更容易从交点「溜」回基态变成热</b>（热猝灭）。
+ <br>此刻：吸收 ≈<span class="kv">${Math.round(M.lab)} nm</span>，发射 ≈<span class="kv">${Math.round(M.lem)} nm</span>，斯托克斯位移 ≈<span class="kv">${(M.Eab-M.Eem).toFixed(2)} eV</span>，发光比例 ≈<span class="kv">${Math.round((1-M.pq)*100)}%</span> <span class="schem">示意模型，不对应具体材料</span>
+ <br><span class="note">真实例子：CsCu₂I₃ 斯托克斯位移 1.54 eV ${cite("ami21")}，室温下已被热猝灭约一半 ${cite("cm23")}。</span>`)}
+function drawCC(c,w,h,now){const M=ccModel(),q=M.q,S0=TH.cc,nar=w<560;const L=40,R=nar?w-10:Math.min(w*0.62,w-170),T=16,B=nar?196:h-28;
+ const Qmin=-1.2,Qmax=2.2,Emax=2.7,X=Q=>L+(Q-Qmin)/(Qmax-Qmin)*(R-L),Y=E=>B-(E+0.05)/(Emax+0.05)*(B-T);
+ c.strokeStyle="#33405c";c.lineWidth=1;c.beginPath();c.moveTo(L,T);c.lineTo(L,B);c.lineTo(R,B);c.stroke();
+ c.fillStyle="#8f96a8";c.font="11px sans-serif";c.fillText("能量",L+4,T+10);c.fillText("晶格畸变 Q →",R-80,B+16);
+ const curve=(fn,col)=>{c.strokeStyle=col;c.lineWidth=2.5;c.beginPath();let st=false;for(let Q=Qmin;Q<=Qmax;Q+=0.02){const E=fn(Q);if(E>Emax){st=false;continue}st?c.lineTo(X(Q),Y(E)):c.moveTo(X(Q),Y(E));st=true}c.stroke()};
+ curve(Q=>Q*Q,"#7d8fb8");curve(Q=>1+(Q-q)*(Q-q),"#f2c86b");
+ c.fillStyle="#7d8fb8";c.fillText("基态",X(-1.1),Y(1.25));c.fillStyle="#f2c86b";c.fillText("激发态",X(q-1.1),Y(2.25));
+ const Qs=(1+q*q)/(2*q),Es=Qs*Qs;if(Es<Emax){c.fillStyle="#ff8a73";c.beginPath();c.arc(X(Qs),Y(Es),4,0,7);c.fill();c.fillText("交点",X(Qs)+6,Y(Es))}
+ const D=[0.55,0.9,0.7,0.6],tot=D.reduce((a,b)=>a+b);let t=(now-S0.t0)/1000;if(t>tot||t<0){S0.t0=now;t=0;S0.quench=Math.random()<M.pq;S0.quench?S0.nQ++:S0.nL++}
+ let bx,by;const emCol=wlColor(Math.min(700,Math.max(380,M.lem)));
+ if(t<D[0]){const k=t/D[0];bx=X(0);by=Y(k*(1+q*q));c.strokeStyle="#b28cff";c.lineWidth=3;c.beginPath();c.moveTo(X(0),Y(0));c.lineTo(X(0),by);c.stroke()}
+ else if(t<D[0]+D[1]){const k=(t-D[0])/D[1],Q=q*k;bx=X(Q);by=Y(1+(Q-q)**2);if(k>0.3)for(let i=0;i<3;i++){c.fillStyle=`rgba(255,140,90,${0.6-k*0.4})`;c.fillText("~",X(Q)-10+i*8,Y(1+(Q-q)**2)+20+Math.sin(now/90+i)*3)}}
+ else if(t<D[0]+D[1]+D[2]){const k=(t-D[0]-D[1])/D[2];
+  if(!S0.quench){bx=X(q);by=Y(1-k*(1-q*q));c.strokeStyle=rgbs(emCol);c.lineWidth=3;c.beginPath();c.moveTo(X(q),Y(1));c.lineTo(X(q),by);c.stroke();wave(c,X(q),Y((1+q*q)/2),X(q)+60,Y((1+q*q)/2)-30,rgbs(emCol,1-k),now/40,4,2)}
+  else{const Q=q+(Qs-q)*k;bx=X(Q);by=Y(Math.min(Emax,1+(Q-q)**2));c.fillStyle="#ff8a73";c.fillText("热 → 晶格振动",X(q)+10,Y(1)+18)}}
+ else{const k=(t-D[0]-D[1]-D[2])/D[3],Q0=S0.quench?Qs:q,Q=Q0*(1-k);bx=X(Q);by=Y(Math.min(Emax,Q*Q))}
+ glow(c,bx,by,16,[255,255,255],.5);c.fillStyle="#fff";c.beginPath();c.arc(bx,by,6,0,7);c.fill();
+ // 右：光谱 + 亮度
+ const sl=nar?40:R+24,sr=w-12,sb=nar?h-62:B-60,st=nar?B+40:T+20,BB=nar?h:B;c.strokeStyle="#33405c";c.beginPath();c.moveTo(sl,sb);c.lineTo(sr,sb);c.stroke();
+ c.fillStyle="#8f96a8";c.fillText("光谱（示意）",sl,st-12);c.fillText("280",sl-6,sb+14);c.fillText("750 nm",sr-36,sb+14);
+ const xs=l=>sl+(l-280)/(750-280)*(sr-sl);
+ const band=(fn,col)=>{c.beginPath();c.moveTo(xs(280),sb);for(let l=280;l<=750;l+=3)c.lineTo(xs(l),sb-(sb-st)*fn(l));c.lineTo(xs(750),sb);c.fillStyle=col;c.fill()};
+ band(l=>Math.exp(-0.5*((1240/l-M.Eab)/0.12)**2),"rgba(178,140,255,.55)");
+ band(l=>(1-M.pq)*Math.exp(-0.5*((1240/l-M.Eem)/M.wid)**2),rgbs(emCol,.7));
+ c.fillStyle="#b28cff";c.fillText("吸收",xs(M.lab)-12,st-4);c.fillStyle=rgbs(emCol);c.fillText("发射",xs(M.lem)-12,st+12);
+ c.fillStyle="#8f96a8";c.fillText("亮度",sl,BB-28);c.fillStyle="#1a2132";c.fillRect(sl+34,BB-38,sr-sl-34,12);c.fillStyle=rgbs(emCol);c.fillRect(sl+34,BB-38,(sr-sl-34)*(1-M.pq),12);
+ c.fillStyle="#8f96a8";c.fillText(`发光 ${S0.nL} · 变成热 ${S0.nQ}`,sl,BB-6)}
 
-const CTRL={
- ste:`<div class="ctrl"><label>维度<span id="v_dim"></span></label><div class="seg" id="segdim">${["0D","1D","2D","3D"].map((d,i)=>`<button data-i="${i}">${d}</button>`).join("")}</div></div>
-  <div class="ctrl"><label>骨架刚性<span id="v_rig"></span></label><input type="range" id="rig" min="0" max="1" step="0.05"></div>
-  <div class="ctrl"><label>温度<span id="v_T"></span></label><input type="range" id="T" min="80" max="400" step="5"></div>`,
- cc:`<div class="ctrl"><label>Cu⋯Cu 距离<span id="v_d"></span></label><input type="range" id="d" min="2.40" max="3.20" step="0.01"></div>
-  <div class="ctrl"><label>温度<span id="v_T2"></span></label><input type="range" id="T2" min="80" max="400" step="5"></div>`,
- tadf:`<div class="ctrl"><label>ΔE_ST<span id="v_dE"></span></label><input type="range" id="dE" min="0.02" max="0.30" step="0.01"></div>
-  <div class="ctrl"><label>温度<span id="v_T3"></span></label><input type="range" id="T3" min="80" max="400" step="5"></div>`
-};
-const ONELINE={ste:"吸收 → 变形弛豫（放热）→ 宽带发光。维度越低、骨架越刚：越亮、位移越大。",
- cc:"Cu⋯Cu 近 → 橙色 ³CC；降温 → 蓝紫 XLCT 冒头（热致变色）。",
- tadf:"ΔE_ST 小、温度高 → T₁ 回到 S₁ → 延迟荧光，颜色变蓝。"};
-function setMode(m){LAB.mode=m;LAB.els=[];LAB.photons=[];LAB.hist={};document.querySelectorAll("#modes button").forEach(b=>b.classList.toggle("on",b.dataset.m===m));
-  document.getElementById("ctrls").innerHTML=CTRL[m];
-  if(m==="ste"){const sg=document.querySelectorAll("#segdim button");sg.forEach(b=>{b.classList.toggle("on",+b.dataset.i===LAB.p.dim);b.onclick=()=>{LAB.p.dim=+b.dataset.i;sg.forEach(x=>x.classList.toggle("on",x===b));LAB.hist={};update()}})}
-  ["rig","T","d","T2","dE","T3"].forEach(k=>{const el=document.getElementById(k);if(el){el.value=LAB.p[k];el.oninput=()=>{LAB.p[k]=+el.value;LAB.hist={};update()}}});
-  document.getElementById("oneline").textContent=ONELINE[m];update();}
-document.querySelectorAll("#modes button").forEach(b=>b.onclick=()=>setMode(b.dataset.m));
-function update(){
-  const M=model(),p=LAB.p,S=spectrum(M),pk=peakOf(S),col=specColor(S);LAB.M=M;LAB.S=S;LAB.col=col;
-  const sv=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
-  sv("v_dim",["0D","1D","2D","3D"][p.dim]);sv("v_rig",p.rig<.34?"柔":p.rig<.67?"中":"刚");sv("v_T",p.T+" K");sv("v_d",p.d.toFixed(2)+" Å");sv("v_T2",p.T2+" K");sv("v_dE",p.dE.toFixed(2)+" eV");sv("v_T3",p.T3+" K");
-  const la=e2l(M.Eabs),lp=pk[0];
-  let rows=[["发射峰",lp+" nm"],["位移",(lp-la).toFixed(0)+" nm"],["半峰宽",fwhmNm(S)+" nm"],["PLQY",(M.plqy*100).toFixed(0)+"%"]];
-  if(LAB.mode==="cc")rows.push(["高能带",(M.fHE*100).toFixed(0)+"%"],["Cu⋯Cu",M.dEff.toFixed(2)+" Å"]);
-  if(LAB.mode==="tadf")rows.push(["延迟荧光",(M.fDF*100).toFixed(0)+"%"],["磷光",((1-M.fDF)*100).toFixed(0)+"%"]);
-  document.getElementById("readout").innerHTML=rows.map(r=>`<div>${r[0]}<b>${r[1]}</b></div>`).join("");
-  const sw=document.getElementById("swatch"),c=`rgb(${col.rgb.join(",")})`,a=Math.max(.08,M.plqy);
-  sw.style.background=`linear-gradient(90deg, rgba(${col.rgb.join(",")},${a}) , rgba(${col.rgb.join(",")},${a*.6}))`;sw.style.setProperty("--sw",`rgba(${col.rgb.join(",")},${(a*.55).toFixed(2)})`);
-}
-/* ---- 电子动画 ---- */
-function fire(n){for(let i=0;i<(n||1);i++)LAB.els.push({ph:"up",t:-i*0.12,path:null})}
-document.getElementById("fire").onclick=()=>fire(1);document.getElementById("burst").onclick=()=>fire(20);
-function sampleBand(M){let r=Math.random()*M.bands.reduce((a,b)=>a+b.a,0);for(const b of M.bands){r-=b.a;if(r<=0){return b}}return M.bands[M.bands.length-1]}
-function gauss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
-// 坐标映射
-const PX={x0:70,x1:560,y0:395,y1:30,Emax:4.6};
-function ey(E){return PX.y0-(E/PX.Emax)*(PX.y0-PX.y1)}
-function stePar(M){const k=.145,Q0=Math.sqrt(M.S/(2*k));return {k,Q0,qx:Q=>PX.x0+(Q+1.6)/(5.2)*(PX.x1-PX.x0),g:Q=>k*Q*Q,e:Q=>M.Eabs-k*Q0*Q0+k*(Q-Q0)**2}}
-function drawAxes(){ctx.strokeStyle="rgba(184,147,90,.5)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(PX.x0,PX.y1-10);ctx.lineTo(PX.x0,PX.y0);ctx.lineTo(PX.x1+10,PX.y0);ctx.stroke();
-  ctx.fillStyle="#8d8a82";ctx.font="12px sans-serif";ctx.save();ctx.translate(26,220);ctx.rotate(-Math.PI/2);ctx.fillText("能量 E →",0,0);ctx.restore()}
-function curve(f,a,b,col,w,dash){ctx.beginPath();ctx.strokeStyle=col;ctx.lineWidth=w||2;ctx.setLineDash(dash||[]);let first=true;for(let x=a;x<=b;x+=.02){const P=f(x);if(P[1]<PX.y1-5||P[1]>PX.y0){first=true;continue}first?ctx.moveTo(...P):ctx.lineTo(...P);first=false}ctx.stroke();ctx.setLineDash([])}
-function arrow(x1,y1,x2,y2,col,w,label){ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=w||2;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();const a=Math.atan2(y2-y1,x2-x1);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-9*Math.cos(a-.4),y2-9*Math.sin(a-.4));ctx.lineTo(x2-9*Math.cos(a+.4),y2-9*Math.sin(a+.4));ctx.fill();if(label){ctx.font="12px sans-serif";ctx.fillText(label,x2+6,(y1+y2)/2)}}
-function wiggle(x1,y1,x2,y2,col,t){ctx.strokeStyle=col;ctx.lineWidth=1.4;ctx.beginPath();const n=40;for(let i=0;i<=n;i++){const f=i/n,x=x1+(x2-x1)*f,y=y1+(y2-y1)*f,o=Math.sin(f*30+t*10)*5;i?ctx.lineTo(x+o,y):ctx.moveTo(x+o,y)}ctx.stroke()}
-function label(t,x,y,col,sz){ctx.fillStyle=col;ctx.font=(sz||12)+"px sans-serif";ctx.fillText(t,x,y)}
-function dot(x,y,col){ctx.beginPath();ctx.fillStyle=col;ctx.shadowColor=col;ctx.shadowBlur=14;ctx.arc(x,y,5.5,0,7);ctx.fill();ctx.shadowBlur=0}
-function emitPhoton(x,y,l){LAB.photons.push({x,y,vx:2.4+Math.random()*1.5,vy:(Math.random()-.5)*1.4,l,life:1});const b=Math.round(l/5)*5;LAB.hist[b]=(LAB.hist[b]||0)+1}
-function drawSTE(dt){const M=LAB.M,P=stePar(M);drawAxes();
-  curve(Q=>[P.qx(Q),ey(P.g(Q))],-1.6,3.6,"#cfc8b8",2);curve(Q=>[P.qx(Q),ey(P.e(Q))],-1.6,3.6,"#6fa8ff",2);
-  label("基态 S₀",P.qx(-1.5),ey(P.g(-1.5))-8,"#cfc8b8");label("激发态",P.qx(-1.55),ey(P.e(-1.5))-8,"#6fa8ff");
-  const x0=P.qx(0),xq=P.qx(P.Q0),Emin=M.Eabs-P.k*P.Q0*P.Q0;
-  ctx.setLineDash([3,4]);ctx.strokeStyle="rgba(184,147,90,.35)";ctx.beginPath();ctx.moveTo(x0,PX.y0);ctx.lineTo(x0,PX.y1);ctx.moveTo(xq,PX.y0);ctx.lineTo(xq,PX.y1);ctx.stroke();ctx.setLineDash([]);
-  label("原构型",x0-18,PX.y0+16,"#8d8a82",11);label("变形后",xq-18,PX.y0+16,"#8d8a82",11);
-  arrow(x0-14,ey(0)-2,x0-14,ey(M.Eabs)+4,"rgba(180,140,255,.55)",1.5);label("吸收",x0-48,ey(M.Eabs/2),"#b48cff");
-  const lc=`rgb(${LAB.col.rgb.join(",")})`;arrow(xq+14,ey(Emin)+4,xq+14,ey(P.g(P.Q0))-4,lc,1.5);label("发射",xq+20,ey((Emin+P.g(P.Q0))/2),lc);
-  ctx.fillStyle="rgba(240,166,64,.9)";ctx.font="12px sans-serif";ctx.fillText("自陷态 STE",xq-30,ey(Emin)+20);
-  // 斯托克斯标注
-  ctx.strokeStyle="rgba(241,217,160,.7)";ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(x0,ey(M.Eabs));ctx.lineTo(PX.x1+20,ey(M.Eabs));ctx.moveTo(xq,ey(Emin-P.g(P.Q0)));ctx.stroke();ctx.setLineDash([]);
-  ctx.strokeStyle="rgba(255,122,107,.35)";ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(xq,ey(Emin));ctx.bezierCurveTo(xq+90,ey(Emin)+30,xq+60,ey(P.g(P.Q0))-40,xq+30,ey(P.g(P.Q0)));ctx.stroke();ctx.setLineDash([]);label("→ 热",xq+66,ey((Emin+P.g(P.Q0))/2)+30,"rgba(255,122,107,.8)",11);
-  // 电子
-  LAB.els.forEach(e=>{e.t+=dt;if(e.t<0)return;let x,y;
-    if(e.ph==="up"){const f=Math.min(1,e.t/.35);x=x0;y=ey(M.Eabs*f);arrow(x0,ey(0),x0,y,"#b48cff",2.5);if(f>=1){e.ph="relax";e.t=0}}
-    else if(e.ph==="relax"){const f=Math.min(1,e.t/.9),Q=P.Q0*(1-Math.pow(1-f,2));x=P.qx(Q);y=ey(P.e(Q));if(Math.random()<.25)wiggle(x,y,x+10,y+18,"rgba(240,166,64,.7)",LAB.t);if(f>=1){e.ph=Math.random()<M.plqy?"emit":"nr";e.t=0;if(e.ph==="emit"){const b=sampleBand(M);e.l=e2l(b.E+gauss()*b.w/2.355)}}}
-    else if(e.ph==="emit"){const f=Math.min(1,e.t/.25);x=xq;y=ey(Emin+(P.g(P.Q0)-Emin)*f);arrow(xq,ey(Emin),xq,y,lamRGB(e.l),3);if(f>=1){emitPhoton(xq,ey((Emin+P.g(P.Q0))/2),e.l);e.ph="back";e.t=0}}
-    else if(e.ph==="nr"){const f=Math.min(1,e.t/.6);x=xq+30*Math.sin(f*Math.PI);y=ey(Emin+(P.g(P.Q0)-Emin)*f);wiggle(xq,ey(Emin),x,y,"#ff7a6b",LAB.t);if(f>=1){e.ph="back";e.t=0}}
-    else if(e.ph==="back"){const f=Math.min(1,e.t/.5),Q=P.Q0*(1-f);x=P.qx(Q);y=ey(P.g(Q));if(f>=1)e.done=true}
-    dot(x,y,"#fff")});
-}
-function drawCC(dt){const M=LAB.M;ctx.fillStyle="#8d8a82";
-  // 能级图（左）
-  const xs=90,xe=360,yS0=ey(0),yX=ey(M.Exl+.25),yC=ey(M.Ecc+.25),yA=ey(M.Eabs);
-  ctx.lineWidth=2;[[yS0,"#cfc8b8","S₀ 基态"],[yA,"rgba(207,200,184,.5)","高激发态"],[yX,"#b48cff","³XLCT（高能）"],[yC,"#f0a640","³CC（低能）"]].forEach(([y,c,t])=>{ctx.strokeStyle=c;ctx.beginPath();ctx.moveTo(xs,y);ctx.lineTo(xe,y);ctx.stroke();label(t,xs,y-6,c)});
-  ctx.globalAlpha=.25+.75*M.wcc;ctx.strokeStyle="#f0a640";ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(220,yX);ctx.lineTo(260,yC);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;
-  label("小能垒",232,(yX+yC)/2,"#8d8a82",11);
-  // 立方烷（右）
-  const a=LAB.t*.5,r=cubane(560,190,62,a,M.wcc);ctx.save();
-  const P=r.P;for(let i=0;i<8;i++)for(let j=i+1;j<8;j++){const v=[[-1,-1,-1],[-1,-1,1],[-1,1,-1],[-1,1,1],[1,-1,-1],[1,-1,1],[1,1,-1],[1,1,1]];const d=v[i].reduce((s,_,k)=>s+Math.abs(v[i][k]-v[j][k]),0);if(d===2){ctx.strokeStyle="rgba(216,180,106,.5)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(P[i][0],P[i][1]);ctx.lineTo(P[j][0],P[j][1]);ctx.stroke()}}
-  for(let i=0;i<4;i++)for(let j=i+1;j<4;j++){ctx.strokeStyle=`rgba(240,166,64,${.15+.8*M.wcc})`;ctx.lineWidth=.6+2.4*M.wcc;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(P[r.cu[i]][0],P[r.cu[i]][1]);ctx.lineTo(P[r.cu[j]][0],P[r.cu[j]][1]);ctx.stroke();ctx.setLineDash([])}
-  [...Array(8).keys()].sort((i,j)=>P[i][2]-P[j][2]).forEach(i=>{const cu=r.cu.includes(i);const g=ctx.createRadialGradient(P[i][0]-4,P[i][1]-4,1,P[i][0],P[i][1],cu?13:19);g.addColorStop(0,"#fff");g.addColorStop(.35,cu?C_CU:C_X);g.addColorStop(1,cu?"rgba(240,166,64,.4)":"rgba(180,140,255,.4)");ctx.fillStyle=g;ctx.beginPath();ctx.arc(P[i][0],P[i][1],cu?12:18,0,7);ctx.fill()});
-  ctx.restore();label(`Cu⋯Cu ${M.dEff.toFixed(2)} Å ${M.dEff<2.8?"< 2.8 Å":"≥ 2.8 Å"}`,490,330,M.dEff<2.8?"#f0a640":"#8d8a82",13);
-  LAB.els.forEach(e=>{e.t+=dt;if(e.t<0)return;let x=150+(e.k||0),y;
-    if(e.k==null)e.k=Math.random()*120;
-    if(e.ph==="up"){const f=Math.min(1,e.t/.3);y=yS0+(yA-yS0)*f;arrow(x,yS0,x,y,"#b48cff",2);if(f>=1){e.ph="down1";e.t=0}}
-    else if(e.ph==="down1"){const f=Math.min(1,e.t/.35);y=yA+(yX-yA)*f;wiggle(x,yA,x,y,"rgba(240,166,64,.5)",LAB.t);if(f>=1){e.t=0;if(Math.random()>M.plqy){e.ph="nr"}else{const b=sampleBand(M);e.l=e2l(b.E+gauss()*b.w/2.355);e.ph=b.k==="xl"?"emX":"hop"}}}
-    else if(e.ph==="hop"){const f=Math.min(1,e.t/.4);y=yX+(yC-yX)*f;x+=40*f;if(f>=1){e.ph="emC";e.t=0}}
-    else if(e.ph==="emX"||e.ph==="emC"){const y0=e.ph==="emX"?yX:yC;if(e.ph==="emC")x+=40;const f=Math.min(1,e.t/.25);y=y0+(yS0-y0)*f;arrow(x,y0,x,y,lamRGB(e.l),3);if(f>=1){emitPhoton(x,(y0+yS0)/2,e.l);e.done=true}}
-    else if(e.ph==="nr"){const f=Math.min(1,e.t/.5);y=yX+(yS0-yX)*f;wiggle(x,yX,x,y,"#ff7a6b",LAB.t);if(f>=1)e.done=true}
-    if(!e.done)dot(x,y,"#fff")});
-}
-function drawTADF(dt){const M=LAB.M;const yS0=ey(0),yS1=ey(M.S1+.4),yT1=ey(M.S1+.4-3*LAB.p.dE),yA=ey(M.Eabs+.3);
-  const xS=170,xT=470;ctx.lineWidth=2;
-  [[xS,yS0,"#cfc8b8","S₀",420],[xS,yS1,"#4fd1c5","S₁（¹(M+X)LCT）",150],[xT,yT1,"#f0a640","T₁（³(M+X)LCT）",150],[xS,yA,"rgba(207,200,184,.45)","高激发态",150]].forEach(([x,y,c,t,w])=>{ctx.strokeStyle=c;ctx.beginPath();ctx.moveTo(x-60,y);ctx.lineTo(x-60+w,y);ctx.stroke();label(t,x-60,y-7,c)});
-  arrow(xS+95,yS1+6,xT-65,yT1+4,"rgba(240,166,64,.7)",1.5,"");label("ISC",(xS+xT)/2-30,(yS1+yT1)/2+26,"#f0a640",11);
-  ctx.globalAlpha=.2+.8*M.fDF;arrow(xT-65,yT1-16,xS+95,yS1-14,"#4fd1c5",1+4*M.fDF);ctx.globalAlpha=1;label("RISC",(xS+xT)/2-10,Math.min(yS1,yT1)-34,"#4fd1c5",11);
-  ctx.strokeStyle="rgba(241,217,160,.6)";ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(xT+100,yS1);ctx.lineTo(xT+100,yT1);ctx.moveTo(xS+90,yS1);ctx.lineTo(xT+100,yS1);ctx.stroke();ctx.setLineDash([]);
-  label(`ΔE_ST = ${LAB.p.dE.toFixed(2)} eV`,xT+108,(yS1+yT1)/2+4,"#f1d9a0",13);label("×3 放大",xT+108,(yS1+yT1)/2+20,"#8d8a82",10);
-  LAB.els.forEach(e=>{e.t+=dt;if(e.t<0)return;let x=xS-20,y;
-    if(e.ph==="up"){const f=Math.min(1,e.t/.3);y=yS0+(yA-yS0)*f;arrow(x,yS0,x,y,"#b48cff",2);if(f>=1){e.ph="toS1";e.t=0}}
-    else if(e.ph==="toS1"){const f=Math.min(1,e.t/.3);y=yA+(yS1-yA)*f;if(f>=1){e.ph="isc";e.t=0}}
-    else if(e.ph==="isc"){const f=Math.min(1,e.t/.4);x=x+(xT-x)*f;y=yS1+(yT1-yS1)*f;if(f>=1){e.t=0;if(Math.random()>M.plqy)e.ph="nr";else{const df=Math.random()<M.fDF;e.ph=df?"risc":"emT";const E=df?M.S1:M.T1;e.l=e2l(E+gauss()*.32/2.355)}}}
-    else if(e.ph==="risc"){const f=Math.min(1,e.t/.4);x=xT+(xS-20-xT)*f;y=yT1+(yS1-yT1)*f;if(f>=1){e.ph="emS";e.t=0}}
-    else if(e.ph==="emS"||e.ph==="emT"){const x0=e.ph==="emS"?xS-20:xT,y0=e.ph==="emS"?yS1:yT1;x=x0;const f=Math.min(1,e.t/.25);y=y0+(yS0-y0)*f;arrow(x0,y0,x0,y,lamRGB(e.l),3);if(f>=1){emitPhoton(x0,(y0+yS0)/2,e.l);e.done=true}}
-    else if(e.ph==="nr"){x=xT;const f=Math.min(1,e.t/.5);y=yT1+(yS0-yT1)*f;wiggle(xT,yT1,x,y,"#ff7a6b",LAB.t);if(f>=1)e.done=true}
-    if(!e.done)dot(x,y,"#fff")});
-}
-function drawSpec(){const S=LAB.S,M=LAB.M;sctx.clearRect(0,0,SW,SH);const x0=50,x1=740,y0=160,y1=18;const lx=l=>x0+(l-300)/500*(x1-x0);
-  // 可见光色带
-  for(let l=380;l<=780;l+=4){sctx.fillStyle=lamRGB(l);sctx.globalAlpha=.12;sctx.fillRect(lx(l),y1,lx(l+4)-lx(l),y0-y1)}sctx.globalAlpha=1;
-  sctx.strokeStyle="rgba(184,147,90,.5)";sctx.beginPath();sctx.moveTo(x0,y0);sctx.lineTo(x1,y0);sctx.stroke();
-  sctx.fillStyle="#8d8a82";sctx.font="11px sans-serif";for(let l=300;l<=800;l+=50){sctx.fillText(l,lx(l)-10,y0+14)}sctx.fillText("波长 / nm",x1-50,y0+28);
-  // 吸收
-  const la=e2l(M.Eabs);sctx.beginPath();for(let l=250;l<=800;l+=2){const v=Math.exp(-.5*((e2l(l)-M.Eabs)/.12)**2);const X=lx(l),Y=y0-v*(y0-y1)*.85;l===250?sctx.moveTo(X,Y):sctx.lineTo(X,Y)}sctx.strokeStyle="rgba(180,140,255,.8)";sctx.setLineDash([4,3]);sctx.stroke();sctx.setLineDash([]);
-  // 发射（按 PLQY 缩放）
-  const mx=Math.max(...S.map(s=>s[1]),1e-6),norm=Math.max(mx,1);
-  for(let i=0;i<S.length-1;i++){const [l,v]=S[i];const h=v/norm*(y0-y1)*.95;sctx.fillStyle=lamRGB(l);sctx.globalAlpha=.85;sctx.fillRect(lx(l),y0-h,lx(S[i+1][0])-lx(l)+.5,h)}sctx.globalAlpha=1;
-  // 光子计数直方
-  const hk=Object.keys(LAB.hist),hm=Math.max(1,...Object.values(LAB.hist));hk.forEach(k=>{const l=+k,h=LAB.hist[k]/hm*30;sctx.fillStyle="#fff";sctx.globalAlpha=.7;sctx.fillRect(lx(l)-1.5,y1+2,3,h)});sctx.globalAlpha=1;
-  const pk=peakOf(S)[0];sctx.strokeStyle="#f1d9a0";sctx.lineWidth=1.2;sctx.beginPath();sctx.moveTo(lx(la),y1+46);sctx.lineTo(lx(pk),y1+46);sctx.stroke();
-  [[lx(la),1],[lx(pk),-1]].forEach(([x,d])=>{sctx.beginPath();sctx.moveTo(x,y1+46);sctx.lineTo(x+6*d,y1+42);sctx.lineTo(x+6*d,y1+50);sctx.fillStyle="#f1d9a0";sctx.fill()});
-  sctx.fillStyle="#f1d9a0";sctx.font="12px sans-serif";sctx.fillText(`斯托克斯位移 ${(pk-la).toFixed(0)} nm`,(lx(la)+lx(pk))/2-50,y1+40);
-  sctx.fillStyle="#b48cff";sctx.fillText("吸收",lx(la)-12,y0-4-(y0-y1)*.85);
-  sctx.fillStyle="#8d8a82";sctx.fillText("白条 = 发出的光子",x0,y1-4);
-}
-let last=performance.now();
-function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;LAB.t+=dt;
-  if(document.getElementById("s-intro").classList.contains("on"))introTick(dt);
-  if(document.getElementById("s-lab").classList.contains("on")){
-    ctx.clearRect(0,0,W,H);ctx.fillStyle="#090b10";ctx.fillRect(0,0,W,H);
-    if(LAB.mode==="ste")drawSTE(dt);else if(LAB.mode==="cc")drawCC(dt);else drawTADF(dt);
-    LAB.els=LAB.els.filter(e=>!e.done);
-    LAB.photons.forEach(p=>{p.x+=p.vx*60*dt;p.y+=p.vy*60*dt;p.life-=dt*.8;ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=lamRGB(p.l);ctx.shadowColor=lamRGB(p.l);ctx.shadowBlur=12;ctx.beginPath();ctx.arc(p.x,p.y,3.2,0,7);ctx.fill();ctx.shadowBlur=0});ctx.globalAlpha=1;
-    LAB.photons=LAB.photons.filter(p=>p.life>0&&p.x<W+10);
-    ctx.fillStyle="rgba(240,166,64,.85)";ctx.font="11px sans-serif";ctx.fillText("示意",W-40,18);
-    drawSpec();
-  }
-  requestAnimationFrame(loop)}
-setMode("ste");requestAnimationFrame(loop);
-/* ================= 拼装台逻辑（自由拼装，直接看结果） ================= */
-let pick={core:"Cu4I4",org:"carb",form:"hostguest"};
-const ORGCOL={tea:"#9fb7ff",mtp:"#e7c66b",chiral:"#ff8fb1",carb:"#4fd1c5",dmpz:"#7ddc9a",pyr:"#c6a0ff"};
-function renderSlots(){
-  const col=(key,arr,title)=>`<div class="slot"><h4>${title}</h4>${arr.map(a=>`<button class="chip ${pick[key]===a.k?'on':''}" data-s="${key}" data-k="${a.k}">${a.n}</button>`).join("")}</div>`;
-  document.getElementById("slots").innerHTML=col("core",CORES,"无机核")+col("org",ORGS,"有机部分")+col("form",FORMS,"形态");
-  document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{pick[c.dataset.s]=c.dataset.k;renderSlots()});
-  drawForge();renderResult();}
-function renderResult(){const hit=APPS.filter(a=>["core","org","form"].every(k=>a.ok[k].includes(pick[k])));
-  const box=document.getElementById("forgeRes");
-  if(hit.length){hit.forEach(h=>{const key="a"+APPS.indexOf(h);if(!ST.forge[key]){ST.forge[key]=1;gain(2)}});
-    box.innerHTML=hit.map(h=>`<svg viewBox="0 0 60 60" style="width:56px;height:56px">${icon(h.a)}</svg><div style="font-family:var(--serif);font-size:20px;color:var(--gold2)">→ ${h.t}</div>${h.r.map(x=>`<div class="kn" style="font-size:14px;margin-top:8px">${x}</div>`).join("")}<div class="note" style="margin-top:12px">${h.refs.map(cite).join("<br>")}</div>`).join('<div class="rule"></div>');return}
-  const best=APPS.map(a=>({a,n:["core","org","form"].filter(k=>a.ok[k].includes(pick[k])).length})).sort((x,y)=>y.n-x.n)[0].a;
-  box.innerHTML=`<div class="note">文献里还没见到这个组合</div><div style="margin-top:14px;color:#8d8a82;font-size:13px">最接近的做法</div><div style="font-family:var(--serif);font-size:18px;color:var(--gold2);margin-top:4px">${best.t}</div>${best.r.map(x=>`<div class="kn" style="margin-top:6px">${x}</div>`).join("")}<div class="note" style="margin-top:10px">${best.refs.map(cite).join("<br>")}</div>`;}
-function drawForge(){let s="";const c=pick.core;
-  if(pick.form==="film")s+=`<path d="M40 200 C200 150, 400 240, 560 180" fill="none" stroke="rgba(231,198,107,.35)" stroke-width="26"/>`;
-  if(pick.form==="hostguest")s+=[0,1,2,3].map(i=>`<rect x="120" y="${30+i*44}" width="360" height="36" fill="none" stroke="${["#4fd1c5","#b48cff","#f0a640","#4fd1c5"][i]}" stroke-opacity=".35"/>`).join("");
-  if(pick.form==="phosphor")s+=`<rect x="230" y="196" width="140" height="18" fill="rgba(180,140,255,.25)" stroke="#b48cff"/>`;
-  if(pick.form==="ink")s+=`<path d="M90 190 L200 140 L300 180 L420 120 L520 170" fill="none" stroke="#ff8a5b" stroke-width="3" stroke-dasharray="6 4"/>`;
-  if(pick.org){const n=8;for(let i=0;i<n;i++){const t=i/n*Math.PI*2;const x=300+150*Math.cos(t),y=110+78*Math.sin(t);s+=`<circle cx="${x}" cy="${y}" r="13" fill="none" stroke="${ORGCOL[pick.org]}" stroke-width="1.5"/><text x="${x}" y="${y+4}" fill="${ORGCOL[pick.org]}" font-size="10" text-anchor="middle">${pick.org==="chiral"?(i%2?"R":"R*"):"+"}</text>`}}
-  if(c)s+=`<g transform="translate(200,40)">${motifSVG(c)}</g>`;
-  document.getElementById("forgeArt").innerHTML=s;}
-renderSlots();
+/* ---- ④ 卤素 ---- */
+function capHal(){const x=["Cl","Br","I"][TH.hal.x];capSet(`把卤素换成 <b>${x}</b>。<br>铅卤钙钛矿 CsPbX₃：从 Cl 到 I，发光一路<b>变红</b>（带边发光，重卤素让带隙变小）。<br>铜卤化物 Cs₃Cu₂X₅：从 Cl 到 I，发光反而<b>变蓝</b>（Cl 约 520 nm 绿光 → I 约 445 nm 蓝光）。因为它的光来自自陷激子：颜色主要看激发态结构变形有多大、激子效应有多强，而不只是带隙 ${cite("cm20a","smll19","jun18")}。<span class="schem">钙钛矿颜色与 Cs₃Cu₂Br₅ 颜色为示意</span>`)}
+function drawHal(c,w,h,now){const x=TH.hal.x;const pv=[410,515,690][x],cu=[520,470,445][x];
+ const items=[["CsPbX₃（钙钛矿）",pv,w*0.27],["Cs₃Cu₂X₅（铜卤化物）",cu,w*0.73]];
+ items.forEach(([n,l,cx])=>{const col=wlColor(l),pulse=0.75+0.25*Math.sin(now/300);glow(c,cx,140,90,col,0.5*pulse);
+  gem(c,cx,140,"dimer",rgbs(col,0.85),"#fff");c.fillStyle="#e9e6dc";c.font="bold 14px sans-serif";c.textAlign="center";c.fillText(n,cx,240);c.textAlign="left"});
+ const L=30,R=w-30,Y=290;for(let l=400;l<=700;l+=3){c.fillStyle=rgbs(wlColor(l),.8);c.fillRect(L+(l-400)/300*(R-L),Y,(R-L)/100+1,10)}
+ c.fillStyle="#8f96a8";c.font="11px sans-serif";c.fillText("400 nm",L,Y+24);c.fillText("700 nm",R-40,Y+24);
+ [[pv,"钙钛矿"],[cu,"铜卤化物"]].forEach(([l,n],i)=>{const px=L+(Math.min(700,l)-400)/300*(R-L);c.fillStyle="#fff";c.beginPath();c.moveTo(px,Y-2);c.lineTo(px-6,Y-12);c.lineTo(px+6,Y-12);c.fill();c.fillText(n,px-18,Y-16-i*12)});
+ c.fillStyle="#8f96a8";c.font="13px sans-serif";c.fillText("Cl → Br → I：",14,24);c.fillStyle="#ff8a73";c.fillText("钙钛矿 变红 →",104,24);c.fillStyle="#7fb8ff";c.fillText("铜卤化物 ← 变蓝",210,24)}
 
-/* ================= 总结地图 ================= */
-(function(){const svg=document.getElementById("mapSvg");const colX=[20,320,620,900],w=[260,260,240,260],hh=46,gap=72,top=60;
-  const heads=["结构","机理","性能","应用"],hc=["#d8b46a","#6fa8ff","#f0a640","#e7c66b"];
-  let s=heads.map((h,i)=>`<text x="${colX[i]}" y="32" fill="${hc[i]}" font-size="16" font-family="serif" letter-spacing="4">${h}</text><line x1="${colX[i]}" y1="40" x2="${colX[i]+w[i]}" y2="40" stroke="${hc[i]}" stroke-opacity=".5"/>`).join("");
-  const pos={};Object.entries(MAPN).forEach(([k,n])=>{pos[k]={x:colX[n.c],y:top+n.r*gap,w:w[n.c]}});
-  s+=MAPL.map(([a,b])=>{const A=pos[a],B=pos[b];let x1=A.x+A.w,y1=A.y+hh/2,x2=B.x,y2=B.y+hh/2;
-    if(MAPN[a].c===MAPN[b].c){x1=A.x+A.w-20;y1=A.y+hh;x2=B.x+B.w-20;y2=B.y}
-    const mx=(x1+x2)/2;return `<path class="lk" data-a="${a}" data-b="${b}" d="M${x1} ${y1} C${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}"/>`}).join("");
-  s+=Object.entries(MAPN).map(([k,n])=>{const P=pos[k];return `<g class="mn" data-k="${k}" style="cursor:pointer"><rect x="${P.x}" y="${P.y}" width="${P.w}" height="${hh}" rx="2"/><rect x="${P.x}" y="${P.y}" width="3" height="${hh}" fill="${hc[n.c]}" stroke="none"/><foreignObject x="${P.x+10}" y="${P.y+4}" width="${P.w-16}" height="${hh-8}"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:12.5px;line-height:1.35;color:#e8e2d4;display:flex;align-items:center;height:${hh-8}px">${n.t}</div></foreignObject></g>`}).join("");
-  svg.innerHTML=s;
-  function related(k){const set=new Set([k]);let ch=true;// 上下游
-    const up=[k],dn=[k];while(up.length){const x=up.pop();MAPL.forEach(([a,b])=>{if(b===x&&!set.has(a)){set.add(a);up.push(a)}})}
-    while(dn.length){const x=dn.pop();MAPL.forEach(([a,b])=>{if(a===x&&!set.has(b)){set.add(b);dn.push(b)}})}return set}
-  function hl(k){const R=k?related(k):null;svg.querySelectorAll(".mn").forEach(g=>{g.classList.toggle("hl",!!R&&g.dataset.k===k);g.classList.toggle("fade",!!R&&!R.has(g.dataset.k))});
-    svg.querySelectorAll("path.lk").forEach(p=>{const on=R&&R.has(p.dataset.a)&&R.has(p.dataset.b);p.classList.toggle("hl",!!on);p.classList.toggle("fade",!!R&&!on)})}
-  svg.querySelectorAll(".mn").forEach(g=>{g.onmouseenter=()=>hl(g.dataset.k);g.onmouseleave=()=>hl(null);
-    g.onclick=()=>{const n=MAPN[g.dataset.k];document.getElementById("mapInfo").innerHTML=`<h3 style="color:var(--gold2)">${n.t}</h3><p style="margin:6px 0">${n.e}</p><div class="note">${n.refs.map(cite).join("；")}</div>`}});
-})();
+function drawTheory(now){const cv=document.getElementById("thCv");const{c,w,h}=fitCv(cv);c.clearRect(0,0,w,h);
+ ({d10:drawD10,dim:drawDim,cc:drawCC,hal:drawHal})[TH.act](c,w,h,now)}
+/* ===================== 点亮城市 ===================== */
+const BLD=[
+ {k:"xray",x:30,w:140,h:150,n:"🏥 X 射线成像",c:[255,190,90]},
+ {k:"led",x:190,w:120,h:110,n:"💡 照明 / LED",c:[255,245,225]},
+ {k:"ink",x:330,w:140,h:130,n:"🔐 防伪加密",c:[160,255,140]},
+ {k:"sense",x:490,w:100,h:190,n:"🌡 传感",c:[120,200,255]},
+ {k:"cpl",x:610,w:160,h:120,n:"🕶 圆偏振发光",c:[255,210,90]}];
+function drawCity(){const sv=document.getElementById("city");let s=`<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1020"/><stop offset="1" stop-color="#1b1430"/></linearGradient><filter id="gl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+ <rect width="800" height="330" fill="url(#sky)"/>`;
+ for(let i=0;i<40;i++)s+=`<circle cx="${(i*197)%800}" cy="${(i*53)%140}" r="${i%3?0.8:1.4}" fill="#fff" opacity="${0.3+(i%4)*0.15}"/>`;
+ s+=`<rect y="290" width="800" height="40" fill="#0d0f18"/>`;
+ BLD.forEach(b=>{const on=!!S.city[b.k],col=on?`rgb(${b.c})`:"#22283a",y=290-b.h;
+  s+=`<g class="bld" data-k="${b.k}"><rect class="roof" x="${b.x}" y="${y}" width="${b.w}" height="${b.h}" fill="#151a28" stroke="${on?col:"#2c3550"}" stroke-width="2"/>`;
+  for(let r=0;r<Math.floor((b.h-40)/26);r++)for(let q=0;q<Math.floor((b.w-20)/26);q++)s+=`<rect x="${b.x+14+q*26}" y="${y+14+r*26}" width="14" height="14" fill="${col}" ${on?'filter="url(#gl)"':""} opacity="${on?0.6+((r+q)%3)*0.15:1}"/>`;
+  s+=`<text x="${b.x+b.w/2}" y="${310}" text-anchor="middle" fill="${on?"#fff":"#8f96a8"}" font-size="16">${b.n}</text>`;
+  if(!on)s+=`<text x="${b.x+b.w/2}" y="${y-8}" text-anchor="middle" fill="#f2c86b" font-size="12">点我点亮</text>`;
+  s+=`</g>`});
+ sv.innerHTML=s;sv.querySelectorAll(".bld").forEach(g=>g.onclick=()=>openBld(g.dataset.k));
+ document.getElementById("litN").textContent=Object.keys(S.city).length}
+function bars(list,max,unit){return`<div class="bars">${list.map(([n,v,col,lab])=>`<div class="bar"><span>${n}</span><div class="t"><i data-w="${Math.min(100,v/max*100)}" style="background:${col}"></i><span>${lab||v.toLocaleString()+(unit||"")}</span></div></div>`).join("")}</div>`}
+function animBars(el){setTimeout(()=>el.querySelectorAll(".bar i").forEach(i=>i.style.width=i.dataset.w+"%"),60)}
+let cityMode=null,inkUV=false,inkGround=false,thermo=0.8;
+function openBld(k){const first=!S.city[k];S.city[k]=1;save();drawCity();if(first)addStar(1,"点亮："+BLD.find(b=>b.k===k).n);cityMode=k;const P=document.getElementById("cityPanel");
+ const Y=m=>rgbs(MID[m].col.rgb);
+ if(k==="xray")P.innerHTML=`<h3 style="margin:0">🏥 X 射线成像：闪烁体</h3><p class="sub" style="margin:4px 0">X 射线人眼看不见，闪烁体把它变成可见光，再让相机拍下来。铜(I)碘化物含重原子碘、斯托克斯位移大（不吸收自己发的光），是这几年的热门闪烁体。</p>
+  <canvas id="xCv" height="150"></canvas>${bars([["(4-popy)₄Cu₄I₄",52000,Y("popy4")],["(MTP)₂Cu₄I₆",43800,Y("mtp")],["CsCu₂I₃（室温）",36000,Y("cscu2i3")]],60000," 光子/MeV")}
+  <p class="note">柔性膜成像分辨率：(4-popy)₄Cu₄I₄/PVA 20 lp/mm，(MTP)₂Cu₄I₆/PDMS 10.2 lp/mm。各文献测试条件不同，只能粗比。${cite("ic26","lam25","cm23")}</p>`;
+ if(k==="led")P.innerHTML=`<h3 style="margin:0">💡 照明与 LED</h3><p class="sub" style="margin:4px 0">两条路：① 当<b>荧光粉</b>，被蓝/紫外芯片激发后发光，拼出白光；② 直接<b>通电发光</b>（电致发光），这条路更难，但进步很快。下面是铜(I)卤化物 LED 外量子效率的几个代表值：</p>
+  ${bars([["CsCu₂I₃ 黄光 LED",0.17,Y("cscu2i3"),"0.17%"],["[dppb]₂Cu₂I₂ 绿光 LED",13.39,"rgb(110,230,120)","13.39%"],["同上·81 cm² 大面积",10.02,"rgb(110,230,120)","10.02%"],["手性 Cu₂I₂ 簇黄光 LED",20.5,"rgb(255,215,80)","20.5%"]],25)}
+  <p class="note">外量子效率 ${cite("nano20","adma24","afm25")}；荧光粉路线：(TEA)₂Cu₂Br₄ 深蓝粉做的白光 LED 20 天后电致发光强度保持 93.8% ${cite("jmcc26")}，也有单组分暖白光 LED ${cite("chemsci23")}。</p>`;
+ if(k==="ink"){inkUV=false;inkGround=false;P.innerHTML=`<h3 style="margin:0">🔐 防伪与加密</h3><p class="sub" style="margin:4px 0">日光下看不出来，紫外灯一照就显形；再「研磨」一下颜色还会变——这类刺激响应发光可以做多重防伪。</p>
+  <div class="ink" id="ink"><span id="inkT">一张普通的票据（日光下）</span><span class="sec" id="inkS">Cu⁺ 真品</span></div>
+  <div class="row" style="gap:8px;margin-top:8px"><button class="btn uv" id="inkB1">💡 紫外灯</button><button class="btn ghost" id="inkB2">🪨 研磨</button></div>
+  <p class="note">研磨例子：CuI(dmpz) 黄绿光 → 研磨后配体脱出、1D 链变成 2D 网络 → 橙红光 ${cite("adom24")}；另有工作用溶剂挥发诱导结构转变、切换发光来做加密 ${cite("cc24")}。图中颜色为示意。</p>`;
+  document.getElementById("inkB1").onclick=()=>{inkUV=!inkUV;updInk()};document.getElementById("inkB2").onclick=()=>{inkGround=!inkGround;updInk()};updInk()}
+ if(k==="sense"){P.innerHTML=`<h3 style="margin:0">🌡 温度传感：热致变色</h3><p class="sub" style="margin:4px 0">Cu₄I₄ 立方烷簇常有两条发射带：低温时高能带（卤素→金属/配体电荷转移）占优，升温后低能带（簇中心态）占优，于是<b>发光颜色随温度变</b>，可以当「看颜色读温度」的探针。</p>
+  <div style="display:flex;gap:16px;align-items:center"><div id="thG" style="width:70px;height:70px;border-radius:14px;transform:rotate(45deg);margin:14px"></div><div style="flex:1"><div class="sl"><span>温度</span><input type="range" id="thR" min="0" max="1" step="0.01" value="${thermo}"><output id="thO"></output></div><canvas id="thS" height="90"></canvas></div></div>
+  <p class="note">机理与现象 ${cite("perr11")}；CuI(dmpz) 也有热致变色 ${cite("adom24")}。两条带的位置和颜色为示意。</p>`;
+  const r=document.getElementById("thR");r.oninput=()=>{thermo=+r.value;updThermo()};updThermo()}
+ if(k==="cpl")P.innerHTML=`<h3 style="margin:0">🕶 圆偏振发光</h3><p class="sub" style="margin:4px 0">给铜碘簇接上<b>手性</b>配体，发出的光会带「旋向」（圆偏振光）。它可用于 3D 显示、防眩光显示和光学加密。</p>
+  <canvas id="cpCv" height="140"></canvas><p class="note">手性 Cu₂I₂ 簇：黄光峰 567 nm，圆偏振电致发光不对称因子 g_EL = 1.36×10⁻³，器件外量子效率 20.5% ${cite("afm25")}。g 值还不大，是这条路要继续提高的指标。</p>`;
+ animBars(P)}
+function updInk(){const e=document.getElementById("ink"),s=document.getElementById("inkS"),t=document.getElementById("inkT");e.classList.toggle("dark",inkUV);
+ const col=inkGround?wlColor(615):wlColor(545);s.style.color=rgbs(col);s.style.textShadow=`0 0 18px ${rgbs(col)}`;
+ t.textContent=inkUV?"":(inkGround?"（已研磨，日光下仍看不出）":"一张普通的票据（日光下）")}
+function updThermo(){const T=thermo,hi=wlColor(470),lo=wlColor(575);document.getElementById("thO").textContent=T<0.33?"低温":T<0.66?"中温":"室温";
+ const fn=l=>(1-T)*Math.exp(-0.5*((l-470)/30)**2)+T*Math.exp(-0.5*((l-575)/45)**2);const cc=specColor(fn).rgb;
+ const g=document.getElementById("thG");g.style.background=rgbs(cc);g.style.boxShadow=`0 0 30px ${rgbs(cc)}`;drawSpec(document.getElementById("thS"),fn,{tag:"示意"})}
+function drawCityAnim(now){if(cityMode==="xray"){const cv=document.getElementById("xCv");if(!cv)return;const{c,w,h}=fitCv(cv);c.clearRect(0,0,w,h);
+  const sx=50,fx=w-90;c.fillStyle="#333a50";c.fillRect(10,50,40,50);c.fillStyle="#8f96a8";c.font="11px sans-serif";c.fillText("X 光管",8,118);
+  for(let i=0;i<5;i++){const k=((now/700)+i/5)%1;c.strokeStyle=`rgba(200,200,255,${0.7-k*0.5})`;c.setLineDash([4,6]);c.beginPath();c.moveTo(sx,60+i*8);c.lineTo(sx+(fx-sx)*k,40+i*18);c.stroke();c.setLineDash([])}
+  const hx=(sx+fx)/2;c.fillStyle="rgba(230,190,160,.25)";c.beginPath();c.ellipse(hx,85,40,50,0,0,7);c.fill();
+  c.strokeStyle="rgba(255,255,255,.7)";c.lineWidth=4;[[-18,-35],[-6,-45],[6,-45],[18,-38]].forEach(([a,b])=>{c.beginPath();c.moveTo(hx+a*0.6,95);c.lineTo(hx+a,85+b);c.stroke()});c.beginPath();c.moveTo(hx,100);c.lineTo(hx,140);c.stroke();
+  const col=wlColor(580);c.fillStyle=rgbs(col,.25+0.15*Math.sin(now/300));c.fillRect(fx,20,14,120);
+  c.fillStyle="rgba(10,10,10,.55)";[[-18,-35],[-6,-45],[6,-45],[18,-38]].forEach(([a])=>{c.fillRect(fx,50+a,14,4)});
+  glow(c,fx+7,80,60,col,.3);c.fillStyle="#8f96a8";c.fillText("闪烁体膜：X 光 → 可见光",fx-60,h-6)}
+ if(cityMode==="cpl"){const cv=document.getElementById("cpCv");if(!cv)return;const{c,w,h}=fitCv(cv);c.clearRect(0,0,w,h);const col=wlColor(567),y=h/2;
+  c.strokeStyle=rgbs(col,.4);c.lineWidth=1;c.beginPath();c.moveTo(20,y);c.lineTo(w-20,y);c.stroke();
+  for(let x=30;x<w-30;x+=14){const ph=(x/40)-now/250,dx=Math.cos(ph)*10,dy=Math.sin(ph)*40;c.strokeStyle=rgbs(col,0.35+0.65*(Math.cos(ph)+1)/2);c.lineWidth=2;c.beginPath();c.moveTo(x,y);c.lineTo(x+dx,y-dy);c.stroke()}
+  glow(c,20,y,40,col,.6);c.fillStyle="#e39a4f";c.beginPath();c.arc(20,y,8,0,7);c.fill();c.fillStyle="#8f96a8";c.font="11px sans-serif";c.fillText("电场矢量绕传播方向旋转（示意）",w-200,h-8)}}
 
-/* ================= 参考文献 ================= */
-document.getElementById("refList").innerHTML=`<ol>${REF_ORDER.map(k=>{const r=REFS[k];return `<li>${r.au} ${r.t}. <i>${r.j}</i> <b>${r.y}</b>, ${r.v}.${r.kind?` <span class="tag t-mute">${r.kind}</span>`:""}${r.dag?" †":""}<br><span class="d">DOI：<a href="https://doi.org/${r.doi}" target="_blank" rel="noopener">${r.doi}</a></span></li>`}).join("")}</ol>`;
+/* ===================== Boss 卡 ===================== */
+const CHAL=[
+ ["🧟 Cu⁺ 怕氧化",`Cu⁺ 被氧化成 Cu²⁺ 是 Cs₃Cu₂Cl₅ 纳米晶等材料稳定性的主要瓶颈之一；掺 Na⁺ 等手段在改善 ${cite("anm23")}。`],
+ ["🔥 室温热猝灭",`CsCu₂I₃ 在室温下发光已被热猝灭约一半，降到 200 K 光产额可从约 36,000 升到约 60,000 光子/MeV ${cite("cm23")}。`],
+ ["⚡ 电致发光要更强",`作者自己也说，铜碘簇的电致发光效率「仍需提升」；圆偏振电致发光此前几乎没人做过 ${cite("afm25")}。`],
+ ["🎨 好看≠好用",`长链铵 0D 样品颜色可调、能单相发白光，但室温量子产率只有约 0.2%，大部分激子以非辐射方式损失 ${cite("li26")}。`]];
+function drawChal(){document.getElementById("chal").innerHTML=CHAL.map(([f,b])=>`<div class="flip"><div class="in"><div class="f">${f}<span class="note">点我翻面</span></div><div class="b">${b}</div></div></div>`).join("");
+ document.querySelectorAll(".flip").forEach(e=>e.onclick=ev=>{if(ev.target.tagName!=="A")e.classList.toggle("on")})}
+
+/* ===================== 图鉴 ===================== */
+function drawDex(){document.getElementById("dex").innerHTML=MATS.map(m=>{const on=has(m.id),A=AS.find(a=>a.k===m.A),C=CS.find(x=>x.k===m.C);
+ return on?`<div class="dx"><div class="gem" style="background:${rgbs(m.col.rgb,Math.max(.15,Math.sqrt(m.q==null?.6:m.q)))};box-shadow:0 0 ${24*Math.sqrt(m.q==null?.6:m.q)}px ${rgbs(m.col.rgb)}"></div><div class="nm">${m.f}</div><div class="note">${m.pk.map(p=>m.flag?"示意色":p+" nm").join(" + ")} · ${m.qt}</div><div class="note">${m.st}</div><div class="ref">${cite(...m.r)}</div></div>`
+ :`<div class="dx lock"><div class="gem"></div><div class="nm">${m.f}</div><div class="note">提示：${A.n} + ${m.X} + ${C.n}</div></div>`}).join("");
+ document.getElementById("refs").innerHTML=RK.map(k=>`<li>${REFS[k].c}. <a href="https://doi.org/${REFS[k].d}" target="_blank" rel="noopener">doi:${REFS[k].d}</a></li>`).join("")}
+
+/* ===================== 开场 + 主循环 ===================== */
+let curSec="lab";
+function show(s){curSec=s;document.querySelectorAll("main>section").forEach(e=>e.classList.toggle("on",e.id==="s-"+s));document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.s===s));
+ if(s==="dex")drawDex();if(s==="city"){drawCity();drawChal()}if(s==="theory")renderThCtl();window.scrollTo({top:0})}
+function drawIntro(now){const cv=document.getElementById("introCv");if(!cv||document.getElementById("intro").classList.contains("hide"))return;const{c,w,h}=fitCv(cv);c.clearRect(0,0,w,h);
+ MATS.slice(0,7).forEach((m,i)=>{const x=w*(i+0.5)/7,y=h/2+Math.sin(now/600+i)*14,a=0.5+0.5*Math.sin(now/400+i*1.3);glow(c,x,y,40,m.col.rgb,0.5*a);c.save();c.translate(x,y);c.rotate(Math.PI/4);c.fillStyle=rgbs(m.col.rgb,0.85);c.fillRect(-9,-9,18,18);c.restore()})}
+function loop(now){try{drawIntro(now);if(curSec==="lab")drawLab(now);else if(curSec==="theory")drawTheory(now);else if(curSec==="city")drawCityAnim(now)}catch(e){console.error(e)}requestAnimationFrame(loop)}
+function init(){chips("pickA",AS,"A");chips("pickX",XS,"X");chips("pickC",CS,"C");updPick();
+ document.getElementById("synBtn").onclick=synth;document.getElementById("uvBtn").onclick=lightUp;
+ document.getElementById("actPick").innerHTML=ACTS.map(a=>`<button class="chip" data-k="${a.k}">${a.n}</button>`).join("");
+ document.querySelectorAll("#actPick .chip").forEach(b=>b.onclick=()=>setAct(b.dataset.k));setAct("d10");
+ document.getElementById("thCv").addEventListener("click",ev=>{if(TH.act!=="dim")return;const r=ev.currentTarget.getBoundingClientRect(),{gx,gy,ox,oy}=dimGeo(r.width);
+  const i=Math.round((ev.clientX-r.left-ox)/gx),j=Math.round((ev.clientY-r.top-oy)/gy);if(i>=0&&i<DCOL&&j>=0&&j<DROW)fireDim(i,j)});
+ document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>show(b.dataset.s));
+ document.getElementById("startBtn").onclick=()=>document.getElementById("intro").classList.add("hide");
+ if(Object.keys(S.dex).length)document.getElementById("startBtn").textContent="继续游戏 ▶";
+ document.getElementById("resetBtn").onclick=()=>{if(confirm("清空全部进度？")){localStorage.removeItem(SKEY);location.reload()}};
+ drawSpec(document.getElementById("specCv"),null);renderOrder();updHUD();checkOrders();requestAnimationFrame(loop)}
+window.addEventListener("resize",()=>{if(curSec==="city"&&cityMode==="sense")updThermo()});
+init();
+
 </script>
 </body>
 </html>
