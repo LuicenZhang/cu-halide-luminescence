@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>铜光纪 · 有机-无机杂化铜(I)卤化物发光探险（2023–2026）</title>
+<style>
+:root{
+  --bg:#07090d; --bg2:#0d1118; --panel:rgba(18,22,30,.78); --line:#b8935a; --gold:#d8b46a; --gold2:#f1d9a0;
+  --ink:#e8e2d4; --mute:#8d8a82; --dim:#5d5b56;
+  --ste:#6fa8ff; --cc:#f0a640; --xl:#b48cff; --tadf:#4fd1c5; --app:#e7c66b; --warn:#ff7a6b; --ok:#7ddc9a;
+  --serif:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun",serif;
+  --sans:"PingFang SC","Noto Sans SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;
+  --mono:"SFMono-Regular","JetBrains Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.65}
+body{background:
+  radial-gradient(1200px 600px at 80% -10%,rgba(216,180,106,.08),transparent 60%),
+  radial-gradient(900px 500px at -10% 110%,rgba(111,168,255,.06),transparent 60%),var(--bg);min-height:100vh}
+a{color:var(--gold2);text-decoration:none;border-bottom:1px dotted rgba(241,217,160,.4)}
+a:hover{color:#fff;border-bottom-color:#fff}
+button{font-family:inherit}
+header{position:sticky;top:0;z-index:20;backdrop-filter:blur(8px);background:rgba(7,9,13,.82);border-bottom:1px solid rgba(184,147,90,.35)}
+.hwrap{max-width:1240px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:10px 22px;flex-wrap:wrap}
+.brand{font-family:var(--serif);font-size:20px;letter-spacing:.12em;color:var(--gold2);white-space:nowrap}
+.brand small{display:block;font-family:var(--sans);font-size:10.5px;letter-spacing:.24em;color:var(--mute)}
+nav{display:flex;gap:2px;flex-wrap:wrap;flex:1}
+nav button{background:none;border:none;color:var(--mute);padding:7px 12px;cursor:pointer;font-size:14px;letter-spacing:.06em;border-bottom:1px solid transparent}
+nav button:hover{color:var(--ink)}
+nav button.on{color:var(--gold2);border-bottom-color:var(--gold)}
+.photons{font-family:var(--mono);color:var(--gold2);font-size:13px;border:1px solid rgba(184,147,90,.5);padding:4px 10px;border-radius:2px;white-space:nowrap}
+.photons b{font-size:16px}
+main{max-width:1240px;margin:0 auto;padding:26px 22px 60px}
+section{display:none;animation:fade .45s ease}
+section.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.06em;margin:0}
+h2{font-size:26px;color:var(--gold2)}
+h2 .en{font-family:var(--sans);font-size:11px;letter-spacing:.3em;color:var(--mute);margin-left:12px;text-transform:uppercase}
+h3{font-size:17px;color:var(--ink)}
+.lead{color:#bdb6a6;max-width:860px;margin:10px 0 20px}
+.rule{height:1px;background:linear-gradient(90deg,var(--line),rgba(184,147,90,.0));margin:14px 0 22px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:900px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid rgba(184,147,90,.28);padding:16px 18px;position:relative}
+.card:before{content:"";position:absolute;left:-1px;top:-1px;width:14px;height:14px;border-left:1px solid var(--gold);border-top:1px solid var(--gold)}
+.card:after{content:"";position:absolute;right:-1px;bottom:-1px;width:14px;height:14px;border-right:1px solid var(--gold);border-bottom:1px solid var(--gold)}
+.tag{display:inline-block;font-size:11px;letter-spacing:.12em;padding:1px 7px;border:1px solid currentColor;margin-right:6px;border-radius:1px}
+.t-ste{color:var(--ste)}.t-cc{color:var(--cc)}.t-xl{color:var(--xl)}.t-tadf{color:var(--tadf)}.t-app{color:var(--app)}.t-mute{color:var(--mute)}
+.note{font-size:12px;color:var(--mute)}
+.schem{font-size:11px;color:var(--cc);letter-spacing:.1em;border:1px dashed rgba(240,166,64,.6);padding:1px 6px}
+.btn{background:transparent;border:1px solid var(--line);color:var(--gold2);padding:7px 16px;cursor:pointer;letter-spacing:.1em;font-size:13px;transition:.2s}
+.btn:hover{background:rgba(216,180,106,.12);color:#fff}
+.btn.solid{background:linear-gradient(180deg,rgba(216,180,106,.25),rgba(216,180,106,.08))}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.kv{font-family:var(--mono);font-size:12.5px;color:var(--gold2)}
+ul.tight{margin:6px 0;padding-left:18px}ul.tight li{margin:3px 0}
+/* intro */
+.steps{counter-reset:s}
+.step h3:before{counter-increment:s;content:"0" counter(s);font-family:var(--mono);color:var(--gold);margin-right:10px;font-size:13px}
+.motifs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+@media(max-width:900px){.motifs{grid-template-columns:repeat(2,1fr)}}
+.motif{border:1px solid rgba(184,147,90,.22);padding:10px;text-align:center;background:rgba(10,13,19,.6);cursor:default}
+.motif svg{width:100%;height:110px}
+.motif .nm{font-family:var(--serif);color:var(--gold2);font-size:14px}
+.motif .ds{font-size:11.5px;color:var(--mute);line-height:1.5;min-height:52px}
+/* timeline */
+.track{position:relative;margin:18px 0 26px;padding:6px 0 0}
+.track .axis{position:absolute;left:0;right:0;top:34px;height:1px;background:linear-gradient(90deg,var(--line),rgba(184,147,90,.25))}
+.years{display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.yr{text-align:center;cursor:pointer;padding-top:4px}
+.yr .dot{width:16px;height:16px;border:1px solid var(--gold);border-radius:50%;margin:20px auto 8px;background:var(--bg);position:relative}
+.yr.open .dot{background:radial-gradient(circle,var(--gold2),var(--gold) 50%,transparent 70%);box-shadow:0 0 14px rgba(241,217,160,.6)}
+.yr.lock{opacity:.35;cursor:not-allowed}
+.yr .y{font-family:var(--mono);font-size:22px;color:var(--gold2);letter-spacing:.08em}
+.yr .t{font-family:var(--serif);font-size:13px;color:var(--mute)}
+.yr.cur .t{color:var(--ink)}
+.yr .prog{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.nodes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media(max-width:1000px){.nodes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.node{border:1px solid rgba(184,147,90,.25);background:rgba(12,15,22,.75);padding:12px;cursor:pointer;transition:.25s;position:relative}
+.node:hover{border-color:var(--gold);transform:translateY(-2px)}
+.node svg{width:100%;height:104px;display:block}
+.node .j{font-size:11px;color:var(--mute);letter-spacing:.06em;margin-top:6px}
+.node .tt{font-family:var(--serif);font-size:14px;color:var(--ink);line-height:1.45;margin-top:2px}
+.node .seen{position:absolute;right:8px;top:6px;font-size:11px;color:var(--gold)}
+.node:not(.visited) .seen{display:none}
+.gate{margin-top:18px}
+.opts{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.opt{text-align:left;background:rgba(255,255,255,.02);border:1px solid rgba(184,147,90,.25);color:var(--ink);padding:9px 12px;cursor:pointer;font-size:14px}
+.opt:hover{border-color:var(--gold)}
+.opt.right{border-color:var(--ok);color:var(--ok)}
+.opt.wrong{border-color:var(--warn);color:var(--warn)}
+.fb{margin-top:10px;font-size:13.5px;color:#cfc8b8;border-left:2px solid var(--gold);padding:4px 10px;display:none}
+/* modal */
+#modal{position:fixed;inset:0;background:rgba(3,4,7,.78);display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+#modal.on{display:flex}
+#modal .box{max-width:860px;width:100%;max-height:90vh;overflow:auto;background:#0c0f15;border:1px solid var(--line);padding:22px 26px;position:relative}
+#modal .x{position:absolute;right:12px;top:8px;background:none;border:none;color:var(--mute);font-size:22px;cursor:pointer}
+#modal .art{display:grid;grid-template-columns:260px 1fr;gap:20px}
+@media(max-width:700px){#modal .art{grid-template-columns:1fr}}
+#modal .art svg{width:100%;height:220px;border:1px solid rgba(184,147,90,.2);background:radial-gradient(circle at 50% 40%,rgba(216,180,106,.07),transparent 70%)}
+.datatab{width:100%;border-collapse:collapse;margin:8px 0;font-size:13.5px}
+.datatab td{border-bottom:1px solid rgba(184,147,90,.15);padding:5px 4px;vertical-align:top}
+.datatab td:first-child{color:var(--mute);width:34%}
+.src{font-size:12px;color:var(--mute);margin-top:12px;border-top:1px solid rgba(184,147,90,.2);padding-top:8px}
+/* lab */
+.labwrap{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px}
+@media(max-width:1000px){.labwrap{grid-template-columns:1fr}}
+canvas{display:block;width:100%;background:#090b10;border:1px solid rgba(184,147,90,.25)}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.modes button{background:none;border:1px solid rgba(184,147,90,.3);color:var(--mute);padding:6px 12px;cursor:pointer;font-size:13px}
+.modes button.on{color:var(--gold2);border-color:var(--gold);background:rgba(216,180,106,.08)}
+.ctrl{margin:10px 0}
+.ctrl label{display:flex;justify-content:space-between;font-size:13px;color:#cfc8b8}
+.ctrl label span{font-family:var(--mono);color:var(--gold2)}
+input[type=range]{width:100%;accent-color:#d8b46a}
+.seg{display:flex;gap:0;margin-top:4px}
+.seg button{flex:1;background:none;border:1px solid rgba(184,147,90,.3);color:var(--mute);padding:5px;cursor:pointer;font-family:var(--mono)}
+.seg button.on{color:#0a0a0a;background:var(--gold);border-color:var(--gold)}
+.readout{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-size:12.5px;margin-top:10px}
+.readout div{border-bottom:1px solid rgba(184,147,90,.12);padding:3px 0}
+.readout b{font-family:var(--mono);color:var(--gold2);font-weight:400;float:right}
+.swatch{height:30px;border:1px solid rgba(255,255,255,.15);margin-top:8px;box-shadow:0 0 24px 2px var(--sw,transparent)}
+.goals li{list-style:none;margin:5px 0;font-size:13px;color:var(--mute)}
+.goals li:before{content:"◇ ";color:var(--gold)}
+.goals li.done{color:var(--ok)}.goals li.done:before{content:"◆ ";color:var(--ok)}
+.explain{font-size:13.5px;color:#cfc8b8;margin-top:10px;min-height:80px}
+/* forge */
+.order{border:1px solid rgba(184,147,90,.3);padding:12px 14px;margin-bottom:10px;cursor:pointer;background:rgba(12,15,22,.6)}
+.order.on{border-color:var(--gold);background:rgba(216,180,106,.07)}
+.order .stars{float:right;color:var(--gold);font-family:var(--mono)}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:900px){.slots{grid-template-columns:1fr}}
+.slot h4{margin:0 0 6px;font-weight:400;font-size:12px;letter-spacing:.2em;color:var(--mute)}
+.chip{display:block;width:100%;text-align:left;background:rgba(255,255,255,.02);border:1px solid rgba(184,147,90,.22);color:var(--ink);padding:7px 10px;margin:5px 0;cursor:pointer;font-size:13px}
+.chip:hover{border-color:var(--gold)}
+.chip.on{border-color:var(--gold2);background:rgba(216,180,106,.12);color:var(--gold2)}
+.chip.good{border-color:var(--ok)}.chip.bad{border-color:var(--warn)}
+#forgeArt{width:100%;height:230px;border:1px solid rgba(184,147,90,.22);background:radial-gradient(circle at 50% 50%,rgba(216,180,106,.06),transparent 70%)}
+/* map */
+#mapSvg{width:100%;height:auto;border:1px solid rgba(184,147,90,.22);background:#080a0f}
+#mapSvg .mn rect{fill:#0e121a;stroke:rgba(184,147,90,.45);transition:.2s}
+#mapSvg .mn text{fill:#e8e2d4;font-size:13px;font-family:var(--sans)}
+#mapSvg .mn.hl rect{stroke:#f1d9a0;stroke-width:2;fill:#17140d}
+#mapSvg .mn.fade{opacity:.25}
+#mapSvg path.lk{fill:none;stroke:rgba(184,147,90,.35);stroke-width:1.2;transition:.2s}
+#mapSvg path.lk.hl{stroke:#f1d9a0;stroke-width:2.2}
+#mapSvg path.lk.fade{opacity:.08}
+.refs li{margin:8px 0;font-size:13.5px;color:#cfc8b8}
+.refs li .d{font-size:12px;color:var(--mute)}
+.refs ol{padding-left:26px}
+footer{max-width:1240px;margin:0 auto;padding:16px 22px 40px;color:var(--dim);font-size:12px;border-top:1px solid rgba(184,147,90,.15)}
+.toast{position:fixed;right:22px;bottom:22px;background:#12100b;border:1px solid var(--gold);color:var(--gold2);padding:10px 16px;z-index:60;opacity:0;transform:translateY(10px);transition:.35s;font-size:13.5px;pointer-events:none}
+.toast.on{opacity:1;transform:none}
+.quizq{font-family:var(--serif);font-size:17px;color:var(--ink)}
+.qbar{height:2px;background:rgba(184,147,90,.2);margin:12px 0}.qbar i{display:block;height:100%;background:var(--gold);transition:.3s}
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:6px 0 22px}
+.chips span{border:1px solid var(--c);color:var(--c);padding:4px 14px;font-size:13px;letter-spacing:.08em}
+#introSvg{width:100%;height:auto;display:block}
+.oneline{font-size:14px;color:#cfc8b8;margin:0 0 12px;border-left:2px solid var(--gold);padding-left:10px}
+.kn{font-family:var(--mono);font-size:12.5px;color:var(--gold2);margin-top:4px}
+.big{font-family:var(--mono);font-size:26px;color:var(--gold2);line-height:1.3}
+@keyframes flow{to{stroke-dashoffset:-40}}
+@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+.flow{stroke-dasharray:6 8;animation:flow 1.4s linear infinite}
+.pulse{animation:pulse 1.8s ease-in-out infinite}
+.motif .ds{min-height:0}
+</style>
+</head>
+<body>
+<header><div class="hwrap">
+  <div class="brand">铜 光 纪<small>CU(I) HALIDE HYBRIDS · 2023–2026</small></div>
+  <nav id="nav">
+    <button data-s="intro" class="on">序章</button>
+    <button data-s="timeline">时间线</button>
+    <button data-s="lab">实验台</button>
+    <button data-s="forge">拼装台</button>
+    <button data-s="map">地图</button>
+    <button data-s="refs">文献</button>
+  </nav>
+  <div class="photons" title="探索获得的光子">✦ <b id="ph">0</b></div>
+</div></header>
+<main>
+
+<section id="s-intro" class="on">
+  <svg id="introSvg" viewBox="0 0 1180 400"></svg>
+  <div class="chips">
+    <span style="--c:var(--gold2)">近 100% PLQY</span><span style="--c:var(--ste)">大斯托克斯位移</span><span style="--c:var(--cc)">宽带</span><span style="--c:var(--tadf)">μs 三重态</span><span style="--c:var(--ok)">无铅 · 低毒 · 可溶液加工</span>
+  </div>
+  <div class="motifs" id="motifs"></div>
+  <div style="text-align:center;margin-top:22px"><button class="btn solid" onclick="go('timeline')">开始 →</button></div>
+</section>
+
+<section id="s-timeline">
+  <div class="track"><div class="axis"></div><div class="years" id="years"></div></div>
+  <div class="nodes" id="nodes"></div>
+  <div style="text-align:right;margin-top:16px" id="nextYr"></div>
+</section>
+
+<section id="s-lab">
+  <div class="modes" id="modes">
+    <button data-m="ste" class="on">自陷激子 STE</button>
+    <button data-m="cc">Cu₄I₄ 热致变色</button>
+    <button data-m="tadf">TADF</button>
+    <span class="schem" style="margin-left:auto;align-self:center">示意 · 非实测</span>
+  </div>
+  <div class="oneline" id="oneline"></div>
+  <div class="labwrap">
+    <div>
+      <canvas id="cv" width="760" height="430"></canvas>
+      <canvas id="sp" width="760" height="190" style="margin-top:10px"></canvas>
+    </div>
+    <div class="card">
+      <div id="ctrls"></div>
+      <div style="display:flex;gap:8px;margin-top:10px"><button class="btn solid" id="fire">✦ 激发</button><button class="btn" id="burst">×20</button></div>
+      <div class="readout" id="readout"></div>
+      <div class="swatch" id="swatch"></div>
+    </div>
+  </div>
+</section>
+
+<section id="s-forge">
+  <div class="grid" style="grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px">
+    <div class="card"><svg id="forgeArt" viewBox="0 0 600 230"></svg><div class="slots" id="slots" style="margin-top:12px"></div></div>
+    <div class="card" id="forgeRes"></div>
+  </div>
+</section>
+
+<section id="s-map">
+  <svg id="mapSvg" viewBox="0 0 1180 560"></svg>
+  <div class="card" id="mapInfo" style="margin-top:12px"><span class="note">点节点看一句话解释</span></div>
+</section>
+
+<section id="s-refs">
+  <p class="note" style="margin:0 0 10px">DOI 经 Crossref 核对（2026-11-20）。† = 数据仅来自期刊摘要页转述。</p>
+  <div class="refs" id="refList"></div>
+</section>
+</main>
+
+<div id="modal"><div class="box"><button class="x" onclick="closeModal()">×</button><div id="mbody"></div></div></div>
+<div class="toast" id="toast"></div>
+<footer>示意图均为定性示意 · 数据以原文为准 · 离线可用</footer>
+<script>
+"use strict";
+/* ================= 文献库（DOI 经 Crossref 核对） ================= */
+const REFS = {
+ chemmater:{au:"Banerjee D., Saparov B.",t:"Ultrabright Light Emission Properties of All-Inorganic and Hybrid Organic–Inorganic Copper(I) Halides",j:"Chem. Mater.",y:"2023",v:"35, 3364–3385",doi:"10.1021/acs.chemmater.3c00071",kind:"综述"},
+ cjl:{au:"张家贝 等",t:"有机-无机杂化铜(Ⅰ)基卤化物闪烁体研究进展",j:"发光学报",y:"2023",v:"44(10), 1705–1720",doi:"10.37188/CJL.20230108",kind:"中文综述"},
+ jmccrev:{au:"Popy D. A., Saparov B.",t:"“This or that” – light emission from hybrid organic–inorganic vs. coordination Cu(I) halides",j:"J. Mater. Chem. C",y:"2025（2024-12 在线）",v:"13, 521–560",doi:"10.1039/d4tc04153d",kind:"综述"},
+ tea23:{au:"Gust D., …, Lenzer T.",t:"Excited-State Dynamics of Bis(tetraethylammonium) Di-µ-bromo-dibromodicuprate(I) Thin Films",j:"Molecules",y:"2023",v:"28, 7841",doi:"10.3390/molecules28237841"},
+ small23:{au:"Chen J., …, Mao L.",t:"One-Dimensional Chiral Copper Iodide Chain-Like Structure Cu4I4(R/S-3-quinuclidinol)3 with Near-Unity PLQY and Efficient CPL",j:"Small",y:"2023",v:"19, 2300938",doi:"10.1002/smll.202300938"},
+ adom23:{au:"Ji X., …, Mao L.",t:"Mono- and Bi-Dentate Chiral Ligands Lead to Efficient Circularly Polarized Luminescence in 0D and 3D Semiconducting Copper(I) Iodides",j:"Adv. Opt. Mater.",y:"2023",v:"11, 2300541",doi:"10.1002/adom.202300541"},
+ anie23:{au:"Hu Q., …, Sun",t:"Highly Effective Hybrid Copper(I) Iodide Cluster Emitter with Negative Thermal Quenched Phosphorescence for X-Ray Imaging",j:"Angew. Chem. Int. Ed.",y:"2023",v:"62, e202217784",doi:"10.1002/anie.202217784"},
+ chemsci23:{au:"Zhou S., …, He R.",t:"Photophysical studies for Cu(I)-based halides: broad excitation bands and highly efficient single-component warm white-light-emitting diodes",j:"Chem. Sci.",y:"2023",v:"14, 5415–5424",doi:"10.1039/d3sc01762a"},
+ acsel23:{au:"Yuan P., …, Bakr O. M.",t:"Hybrid Thermally Activated Nanocluster Fluorophores for X-ray Scintillators",j:"ACS Energy Lett.",y:"2023",v:"8, 5088–5097",doi:"10.1021/acsenergylett.3c02050"},
+ pccp:{au:"Gao Y., …, Zhuang",t:"A zero-dimensional hybrid copper(I) bromide single crystal with highly efficient green emission",j:"Phys. Chem. Chem. Phys.",y:"2024（2023-12 在线）",v:"26, 2472–2477",doi:"10.1039/d3cp05140d"},
+ ic23:{au:"Zhou …, Jiang",t:"Syntheses, Structures, and Photoluminescence of Copper-Based Halides",j:"Inorg. Chem.",y:"2023",v:"62, 7376–7384",doi:"10.1021/acs.inorgchem.3c00580"},
+ adma24:{au:"Lin S., …, Shi",t:"Efficient Large-Area (81 cm²) Ternary Copper Halides Light-Emitting Diodes with External Quantum Efficiency Exceeding 13% via Host-Guest Strategy",j:"Adv. Mater.",y:"2024",v:"36, 2313570",doi:"10.1002/adma.202313570"},
+ ncomms24:{au:"Sun J., …, Xu",t:"Ligand-mediate exciton allocation enables efficient cluster-based white light-emitting diodes via single and heavy doping",j:"Nat. Commun.",y:"2024",v:"15, 4997",doi:"10.1038/s41467-024-49394-8"},
+ lsa24:{au:"Zhang D., …, Ye",t:"Efficient and bright broadband electroluminescence based on environment-friendly metal halide nanoclusters",j:"Light Sci. Appl.",y:"2024",v:"13, 82",doi:"10.1038/s41377-024-01427-z"},
+ jacs24:{au:"Song K.-H., …, Yao",t:"Copper-Iodide Hybrid Clusters with Partial Distortion Enable High-Performance Full-Visible-Spectrum White-Light-Emitting Diodes",j:"J. Am. Chem. Soc.",y:"2024",v:"146, 34199–34208",doi:"10.1021/jacs.4c14545"},
+ adom24:{au:"Li H., …, Ouyang G.",t:"Ligand Detachment—New Insight into the Mechanochromic Luminescence Mechanism of Copper Iodide Complexes with TADF",j:"Adv. Opt. Mater.",y:"2024",v:"12, 2400364",doi:"10.1002/adom.202400364"},
+ cc24:{au:"Liu X., …, Xu",t:"Solvent-induced structural regulation and luminescence switching of hybrid copper(I) halides for encryption and anti-counterfeiting applications",j:"Chem. Commun.",y:"2024",v:"60, 9034–9037",doi:"10.1039/d4cc03540b"},
+ anieml:{au:"Wang Y., …, Huang",t:"Machine Learning-Guided Discovery of Copper(I)-Iodide Cluster Scintillators for Efficient X-ray Luminescence Imaging",j:"Angew. Chem. Int. Ed.",y:"2025（2024-11 在线）",v:"64, e202413672",doi:"10.1002/anie.202413672"},
+ afm25:{au:"Zeng H., …, Chen",t:"Chiral Copper(I) Iodide Cluster Hybrids Enabling Highly Efficient Circularly Polarized Electroluminescence",j:"Adv. Funct. Mater.",y:"2025",v:"35, 2424704",doi:"10.1002/adfm.202424704"},
+ chemsci25:{au:"Chen J., …, Li",t:"Strongly photoluminescent and radioluminescent copper(I) iodide hybrid materials made of coordinated ionic chains",j:"Chem. Sci.",y:"2025（2024-11 登记）",v:"16, 1106–1114",doi:"10.1039/d4sc06242f"},
+ icf25:{au:"Zou Q.-H., …, Li J.-R.",t:"Ionothermal synthesis of a stable three-dimensional [Cu4I4] cluster scintillator with near-unity quantum efficiency and weak thermal quenching",j:"Inorg. Chem. Front.",y:"2025（2024-11 在线）",v:"12, 692–700",doi:"10.1039/d4qi02590c"},
+ lam25:{au:"Li D., …, Chang",t:"Large-area, high-resolution, flexible X-ray scintillator film based on a novel 0D hybrid cuprous halide",j:"Light Adv. Manuf.",y:"2025",v:"6",doi:"10.37188/lam.2025.044"},
+ matter25:{au:"Li B.-H., …, Xia Z.",t:"Hybrid Cu(I)-based glassy cluster gel scintillator film by in situ UV photopolymerization",j:"Matter",y:"2025",v:"8, 102214",doi:"10.1016/j.matt.2025.102214",dag:true},
+ ic26:{au:"Zhou W., …, Chen",t:"Zero-Dimensional Hybrid Cuprous Iodide Clusters for X-ray Imaging",j:"Inorg. Chem.",y:"2026（2025-12-31 在线）",v:"65, 1593–1600",doi:"10.1021/acs.inorgchem.5c05228"},
+ jmcc26:{au:"Wang B., …, Lyu",t:"Efficient and stable deep-blue emission from lead-free (TEA)2Cu2Br4 for white LEDs",j:"J. Mater. Chem. C",y:"2026（2025-12 登记）",v:"14, 2928–2935",doi:"10.1039/d5tc04024h"},
+ perr11:{au:"Perruchas S., …, Boilot J.-P.",t:"Thermochromic Luminescence of Copper Iodide Clusters: The Case of Phosphine Ligands",j:"Inorg. Chem.",y:"2011（经典背景）",v:"50, 10682–10692",doi:"10.1021/ic201128a"}
+};
+const REF_ORDER = Object.keys(REFS);
+function refNo(k){return REF_ORDER.indexOf(k)+1}
+function cite(k){const r=REFS[k];return `<a href="https://doi.org/${r.doi}" target="_blank" rel="noopener">[${refNo(k)}] ${r.j} ${r.y.split("（")[0]}</a>`}
+
+/* ================= SVG 绘图工具 ================= */
+const C_CU="#f0a640", C_X="#b48cff", C_L="#4fd1c5", C_B="rgba(216,180,106,.55)";
+let gid=0;
+function atom(x,y,r,c){gid++;return `<defs><radialGradient id="ag${gid}" cx="35%" cy="30%" r="70%"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset=".35" stop-color="${c}"/><stop offset="1" stop-color="${c}" stop-opacity=".55"/></radialGradient></defs><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="url(#ag${gid})" stroke="${c}" stroke-width=".6"/>`}
+function bond(a,b,c,w,dash){return `<line x1="${a[0].toFixed(1)}" y1="${a[1].toFixed(1)}" x2="${b[0].toFixed(1)}" y2="${b[1].toFixed(1)}" stroke="${c||C_B}" stroke-width="${w||1.6}" ${dash?'stroke-dasharray="3 3"':''}/>`}
+function proj(p,ang,s,cx,cy){const ca=Math.cos(ang),sa=Math.sin(ang);let x=p[0]*ca-p[2]*sa,z=p[0]*sa+p[2]*ca,y=p[1];const t=0.42;let y2=y*Math.cos(t)-z*Math.sin(t),z2=y*Math.sin(t)+z*Math.cos(t);return [cx+x*s,cy+y2*s,z2]}
+function cubane(cx,cy,s,ang,cuCu){ // cuCu: 0..1 强度
+  const V=[];for(const x of[-1,1])for(const y of[-1,1])for(const z of[-1,1])V.push([x,y,z]);
+  const P=V.map(v=>proj(v,ang,s,cx,cy));let out="";
+  for(let i=0;i<8;i++)for(let j=i+1;j<8;j++){const d=V[i].reduce((a,_,k)=>a+Math.abs(V[i][k]-V[j][k]),0);if(d===2)out+=bond(P[i],P[j]);}
+  const cu=[],xi=[];V.forEach((v,i)=>(v[0]*v[1]*v[2]>0?cu:xi).push(i));
+  const a=cuCu==null?.6:cuCu;
+  for(let i=0;i<4;i++)for(let j=i+1;j<4;j++)out+=`<line x1="${P[cu[i]][0]}" y1="${P[cu[i]][1]}" x2="${P[cu[j]][0]}" y2="${P[cu[j]][1]}" stroke="${C_CU}" stroke-opacity="${(0.15+0.8*a).toFixed(2)}" stroke-width="${(0.6+1.8*a).toFixed(2)}" stroke-dasharray="2 3"/>`;
+  const order=[...Array(8).keys()].sort((i,j)=>P[i][2]-P[j][2]);
+  order.forEach(i=>{out+=atom(P[i][0],P[i][1],cu.includes(i)?s*0.2:s*0.3,cu.includes(i)?C_CU:C_X)});
+  return {svg:out,P,cu};
+}
+function motifSVG(type){
+  let o="";
+  switch(type){
+  case "CuX4":{const c=[100,62],X=[[100,18],[56,84],[146,82],[112,104]];X.forEach(p=>o+=bond(c,p));o+=atom(...c,10,C_CU);X.forEach(p=>o+=atom(...p,13,C_X));break;}
+  case "Cu2X4":{const a=[72,60],b=[128,60],X=[[100,30],[100,90],[28,60],[172,60]];[[a,X[0]],[a,X[1]],[b,X[0]],[b,X[1]],[a,X[2]],[b,X[3]]].forEach(e=>o+=bond(...e));o+=atom(...a,9,C_CU)+atom(...b,9,C_CU);X.forEach(p=>o+=atom(...p,13,C_X));break;}
+  case "Cu2I2":{const a=[78,60],b=[122,60],X=[[100,30],[100,90]],L=[[40,38],[40,82],[160,38],[160,82]];[[a,X[0]],[a,X[1]],[b,X[0]],[b,X[1]],[a,L[0]],[a,L[1]],[b,L[2]],[b,L[3]]].forEach(e=>o+=bond(...e));o+=bond(a,b,C_CU,1.2,true);L.forEach(p=>o+=atom(...p,8,C_L));o+=atom(...a,9,C_CU)+atom(...b,9,C_CU);X.forEach(p=>o+=atom(...p,13,C_X));break;}
+  case "Cu4I4":{const r=cubane(100,62,30,0.6,0.7);o+=r.svg;break;}
+  case "Cu4X6":{const T=[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]].map(v=>v.map(x=>x*0.75));const Xs=[];const B=[];
+    for(let i=0;i<4;i++)for(let j=i+1;j<4;j++){const m=T[i].map((x,k)=>(x+T[j][k])/2);const n=Math.hypot(...m);const p=m.map(x=>x/n*1.45);Xs.push(p);B.push([i,Xs.length-1]);B.push([j,Xs.length-1]);}
+    const PT=T.map(v=>proj(v,0.5,34,100,62)),PX=Xs.map(v=>proj(v,0.5,34,100,62));
+    B.forEach(([i,k])=>o+=bond(PT[i],PX[k]));
+    const all=[...PT.map((p,i)=>({p,c:C_CU,r:8})),...PX.map(p=>({p,c:C_X,r:11}))].sort((a,b)=>a.p[2]-b.p[2]);all.forEach(a=>o+=atom(a.p[0],a.p[1],a.r,a.c));break;}
+  case "chain":{const pts=[];for(let i=0;i<7;i++){pts.push({p:[20+i*27,44],c:i%2?C_X:C_CU});pts.push({p:[20+i*27,80],c:i%2?C_CU:C_X});}
+    for(let i=0;i<7;i++){o+=bond(pts[2*i].p,pts[2*i+1].p);if(i<6){o+=bond(pts[2*i].p,pts[2*i+2].p);o+=bond(pts[2*i+1].p,pts[2*i+3].p);}}
+    pts.forEach(a=>o+=atom(...a.p,a.c===C_CU?7:10,a.c));o+=`<text x="100" y="112" fill="#8d8a82" font-size="10" text-anchor="middle">… 无限延伸 …</text>`;break;}
+  case "layer":{for(let r=0;r<4;r++)for(let c=0;c<7;c++){const x=22+c*26+(r%2)*13,y=22+r*26;if(c<6)o+=bond([x,y],[x+26,y]);if(r<3)o+=bond([x,y],[x+13,y+26]);}
+    for(let r=0;r<4;r++)for(let c=0;c<7;c++){const x=22+c*26+(r%2)*13,y=22+r*26;o+=atom(x,y,(r+c)%2?9:6,(r+c)%2?C_X:C_CU);}break;}
+  case "3D":{const a=cubane(55,60,17,0.6,0.6),b=cubane(145,60,17,0.6,0.6);o+=bond([72,60],[128,60],C_L,2.4)+bond([55,40],[55,10],C_L,2.4)+bond([145,80],[145,112],C_L,2.4);o+=a.svg+b.svg;o+=atom(100,60,6,C_L);break;}
+  case "nanocl":{const r=cubane(100,62,24,0.9,0.5);for(let k=0;k<8;k++){const t=k*Math.PI/4;o+=bond([100+34*Math.cos(t),62+34*Math.sin(t)],[100+52*Math.cos(t),62+48*Math.sin(t)],C_L,1.4);o+=atom(100+52*Math.cos(t),62+48*Math.sin(t),5,C_L);}o+=r.svg;break;}
+  }
+  return o;
+}
+function icon(app){
+  let o="";const g="#e7c66b";
+  switch(app){
+  case "led": o=`<path d="M30 10a14 14 0 0 1 8 25v6H22v-6a14 14 0 0 1 8-25z" fill="none" stroke="${g}" stroke-width="1.4"/><line x1="23" y1="45" x2="37" y2="45" stroke="${g}"/>${[0,1,2,3,4].map(i=>{const t=-Math.PI*(0.15+i*0.175);return `<line x1="${30+20*Math.cos(t)}" y1="${24+20*Math.sin(t)}" x2="${30+27*Math.cos(t)}" y2="${24+27*Math.sin(t)}" stroke="${g}" stroke-width="1"/>`}).join("")}`;break;
+  case "white": o=`<defs><linearGradient id="wg${++gid}"><stop offset="0" stop-color="#6b5cff"/><stop offset=".3" stop-color="#3fb7ff"/><stop offset=".5" stop-color="#5de08a"/><stop offset=".7" stop-color="#ffd54a"/><stop offset="1" stop-color="#ff5a3c"/></linearGradient></defs><rect x="4" y="22" width="52" height="10" fill="url(#wg${gid})" opacity=".9"/><path d="M4 50 Q30 6 56 50" fill="none" stroke="#fff" stroke-width="1.2"/>`;break;
+  case "xray": o=`<rect x="40" y="8" width="5" height="44" fill="${g}" opacity=".7"/>${[14,24,34,44].map(y=>`<line x1="2" y1="${y}" x2="36" y2="${y}" stroke="#9fb7ff" stroke-width="1" stroke-dasharray="4 2"/>`).join("")}<circle cx="52" cy="30" r="4" fill="#fff" opacity=".85"/><text x="2" y="58" font-size="9" fill="#9fb7ff">X-ray</text>`;break;
+  case "flex": o=`<path d="M4 40 C18 10, 42 54, 56 20" fill="none" stroke="${g}" stroke-width="5" opacity=".75"/>${[12,22,32].map(x=>`<line x1="${x}" y1="0" x2="${x}" y2="18" stroke="#9fb7ff" stroke-dasharray="3 2"/>`).join("")}`;break;
+  case "cpl": {let p="M4 30";for(let x=4;x<=56;x+=2)p+=` L${x} ${30+12*Math.sin(x/4)}`;o=`<path d="${p}" fill="none" stroke="${g}" stroke-width="1.3"/><path d="M50 18 L58 30 L48 34" fill="none" stroke="${g}"/><ellipse cx="30" cy="30" rx="8" ry="14" fill="none" stroke="#4fd1c5" stroke-dasharray="2 2"/>`;break;}
+  case "el": o=["#4fd1c5","#f0a640","#b48cff","#d8b46a"].map((c,i)=>`<rect x="8" y="${10+i*9}" width="44" height="7" fill="none" stroke="${c}"/>`).join("")+`<text x="54" y="22" font-size="11" fill="${g}">+</text><text x="54" y="46" font-size="11" fill="${g}">−</text>`;break;
+  case "ink": o=`<rect x="10" y="10" width="40" height="40" fill="none" stroke="${g}"/><path d="M16 40 L26 22 L34 34 L44 18" fill="none" stroke="#ff8a5b" stroke-width="2"/><text x="10" y="58" font-size="9" fill="${g}">UV 下显影</text>`;break;
+  case "book": o=`<path d="M8 12 h20 v38 h-20z M32 12 h20 v38 h-20z" fill="none" stroke="${g}"/>${[20,26,32,38].map(y=>`<line x1="12" y1="${y}" x2="24" y2="${y}" stroke="${g}" opacity=".5"/><line x1="36" y1="${y}" x2="48" y2="${y}" stroke="${g}" opacity=".5"/>`).join("")}`;break;
+  case "temp": o=`<rect x="24" y="6" width="10" height="36" rx="5" fill="none" stroke="${g}"/><circle cx="29" cy="46" r="8" fill="none" stroke="${g}"/><rect x="27" y="22" width="4" height="22" fill="#ff7a6b"/><text x="40" y="20" font-size="9" fill="#6fa8ff">冷</text><text x="40" y="44" font-size="9" fill="#ff7a6b">热</text>`;break;
+  case "ml": o=`${[[10,14],[10,30],[10,46],[30,22],[30,38],[50,30]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="none" stroke="${g}"/>`).join("")}${[[10,14,30,22],[10,30,30,22],[10,46,30,38],[10,30,30,38],[30,22,50,30],[30,38,50,30]].map(l=>`<line x1="${l[0]}" y1="${l[1]}" x2="${l[2]}" y2="${l[3]}" stroke="${g}" opacity=".5"/>`).join("")}`;break;
+  case "shield": o=`<path d="M30 6 L52 14 V30 C52 44 42 52 30 56 C18 52 8 44 8 30 V14z" fill="none" stroke="${g}"/><path d="M20 30 l7 7 l13 -14" fill="none" stroke="#7ddc9a" stroke-width="2"/>`;break;
+  case "q": o=`<text x="30" y="40" font-size="34" fill="${g}" text-anchor="middle" font-family="serif">?</text>`;break;
+  }
+  return o;
+}
+function nodeArt(motif,app,h){
+  return `<svg viewBox="0 0 200 120" preserveAspectRatio="xMidYMid meet" style="${h?'height:'+h+'px':''}"><g transform="translate(0,14) scale(.68)">${motifSVG(motif)}</g><g transform="translate(138,30)">${icon(app)}</g></svg>`;
+}
+/* ================= 结构图鉴（只留名字） ================= */
+const MOTIFS=[{m:"CuX4",n:"[CuX₄] 四面体",d:"0D"},{m:"Cu2X4",n:"[Cu₂X₄]²⁻ 双核",d:"0D"},{m:"Cu4I4",n:"[Cu₄I₄] 立方烷",d:"0D"},
+ {m:"Cu4X6",n:"[Cu₄X₆]²⁻ 簇",d:"0D"},{m:"chain",n:"链",d:"1D"},{m:"layer",n:"层 / 骨架",d:"2D / 3D"}];
+
+/* ================= 时间线节点：一句话 + 1–2 个关键数字 ================= */
+const LEVELS=[{y:"2023",t:"看清光从哪来"},{y:"2024",t:"走向器件"},{y:"2025",t:"做大 · 做柔 · 手性"},{y:"2025末–2026",t:"向实用逼近"}];
+const NODES=[
+ {L:0,id:"n1",ref:"chemmater",m:"Cu2X4",a:"book",tag:["ste"],title:"综述：为何超亮",s:"低维 → 激子局域 → 室温自陷激子",k:["PLQY 近 100%"]},
+ {L:0,id:"n2",ref:"tea23",m:"Cu2X4",a:"temp",tag:["ste"],title:"(TEA)₂Cu₂Br₄",s:"蓝光来自三重态 T₁ 磷光",k:["283 → 467 nm · 1.38 eV","τ 57 μs"]},
+ {L:0,id:"n3",ref:"small23",m:"chain",a:"cpl",tag:["cc","app"],title:"手性 1D 链",s:"刚性 + 手性：又亮又圆偏振",k:["PLQY 99.9%","g_lum ≈ 4×10⁻³"]},
+ {L:0,id:"n4",ref:"adom23",m:"Cu4I4",a:"cpl",tag:["cc"],title:"手性 0D vs 3D",s:"同一 Cu₄I₄，0D 更亮",k:["PLQY ≈ 95%","Cu⋯Cu < 2.8 Å"]},
+ {L:0,id:"n5",ref:"anie23",m:"Cu4I4",a:"xray",tag:["cc","app"],title:"(DBA)₄Cu₄I₄",s:"升温反而更亮（负热猝灭）",k:["PLQY > 94.9%","> 10⁴ photons/MeV"]},
+ {L:0,id:"n6",ref:"chemsci23",m:"Cu4X6",a:"white",tag:["cc","xl"],title:"DPCu₄X₆",s:"碘版双带发射 → 单组分白光",k:["CRI 85.1"]},
+ {L:0,id:"n7",ref:"acsel23",m:"Cu2I2",a:"xray",tag:["tadf","app"],title:"TADF Cu₂X₂ 闪烁体",s:"回收三重态激子",k:["175,000 photons/MeV","~30 lp/mm"]},
+ {L:0,id:"n8",ref:"pccp",m:"CuX4",a:"led",tag:["ste"],title:"0D 溴化亚铜绿光",s:"自陷激子绿光",k:["510 nm · PLQY 90.5%","Stokes 220 nm"]},
+ {L:1,id:"n9",ref:"adma24",m:"Cu2I2",a:"el",tag:["app"],title:"81 cm² 绿光 LED",s:"主客体掺杂让铜簇通电发光",k:["EQE 13.39%","81 cm² · 10.02%"]},
+ {L:1,id:"n10",ref:"ncomms24",m:"Cu4I4",a:"el",tag:["tadf","app"],title:"白光簇 LED",s:"咔唑配体当能量天线",k:["EQE 23.5%"]},
+ {L:1,id:"n11",ref:"lsa24",m:"nanocl",a:"el",tag:["tadf","app"],title:"超宽带电致发光",s:"一个发光体覆盖宽光谱",k:["EQE 13% · ~50,000 cd/m²","FWHM ~120 nm"]},
+ {L:1,id:"n12",ref:"jacs24",m:"Cu4I4",a:"white",tag:["cc","app"],title:"Cu₄I₄ 全光谱白光",s:"两个三重态共存（作者假设）",k:["400–800 nm · PLQY 97%","CRI ≈ 88 / 1000 h"]},
+ {L:1,id:"n13",ref:"adom24",m:"layer",a:"ink",tag:["tadf","app"],title:"研磨变色",s:"配体脱附，1D→2D，黄绿 → 橙红",k:["紫外下显影防伪"]},
+ {L:1,id:"n14",ref:"cc24",m:"chain",a:"ink",tag:["app"],title:"溶剂发光开关",s:"甲醇触发相变，发光切换",k:["加密 / 防伪"]},
+ {L:1,id:"n15",ref:"anieml",m:"3D",a:"ml",tag:["app"],title:"机器学习选闪烁体",s:"数据驱动挑组合",k:["56× PbWO₄","20 lp/mm"]},
+ {L:1,id:"n16",ref:"jmccrev",m:"Cu2I2",a:"book",tag:["ste","cc","xl"],title:"综述：离子型 vs 配位型",s:"两类机理与器件策略不同",k:[]},
+ {L:2,id:"n17",ref:"afm25",m:"Cu2I2",a:"cpl",tag:["cc","app"],title:"圆偏振电致发光",s:"Cu(I) 卤化物簇首次实现 CPEL",k:["EQE 20.5%","g_EL 1.36×10⁻³"]},
+ {L:2,id:"n18",ref:"chemsci25",m:"chain",a:"shield",tag:["xl","app"],title:"AIO 双成键",s:"离子键 + 配位键 → 更稳",k:["PLQY 84.8%","377 nGy/s"]},
+ {L:2,id:"n19",ref:"icf25",m:"3D",a:"shield",tag:["cc","app"],title:"3D [Cu₄I₄] 闪烁体",s:"3D 骨架换稳定，效率不丢",k:["近 100% 量子效率"]},
+ {L:2,id:"n20",ref:"lam25",m:"Cu4X6",a:"flex",tag:["ste","app"],title:"(MTP)₂Cu₄I₆ 柔性膜",s:"大斯托克斯位移 → 不自吸收",k:["PLQY 99.9% · 43,800 photons/MeV","10.2 lp/mm"]},
+ {L:2,id:"n21",ref:"matter25",m:"nanocl",a:"flex",tag:["app"],title:"团簇凝胶闪烁膜 †",s:"紫外光聚合约 30 s 成大膜 †",k:["20 × 12 cm †","透过率 ~90% †"]},
+ {L:3,id:"n22",ref:"ic26",m:"Cu4I4",a:"flex",tag:["cc","app"],title:"(4-popy)₄Cu₄I₄ 柔性膜",s:"立方烷更致密，X 射线吸收更强",k:["52,000 photons/MeV","20 lp/mm"]},
+ {L:3,id:"n23",ref:"jmcc26",m:"Cu2X4",a:"led",tag:["ste","app"],title:"深蓝 (TEA)₂Cu₂Br₄",s:"蓝光开始看器件寿命",k:["PLQY 98%","20 天保持 93.8%"]},
+ {L:3,id:"n24",ref:null,m:"Cu4I4",a:"q",tag:["app"],title:"待解问题",s:"离子型 EL 仍弱，器件寿命短（据上述文献归纳）",k:["高 EQE 均靠主客体","T₅₀ 137 h"]}
+];
+/* ================= 拼装台（自由拼装，无对错） ================= */
+const CORES=[{k:"CuX4",n:"[CuX₄]"},{k:"Cu2X4",n:"[Cu₂Br₄]²⁻"},{k:"Cu2I2",n:"[Cu₂I₂]"},{k:"Cu4I4",n:"[Cu₄I₄]"},{k:"Cu4X6",n:"[Cu₄I₆]²⁻"},{k:"chain",n:"[CuI]∞ 链"}];
+const ORGS=[{k:"tea",n:"TEA⁺ 铵"},{k:"mtp",n:"MTP⁺ 鏻"},{k:"chiral",n:"手性配体"},{k:"carb",n:"膦 / 咔唑配体"},{k:"dmpz",n:"dmpz 小配体"},{k:"pyr",n:"4-popy 吡啶"}];
+const FORMS=[{k:"phosphor",n:"荧光粉 + UV 芯片"},{k:"film",n:"柔性聚合物膜"},{k:"hostguest",n:"主客体薄膜器件"},{k:"ink",n:"油墨 / 涂层"}];
+const APPS=[
+ {t:"柔性 X 射线成像",a:"flex",ok:{core:["Cu4X6","Cu4I4"],org:["mtp","pyr"],form:["film"]},r:["(MTP)₂Cu₄I₆ / PDMS · 10.2 lp/mm","(4-popy)₄Cu₄I₄ / PVA · 20 lp/mm"],refs:["lam25","ic26"]},
+ {t:"蓝光荧光粉 → 白光 LED",a:"led",ok:{core:["Cu2X4"],org:["tea"],form:["phosphor"]},r:["(TEA)₂Cu₂Br₄ · PLQY 98%"],refs:["tea23","jmcc26"]},
+ {t:"圆偏振发光",a:"cpl",ok:{core:["Cu4I4","chain","Cu2I2"],org:["chiral"],form:["phosphor","hostguest"]},r:["手性链 · g_lum ≈ 4×10⁻³","手性 Cu₂I₂ · CPEL EQE 20.5%"],refs:["small23","afm25"]},
+ {t:"电致发光 LED",a:"el",ok:{core:["Cu2I2","Cu4I4"],org:["carb"],form:["hostguest"]},r:["[dppb]₂Cu₂I₂ · EQE 13.39%","[tBCzDppy]₂Cu₄I₄ · EQE 23.5%"],refs:["adma24","ncomms24"]},
+ {t:"单组分白光",a:"white",ok:{core:["Cu4I4","Cu4X6"],org:["carb","pyr"],form:["phosphor"]},r:["Cu₄I₄(NP-tBu)₂ · PLQY 97%","DPCu₄I₆ · CRI 85.1"],refs:["jacs24","chemsci23"]},
+ {t:"防伪油墨",a:"ink",ok:{core:["chain"],org:["dmpz"],form:["ink"]},r:["CuI(dmpz) 研磨 · 黄绿 → 橙红"],refs:["adom24","cc24"]}
+];
+
+/* ================= 总结地图 ================= */
+const MAPN={
+ s0:{c:0,r:0,t:"Cu⁺(d¹⁰) + 卤素：无铅、储量丰富",e:"铜(I) 是 3d¹⁰ 闭壳层，元素无毒、便宜。",refs:["chemmater"]},
+ s1:{c:0,r:1,t:"0D 孤立单元 [Cu₂X₄]/[Cu₄I₄]/[Cu₄X₆]",e:"无机发光单元被有机部分完全隔开，是近三年高 PLQY 材料的主力结构。",refs:["tea23","adom23","lam25"]},
+ s2:{c:0,r:2,t:"1D 链 / 2D 层 / 3D 骨架",e:"单元连起来，局域变弱但稳定性可能更好；维度变化还能触发变色。",refs:["small23","adom24","icf25"]},
+ s3:{c:0,r:3,t:"有机部分：阳离子 / 配体 / 手性",e:"阳离子负责隔开；配体可直接参与电荷转移、当能量天线；手性配体传递手性。",refs:["ncomms24","small23","jmccrev"]},
+ s4:{c:0,r:4,t:"Cu⋯Cu＜2.8 Å（亲铜作用）",e:"铜原子靠得够近，产生簇中心态；距离越短，低能带越红。",refs:["adom23","perr11"]},
+ s5:{c:0,r:5,t:"刚性环境：氢键 / AIO 双成键",e:"骨架越刚，振动耗散越少；离子键 + 配位键叠加还提高稳定性。",refs:["small23","chemsci25"]},
+ s6:{c:0,r:6,t:"重原子 I、致密簇（高 Z）",e:"碘多、簇致密 → X 射线吸收强。",refs:["ic26","anie23"]},
+ m1:{c:1,r:0,t:"强量子限域 → 激子局域",e:"激子被关在单个簇里。",refs:["chemmater"]},
+ m2:{c:1,r:1,t:"激发态结构重组 → 自陷激子 STE",e:"激发后簇变形，能量下降，形成自陷态，再发光。",refs:["chemmater","pccp","anie23"]},
+ m3:{c:1,r:2,t:"³CC 簇中心态",e:"Cu₄I₄ 等簇中，卤→金属电荷转移与 Cu d¹⁰→d⁹s¹ 混合的三重态。",refs:["adom23","perr11"]},
+ m4:{c:1,r:3,t:"(M+X)LCT / XLCT 电荷转移态",e:"金属+卤素 → 配体的电荷转移，常见于配位型；与 ³CC 共存时出现双发射。",refs:["chemsci23","chemsci25","perr11"]},
+ m5:{c:1,r:4,t:"TADF：小 ΔE_ST，RISC 回收三重态",e:"单重–三重能差小，热能把 T₁ 推回 S₁，延迟荧光。",refs:["acsel23","lsa24","adom24"]},
+ m6:{c:1,r:5,t:"非辐射衰减被抑制",e:"刚性 + 隔离：激发能少变热。",refs:["small23","adom23"]},
+ p1:{c:2,r:0,t:"近 100% PLQY",e:"例：99.9%（Small 2023；Light Adv. Manuf. 2025），98%（JMCC 2026），97%（JACS 2024）。",refs:["small23","lam25","jacs24"]},
+ p2:{c:2,r:1,t:"大斯托克斯位移 → 低自吸收",e:"例：1.38 eV（TEA₂Cu₂Br₄），185 nm（MTP₂Cu₄I₆），220 nm（绿光溴化物）。",refs:["tea23","lam25","pccp"]},
+ p3:{c:2,r:2,t:"宽带 / 双发射",e:"半峰宽常 100 nm 以上；双发射可覆盖 400–800 nm。",refs:["jacs24","chemsci23","lsa24"]},
+ p4:{c:2,r:3,t:"热致 / 力致 / 溶剂致变色",e:"两个发光态此消彼长，或结构相变、Cu–Cu 距离改变。",refs:["perr11","adom24","cc24"]},
+ p5:{c:2,r:4,t:"圆偏振发光 CPL",e:"g_lum ~10⁻³ 量级。",refs:["small23","adom23","afm25"]},
+ p6:{c:2,r:5,t:"强 X 射线吸收 + 高光产额",e:"10⁴–10⁵ photons/MeV 量级。",refs:["acsel23","ic26","lam25"]},
+ a1:{c:3,r:0,t:"白光 LED / 照明",e:"单组分白光：CRI 85.1（2023）→ CRI≈88 保持 1000 h（2024）。",refs:["chemsci23","jacs24","jmcc26"]},
+ a2:{c:3,r:1,t:"X 射线闪烁体、柔性成像",e:"光产额从 >10⁴ 到 1.75×10⁵ photons/MeV；柔性复合膜分辨率 10–20 lp/mm（2024–2026）。",refs:["anie23","anieml","ic26"]},
+ a3:{c:3,r:2,t:"电致发光 LED（主客体）",e:"EQE 13.39% → 23.5%；最高亮度约 5 万 cd/m²。",refs:["adma24","ncomms24","lsa24"]},
+ a4:{c:3,r:3,t:"防伪与信息加密",e:"研磨、溶剂、温度都能当“钥匙”。",refs:["adom24","cc24"]},
+ a5:{c:3,r:4,t:"CPL / 圆偏振电致发光",e:"2025 年首次实现 Cu(I) 卤化物簇的 CPEL，EQE 20.5%。",refs:["afm25"]},
+ a6:{c:3,r:5,t:"无铅、低毒、低成本替代",e:"替代铅卤钙钛矿的主要动机。",refs:["chemmater"]}
+};
+const MAPL=[["s0","m3"],["s0","a6"],["s1","m1"],["s2","m1"],["s2","p4"],["s3","m1"],["s3","m4"],["s3","m5"],["s3","p5"],["s4","m3"],["s5","m6"],["s6","p6"],
+ ["m1","m2"],["m1","p1"],["m2","p2"],["m2","p3"],["m3","p3"],["m4","p3"],["m3","p4"],["m4","p4"],["m5","p4"],["m5","p6"],["m6","p1"],
+ ["p1","a1"],["p1","a2"],["p1","a3"],["p2","a2"],["p3","a1"],["p4","a4"],["p5","a5"],["p6","a2"],["m5","a3"]];
+/* ================= 状态 ================= */
+const KEY="cuhalide_game_v2";
+let ST={ph:0,seen:{},gate:{},goals:{},forge:{},quiz:{}};
+try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s)ST=Object.assign(ST,s);}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}}
+function gain(n){ST.ph+=n;save();document.getElementById("ph").textContent=ST.ph;toast(`✦ +${n}`)}
+let tt=null;function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2200)}
+document.getElementById("ph").textContent=ST.ph;
+
+/* ================= 导航 ================= */
+function go(s){document.querySelectorAll("section").forEach(x=>x.classList.toggle("on",x.id==="s-"+s));
+  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.s===s));
+  window.scrollTo({top:0});if(s==="lab")labResize();}
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>go(b.dataset.s));
+
+/* ================= 序章图鉴 ================= */
+document.getElementById("motifs").innerHTML=MOTIFS.map(m=>`<div class="motif"><svg viewBox="0 0 200 120">${motifSVG(m.m)}</svg><div class="nm">${m.n}</div><div class="kn">${m.d}</div></div>`).join("");
+/* ---- 序章一屏图示（动画） ---- */
+function introStatic(){
+  const T=(x,y,t,c,sz)=>`<text x="${x}" y="${y}" fill="${c||'#e8e2d4'}" font-size="${sz||15}" text-anchor="middle" font-family="serif" letter-spacing="2">${t}</text>`;
+  const A=(x1,x2,y,lab)=>`<path class="flow" d="M${x1} ${y} L${x2} ${y}" stroke="#d8b46a" stroke-width="1.6" fill="none"/><path d="M${x2} ${y} l-8 -5 v10z" fill="#d8b46a"/>${T((x1+x2)/2,y-12,lab,'#8d8a82',12)}`;
+  let o=`<defs><radialGradient id="exg"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#6fa8ff"/><stop offset="1" stop-color="#6fa8ff" stop-opacity="0"/></radialGradient>
+   <linearGradient id="spg" x1="0" x2="1"><stop offset="0" stop-color="#7b5cff"/><stop offset=".3" stop-color="#3fb7ff"/><stop offset=".5" stop-color="#5de08a"/><stop offset=".7" stop-color="#ffd54a"/><stop offset="1" stop-color="#ff5a3c"/></linearGradient></defs>`;
+  // 1 簇 + 有机
+  o+=`<g id="introCube"></g>`;for(let i=0;i<8;i++){const t=i/8*Math.PI*2;o+=`<circle cx="${130+92*Math.cos(t)}" cy="${190+80*Math.sin(t)}" r="11" fill="none" stroke="#9fb7ff" stroke-width="1.2"/><text x="${130+92*Math.cos(t)}" y="${194+80*Math.sin(t)}" fill="#9fb7ff" font-size="11" text-anchor="middle">+</text>`}
+  o+=T(130,320,"Cu–X 簇 + 有机部分")+T(130,342,"有机部分把簇隔开","#8d8a82",12);
+  o+=A(240,320,190,"隔开");
+  // 2 激子局域
+  o+=`<circle cx="400" cy="190" r="56" fill="none" stroke="rgba(216,180,106,.5)" stroke-dasharray="3 4"/><circle class="pulse" cx="400" cy="190" r="34" fill="url(#exg)"/>`+T(400,320,"激子被关在一个簇里")+T(400,342,"强局域","#8d8a82",12);
+  o+=A(470,550,190,"变形");
+  // 3 位形坐标
+  const px=(q)=>560+q*48,py=(e)=>270-e*55;let g="",x="";for(let q=-.2;q<=3.6;q+=.1){g+=(q<=-.15?"M":"L")+px(q).toFixed(1)+" "+py(.22*q*q).toFixed(1)+" ";x+=(q<=-.15?"M":"L")+px(q).toFixed(1)+" "+py(3.2-.22*2.2*2.2+.22*(q-2.2)**2).toFixed(1)+" "}
+  o+=`<path d="${g}" stroke="#cfc8b8" fill="none" stroke-width="1.6"/><path d="${x}" stroke="#6fa8ff" fill="none" stroke-width="1.6"/>`;
+  o+=`<line x1="${px(0)}" y1="${py(0)}" x2="${px(0)}" y2="${py(3.2)}" stroke="#b48cff" stroke-width="2.4"/><line x1="${px(2.2)}" y1="${py(3.2-.22*4.84)}" x2="${px(2.2)}" y2="${py(.22*4.84)}" stroke="#3fb7ff" stroke-width="2.4"/>`;
+  o+=`<circle id="introE" r="6" fill="#fff"/>`;
+  o+=T(650,320,"激发态变形 → 放掉一截能量")+T(650,342,"自陷激子 STE","#8d8a82",12);
+  o+=A(760,830,190,"发光");
+  // 4 宽带光谱
+  let b="M850 250";for(let l=0;l<=160;l+=4){b+=` L${850+l} ${250-120*Math.exp(-.5*((l-80)/32)**2)}`}b+=" L1010 250 Z";
+  o+=`<path d="${b}" fill="url(#spg)" opacity=".85"/><line x1="850" y1="250" x2="1010" y2="250" stroke="#8d8a82"/><path d="M842 250 q6 -110 12 0" fill="none" stroke="#b48cff" stroke-dasharray="3 3"/>`;
+  o+=`<path d="M848 150 L930 150" stroke="#f1d9a0" stroke-width="1"/>`+T(890,142,"斯托克斯位移","#f1d9a0",11);
+  o+=T(930,320,"宽带 · 大位移 · 近 100%")+T(930,342,"三重态，μs 寿命","#8d8a82",12);
+  // 5 应用
+  [["led","照明"],["xray","X 射线"],["el","LED"],["cpl","CPL"],["ink","防伪"]].forEach(([a,n],i)=>{o+=`<g transform="translate(1060,${40+i*66}) scale(.8)">${icon(a)}</g>`+T(1150,70+i*66,n,"#e7c66b",12)});
+  return o;
+}
+const IS=document.getElementById("introSvg");IS.innerHTML=introStatic();
+let introT=0;
+function introTick(dt){introT+=dt;const c=document.getElementById("introCube");if(!c)return;c.innerHTML=cubane(130,190,40,introT*.6,.5+.5*Math.sin(introT*2)).svg;
+  const e=document.getElementById("introE");const ph=(introT%3)/3;let q,E;const px=q=>560+q*48,py=v=>270-v*55;
+  if(ph<.2){q=0;E=3.2*ph/.2}else if(ph<.6){const f=(ph-.2)/.4;q=2.2*f;E=3.2-.22*2.2*2.2+.22*(q-2.2)**2}else if(ph<.75){q=2.2;const f=(ph-.6)/.15;E=(3.2-1.0648)+((1.0648)-(3.2-1.0648))*f}else{const f=(ph-.75)/.25;q=2.2*(1-f);E=.22*q*q}
+  e.setAttribute("cx",px(q));e.setAttribute("cy",py(E));}
+
+/* ================= 时间线（无关卡题，年份随点随开） ================= */
+let curL=0;
+const TAGN={ste:["STE","t-ste"],cc:["³CC","t-cc"],xl:["(M+X)LCT","t-xl"],tadf:["TADF","t-tadf"],app:["应用","t-app"]};
+function renderTimeline(){
+  document.getElementById("years").innerHTML=LEVELS.map((l,i)=>{const ns=NODES.filter(n=>n.L===i),k=ns.filter(n=>ST.seen[n.id]).length;
+    return `<div class="yr open ${i===curL?'cur':''}" data-i="${i}"><div class="dot"></div><div class="y">${l.y}</div><div class="t">${l.t}</div><div class="prog">${k}/${ns.length}</div></div>`}).join("");
+  document.querySelectorAll(".yr").forEach(e=>e.onclick=()=>{curL=+e.dataset.i;renderTimeline()});
+  document.getElementById("nodes").innerHTML=NODES.filter(n=>n.L===curL).map(n=>{const r=n.ref?REFS[n.ref]:null;
+    return `<div class="node ${ST.seen[n.id]?'visited':''}" data-id="${n.id}"><span class="seen">✦</span>${nodeArt(n.m,n.a)}<div class="j">${r?`${r.j} · ${r.y.split("（")[0]}`:'归纳'}</div><div class="tt">${n.title}</div>${n.k[0]?`<div class="kn">${n.k[0]}</div>`:""}<div style="margin-top:6px">${n.tag.map(t=>`<span class="tag ${TAGN[t][1]}">${TAGN[t][0]}</span>`).join("")}</div></div>`}).join("");
+  document.querySelectorAll(".node").forEach(e=>e.onclick=()=>openNode(e.dataset.id));
+  document.getElementById("nextYr").innerHTML=curL<3?`<button class="btn" onclick="curL=${curL+1};renderTimeline();window.scrollTo({top:0})">${LEVELS[curL+1].y} →</button>`:`<button class="btn" onclick="go('map')">地图 →</button>`;
+}
+function openNode(id){
+  const n=NODES.find(x=>x.id===id),r=n.ref?REFS[n.ref]:null;
+  if(!ST.seen[id]){ST.seen[id]=true;gain(1)}
+  document.getElementById("mbody").innerHTML=`<h3 style="font-size:21px;color:var(--gold2);margin:4px 0 14px">${n.title}</h3>
+   <div class="art"><div>${nodeArt(n.m,n.a)}<div class="note" style="margin-top:4px"><span class="schem">示意</span></div></div>
+   <div><div style="font-size:16px;color:#e8e2d4;margin:6px 0 14px">${n.s}</div>${n.k.map(k=>`<div class="big">${k}</div>`).join("")}</div></div>
+   <div class="src">${r?`[${refNo(n.ref)}] ${r.j} ${r.y.split("（")[0]} · <a href="https://doi.org/${r.doi}" target="_blank" rel="noopener">${r.doi}</a>${r.dag?' †':''}`:''}</div>`;
+  document.getElementById("modal").classList.add("on");renderTimeline();
+}
+function closeModal(){document.getElementById("modal").classList.remove("on")}
+document.getElementById("modal").onclick=e=>{if(e.target.id==="modal")closeModal()};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+renderTimeline();
+
+/* ================= 颜色：光谱 → sRGB（CIE 1931 解析近似） ================= */
+function g3(x,m,s1,s2){const t=(x-m)/(x<m?s1:s2);return Math.exp(-.5*t*t)}
+function cmf(l){return [1.056*g3(l,599.8,37.9,31)+.362*g3(l,442,16,26.7)-.065*g3(l,501.1,20.4,26.2),.821*g3(l,568.8,46.9,40.5)+.286*g3(l,530.9,16.3,31.1),1.217*g3(l,437,11.8,36)+.681*g3(l,459,26,13.8)]}
+function xyz2rgb(X,Y,Z){let r=3.2406*X-1.5372*Y-.4986*Z,g=-.9689*X+1.8758*Y+.0415*Z,b=.0557*X-.204*Y+1.057*Z;
+  const mn=Math.min(r,g,b);if(mn<0){r-=mn;g-=mn;b-=mn}const mx=Math.max(r,g,b)||1;
+  return [r,g,b].map(v=>{v/=mx;v=v<=.0031308?12.92*v:1.055*Math.pow(v,1/2.4)-.055;return Math.round(255*Math.max(0,Math.min(1,v)))})}
+function lamRGB(l){const c=cmf(l);const rgb=xyz2rgb(...c);const vis=l<380?Math.max(0,(l-330)/50):l>720?Math.max(0,(780-l)/60):1;return `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${Math.max(.25,vis).toFixed(2)})`}
+function specColor(spec){let X=0,Y=0,Z=0;spec.forEach(([l,v])=>{if(l<380||l>780)return;const c=cmf(l);X+=c[0]*v;Y+=c[1]*v;Z+=c[2]*v});const s=X+Y+Z||1;return {rgb:xyz2rgb(X,Y,Z),x:X/s,y:Y/s}}
+
+/* ================= 原理实验台 ================= */
+const kB=8.617e-5;
+const LAB={mode:"ste",p:{dim:0,T:300,rig:.5,d:2.65,T2:300,dE:.08,T3:300},els:[],photons:[],hist:{},t:0};
+const cv=document.getElementById("cv"),ctx=cv.getContext("2d"),sp=document.getElementById("sp"),sctx=sp.getContext("2d");
+let W=760,H=430,SW=760,SH=190;
+function labResize(){const dpr=window.devicePixelRatio||1;[[cv,ctx,760,430],[sp,sctx,760,190]].forEach(([c,x,w,h])=>{c.width=w*dpr;c.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0)})}
+labResize();
+function e2l(E){return 1239.84/E}
+function model(){
+  const p=LAB.p,m=LAB.mode;
+  if(m==="ste"){const loc=[1,.72,.45,.22][p.dim];const Eabs=4.05,S=.25+1.15*loc,Eem=Eabs-S;
+    const fw=.15+.33*loc+.0003*(p.T-80);const C=[60,300,1500,8000][p.dim]*Math.pow(10,1-2*p.rig);
+    const knr=C*Math.exp(-.2/(kB*p.T));const q=1/(1+knr);
+    return {Eabs,S,bands:[{E:Eem,w:fw,a:q,k:"ste"}],plqy:q,loc}}
+  if(m==="cc"){const dEff=p.d-.06*(300-p.T2)/220;const wcc=1/(1+Math.exp((dEff-2.8)/.05));
+    const Ecc=Math.max(1.85,Math.min(2.45,2.15+.9*(dEff-2.6)));const Exl=2.85;
+    const kconv=50*wcc*Math.exp(-.04/(kB*p.T2));const fHE=1/(1+kconv);
+    const q=.95/(1+20*Math.exp(-.25/(kB*p.T2)));
+    return {Eabs:3.75,dEff,wcc,Ecc,Exl,fHE,plqy:q,bands:[{E:Exl,w:.33,a:q*fHE,k:"xl"},{E:Ecc,w:.42+.0004*(p.T2-80),a:q*(1-fHE),k:"cc"}]}}
+  const S1=2.55,T1=S1-p.dE;const kr=300*Math.exp(-p.dE/(kB*p.T3));const fDF=kr/(kr+1);const q=.9/(1+5*Math.exp(-.22/(kB*p.T3)));
+  return {Eabs:3.6,S1,T1,fDF,plqy:q,bands:[{E:S1,w:.32,a:q*fDF,k:"tadf"},{E:T1,w:.32,a:q*(1-fDF),k:"ph"}]};
+}
+function spectrum(M){const out=[];for(let l=300;l<=800;l+=2){const E=e2l(l);let v=0;M.bands.forEach(b=>{const s=b.w/2.355;v+=b.a*Math.exp(-.5*((E-b.E)/s)**2)});out.push([l,v])}return out}
+function peakOf(sp){let b=sp[0];sp.forEach(x=>{if(x[1]>b[1])b=x});return b}
+function fwhmNm(sp){const p=peakOf(sp);const h=p[1]/2;const a=sp.filter(x=>x[1]>=h);return a.length?a[a.length-1][0]-a[0][0]:0}
+
+const CTRL={
+ ste:`<div class="ctrl"><label>维度<span id="v_dim"></span></label><div class="seg" id="segdim">${["0D","1D","2D","3D"].map((d,i)=>`<button data-i="${i}">${d}</button>`).join("")}</div></div>
+  <div class="ctrl"><label>骨架刚性<span id="v_rig"></span></label><input type="range" id="rig" min="0" max="1" step="0.05"></div>
+  <div class="ctrl"><label>温度<span id="v_T"></span></label><input type="range" id="T" min="80" max="400" step="5"></div>`,
+ cc:`<div class="ctrl"><label>Cu⋯Cu 距离<span id="v_d"></span></label><input type="range" id="d" min="2.40" max="3.20" step="0.01"></div>
+  <div class="ctrl"><label>温度<span id="v_T2"></span></label><input type="range" id="T2" min="80" max="400" step="5"></div>`,
+ tadf:`<div class="ctrl"><label>ΔE_ST<span id="v_dE"></span></label><input type="range" id="dE" min="0.02" max="0.30" step="0.01"></div>
+  <div class="ctrl"><label>温度<span id="v_T3"></span></label><input type="range" id="T3" min="80" max="400" step="5"></div>`
+};
+const ONELINE={ste:"吸收 → 变形弛豫（放热）→ 宽带发光。维度越低、骨架越刚：越亮、位移越大。",
+ cc:"Cu⋯Cu 近 → 橙色 ³CC；降温 → 蓝紫 XLCT 冒头（热致变色）。",
+ tadf:"ΔE_ST 小、温度高 → T₁ 回到 S₁ → 延迟荧光，颜色变蓝。"};
+function setMode(m){LAB.mode=m;LAB.els=[];LAB.photons=[];LAB.hist={};document.querySelectorAll("#modes button").forEach(b=>b.classList.toggle("on",b.dataset.m===m));
+  document.getElementById("ctrls").innerHTML=CTRL[m];
+  if(m==="ste"){const sg=document.querySelectorAll("#segdim button");sg.forEach(b=>{b.classList.toggle("on",+b.dataset.i===LAB.p.dim);b.onclick=()=>{LAB.p.dim=+b.dataset.i;sg.forEach(x=>x.classList.toggle("on",x===b));LAB.hist={};update()}})}
+  ["rig","T","d","T2","dE","T3"].forEach(k=>{const el=document.getElementById(k);if(el){el.value=LAB.p[k];el.oninput=()=>{LAB.p[k]=+el.value;LAB.hist={};update()}}});
+  document.getElementById("oneline").textContent=ONELINE[m];update();}
+document.querySelectorAll("#modes button").forEach(b=>b.onclick=()=>setMode(b.dataset.m));
+function update(){
+  const M=model(),p=LAB.p,S=spectrum(M),pk=peakOf(S),col=specColor(S);LAB.M=M;LAB.S=S;LAB.col=col;
+  const sv=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
+  sv("v_dim",["0D","1D","2D","3D"][p.dim]);sv("v_rig",p.rig<.34?"柔":p.rig<.67?"中":"刚");sv("v_T",p.T+" K");sv("v_d",p.d.toFixed(2)+" Å");sv("v_T2",p.T2+" K");sv("v_dE",p.dE.toFixed(2)+" eV");sv("v_T3",p.T3+" K");
+  const la=e2l(M.Eabs),lp=pk[0];
+  let rows=[["发射峰",lp+" nm"],["位移",(lp-la).toFixed(0)+" nm"],["半峰宽",fwhmNm(S)+" nm"],["PLQY",(M.plqy*100).toFixed(0)+"%"]];
+  if(LAB.mode==="cc")rows.push(["高能带",(M.fHE*100).toFixed(0)+"%"],["Cu⋯Cu",M.dEff.toFixed(2)+" Å"]);
+  if(LAB.mode==="tadf")rows.push(["延迟荧光",(M.fDF*100).toFixed(0)+"%"],["磷光",((1-M.fDF)*100).toFixed(0)+"%"]);
+  document.getElementById("readout").innerHTML=rows.map(r=>`<div>${r[0]}<b>${r[1]}</b></div>`).join("");
+  const sw=document.getElementById("swatch"),c=`rgb(${col.rgb.join(",")})`,a=Math.max(.08,M.plqy);
+  sw.style.background=`linear-gradient(90deg, rgba(${col.rgb.join(",")},${a}) , rgba(${col.rgb.join(",")},${a*.6}))`;sw.style.setProperty("--sw",`rgba(${col.rgb.join(",")},${(a*.55).toFixed(2)})`);
+}
+/* ---- 电子动画 ---- */
+function fire(n){for(let i=0;i<(n||1);i++)LAB.els.push({ph:"up",t:-i*0.12,path:null})}
+document.getElementById("fire").onclick=()=>fire(1);document.getElementById("burst").onclick=()=>fire(20);
+function sampleBand(M){let r=Math.random()*M.bands.reduce((a,b)=>a+b.a,0);for(const b of M.bands){r-=b.a;if(r<=0){return b}}return M.bands[M.bands.length-1]}
+function gauss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+// 坐标映射
+const PX={x0:70,x1:560,y0:395,y1:30,Emax:4.6};
+function ey(E){return PX.y0-(E/PX.Emax)*(PX.y0-PX.y1)}
+function stePar(M){const k=.145,Q0=Math.sqrt(M.S/(2*k));return {k,Q0,qx:Q=>PX.x0+(Q+1.6)/(5.2)*(PX.x1-PX.x0),g:Q=>k*Q*Q,e:Q=>M.Eabs-k*Q0*Q0+k*(Q-Q0)**2}}
+function drawAxes(){ctx.strokeStyle="rgba(184,147,90,.5)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(PX.x0,PX.y1-10);ctx.lineTo(PX.x0,PX.y0);ctx.lineTo(PX.x1+10,PX.y0);ctx.stroke();
+  ctx.fillStyle="#8d8a82";ctx.font="12px sans-serif";ctx.save();ctx.translate(26,220);ctx.rotate(-Math.PI/2);ctx.fillText("能量 E →",0,0);ctx.restore()}
+function curve(f,a,b,col,w,dash){ctx.beginPath();ctx.strokeStyle=col;ctx.lineWidth=w||2;ctx.setLineDash(dash||[]);let first=true;for(let x=a;x<=b;x+=.02){const P=f(x);if(P[1]<PX.y1-5||P[1]>PX.y0){first=true;continue}first?ctx.moveTo(...P):ctx.lineTo(...P);first=false}ctx.stroke();ctx.setLineDash([])}
+function arrow(x1,y1,x2,y2,col,w,label){ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=w||2;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();const a=Math.atan2(y2-y1,x2-x1);ctx.beginPath();ctx.moveTo(x2,y2);ctx.lineTo(x2-9*Math.cos(a-.4),y2-9*Math.sin(a-.4));ctx.lineTo(x2-9*Math.cos(a+.4),y2-9*Math.sin(a+.4));ctx.fill();if(label){ctx.font="12px sans-serif";ctx.fillText(label,x2+6,(y1+y2)/2)}}
+function wiggle(x1,y1,x2,y2,col,t){ctx.strokeStyle=col;ctx.lineWidth=1.4;ctx.beginPath();const n=40;for(let i=0;i<=n;i++){const f=i/n,x=x1+(x2-x1)*f,y=y1+(y2-y1)*f,o=Math.sin(f*30+t*10)*5;i?ctx.lineTo(x+o,y):ctx.moveTo(x+o,y)}ctx.stroke()}
+function label(t,x,y,col,sz){ctx.fillStyle=col;ctx.font=(sz||12)+"px sans-serif";ctx.fillText(t,x,y)}
+function dot(x,y,col){ctx.beginPath();ctx.fillStyle=col;ctx.shadowColor=col;ctx.shadowBlur=14;ctx.arc(x,y,5.5,0,7);ctx.fill();ctx.shadowBlur=0}
+function emitPhoton(x,y,l){LAB.photons.push({x,y,vx:2.4+Math.random()*1.5,vy:(Math.random()-.5)*1.4,l,life:1});const b=Math.round(l/5)*5;LAB.hist[b]=(LAB.hist[b]||0)+1}
+function drawSTE(dt){const M=LAB.M,P=stePar(M);drawAxes();
+  curve(Q=>[P.qx(Q),ey(P.g(Q))],-1.6,3.6,"#cfc8b8",2);curve(Q=>[P.qx(Q),ey(P.e(Q))],-1.6,3.6,"#6fa8ff",2);
+  label("基态 S₀",P.qx(-1.5),ey(P.g(-1.5))-8,"#cfc8b8");label("激发态",P.qx(-1.55),ey(P.e(-1.5))-8,"#6fa8ff");
+  const x0=P.qx(0),xq=P.qx(P.Q0),Emin=M.Eabs-P.k*P.Q0*P.Q0;
+  ctx.setLineDash([3,4]);ctx.strokeStyle="rgba(184,147,90,.35)";ctx.beginPath();ctx.moveTo(x0,PX.y0);ctx.lineTo(x0,PX.y1);ctx.moveTo(xq,PX.y0);ctx.lineTo(xq,PX.y1);ctx.stroke();ctx.setLineDash([]);
+  label("原构型",x0-18,PX.y0+16,"#8d8a82",11);label("变形后",xq-18,PX.y0+16,"#8d8a82",11);
+  arrow(x0-14,ey(0)-2,x0-14,ey(M.Eabs)+4,"rgba(180,140,255,.55)",1.5);label("吸收",x0-48,ey(M.Eabs/2),"#b48cff");
+  const lc=`rgb(${LAB.col.rgb.join(",")})`;arrow(xq+14,ey(Emin)+4,xq+14,ey(P.g(P.Q0))-4,lc,1.5);label("发射",xq+20,ey((Emin+P.g(P.Q0))/2),lc);
+  ctx.fillStyle="rgba(240,166,64,.9)";ctx.font="12px sans-serif";ctx.fillText("自陷态 STE",xq-30,ey(Emin)+20);
+  // 斯托克斯标注
+  ctx.strokeStyle="rgba(241,217,160,.7)";ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(x0,ey(M.Eabs));ctx.lineTo(PX.x1+20,ey(M.Eabs));ctx.moveTo(xq,ey(Emin-P.g(P.Q0)));ctx.stroke();ctx.setLineDash([]);
+  ctx.strokeStyle="rgba(255,122,107,.35)";ctx.setLineDash([5,4]);ctx.beginPath();ctx.moveTo(xq,ey(Emin));ctx.bezierCurveTo(xq+90,ey(Emin)+30,xq+60,ey(P.g(P.Q0))-40,xq+30,ey(P.g(P.Q0)));ctx.stroke();ctx.setLineDash([]);label("→ 热",xq+66,ey((Emin+P.g(P.Q0))/2)+30,"rgba(255,122,107,.8)",11);
+  // 电子
+  LAB.els.forEach(e=>{e.t+=dt;if(e.t<0)return;let x,y;
+    if(e.ph==="up"){const f=Math.min(1,e.t/.35);x=x0;y=ey(M.Eabs*f);arrow(x0,ey(0),x0,y,"#b48cff",2.5);if(f>=1){e.ph="relax";e.t=0}}
+    else if(e.ph==="relax"){const f=Math.min(1,e.t/.9),Q=P.Q0*(1-Math.pow(1-f,2));x=P.qx(Q);y=ey(P.e(Q));if(Math.random()<.25)wiggle(x,y,x+10,y+18,"rgba(240,166,64,.7)",LAB.t);if(f>=1){e.ph=Math.random()<M.plqy?"emit":"nr";e.t=0;if(e.ph==="emit"){const b=sampleBand(M);e.l=e2l(b.E+gauss()*b.w/2.355)}}}
+    else if(e.ph==="emit"){const f=Math.min(1,e.t/.25);x=xq;y=ey(Emin+(P.g(P.Q0)-Emin)*f);arrow(xq,ey(Emin),xq,y,lamRGB(e.l),3);if(f>=1){emitPhoton(xq,ey((Emin+P.g(P.Q0))/2),e.l);e.ph="back";e.t=0}}
+    else if(e.ph==="nr"){const f=Math.min(1,e.t/.6);x=xq+30*Math.sin(f*Math.PI);y=ey(Emin+(P.g(P.Q0)-Emin)*f);wiggle(xq,ey(Emin),x,y,"#ff7a6b",LAB.t);if(f>=1){e.ph="back";e.t=0}}
+    else if(e.ph==="back"){const f=Math.min(1,e.t/.5),Q=P.Q0*(1-f);x=P.qx(Q);y=ey(P.g(Q));if(f>=1)e.done=true}
+    dot(x,y,"#fff")});
+}
+function drawCC(dt){const M=LAB.M;ctx.fillStyle="#8d8a82";
+  // 能级图（左）
+  const xs=90,xe=360,yS0=ey(0),yX=ey(M.Exl+.25),yC=ey(M.Ecc+.25),yA=ey(M.Eabs);
+  ctx.lineWidth=2;[[yS0,"#cfc8b8","S₀ 基态"],[yA,"rgba(207,200,184,.5)","高激发态"],[yX,"#b48cff","³XLCT（高能）"],[yC,"#f0a640","³CC（低能）"]].forEach(([y,c,t])=>{ctx.strokeStyle=c;ctx.beginPath();ctx.moveTo(xs,y);ctx.lineTo(xe,y);ctx.stroke();label(t,xs,y-6,c)});
+  ctx.globalAlpha=.25+.75*M.wcc;ctx.strokeStyle="#f0a640";ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(220,yX);ctx.lineTo(260,yC);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;
+  label("小能垒",232,(yX+yC)/2,"#8d8a82",11);
+  // 立方烷（右）
+  const a=LAB.t*.5,r=cubane(560,190,62,a,M.wcc);ctx.save();
+  const P=r.P;for(let i=0;i<8;i++)for(let j=i+1;j<8;j++){const v=[[-1,-1,-1],[-1,-1,1],[-1,1,-1],[-1,1,1],[1,-1,-1],[1,-1,1],[1,1,-1],[1,1,1]];const d=v[i].reduce((s,_,k)=>s+Math.abs(v[i][k]-v[j][k]),0);if(d===2){ctx.strokeStyle="rgba(216,180,106,.5)";ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(P[i][0],P[i][1]);ctx.lineTo(P[j][0],P[j][1]);ctx.stroke()}}
+  for(let i=0;i<4;i++)for(let j=i+1;j<4;j++){ctx.strokeStyle=`rgba(240,166,64,${.15+.8*M.wcc})`;ctx.lineWidth=.6+2.4*M.wcc;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(P[r.cu[i]][0],P[r.cu[i]][1]);ctx.lineTo(P[r.cu[j]][0],P[r.cu[j]][1]);ctx.stroke();ctx.setLineDash([])}
+  [...Array(8).keys()].sort((i,j)=>P[i][2]-P[j][2]).forEach(i=>{const cu=r.cu.includes(i);const g=ctx.createRadialGradient(P[i][0]-4,P[i][1]-4,1,P[i][0],P[i][1],cu?13:19);g.addColorStop(0,"#fff");g.addColorStop(.35,cu?C_CU:C_X);g.addColorStop(1,cu?"rgba(240,166,64,.4)":"rgba(180,140,255,.4)");ctx.fillStyle=g;ctx.beginPath();ctx.arc(P[i][0],P[i][1],cu?12:18,0,7);ctx.fill()});
+  ctx.restore();label(`Cu⋯Cu ${M.dEff.toFixed(2)} Å ${M.dEff<2.8?"< 2.8 Å":"≥ 2.8 Å"}`,490,330,M.dEff<2.8?"#f0a640":"#8d8a82",13);
+  LAB.els.forEach(e=>{e.t+=dt;if(e.t<0)return;let x=150+(e.k||0),y;
+    if(e.k==null)e.k=Math.random()*120;
+    if(e.ph==="up"){const f=Math.min(1,e.t/.3);y=yS0+(yA-yS0)*f;arrow(x,yS0,x,y,"#b48cff",2);if(f>=1){e.ph="down1";e.t=0}}
+    else if(e.ph==="down1"){const f=Math.min(1,e.t/.35);y=yA+(yX-yA)*f;wiggle(x,yA,x,y,"rgba(240,166,64,.5)",LAB.t);if(f>=1){e.t=0;if(Math.random()>M.plqy){e.ph="nr"}else{const b=sampleBand(M);e.l=e2l(b.E+gauss()*b.w/2.355);e.ph=b.k==="xl"?"emX":"hop"}}}
+    else if(e.ph==="hop"){const f=Math.min(1,e.t/.4);y=yX+(yC-yX)*f;x+=40*f;if(f>=1){e.ph="emC";e.t=0}}
+    else if(e.ph==="emX"||e.ph==="emC"){const y0=e.ph==="emX"?yX:yC;if(e.ph==="emC")x+=40;const f=Math.min(1,e.t/.25);y=y0+(yS0-y0)*f;arrow(x,y0,x,y,lamRGB(e.l),3);if(f>=1){emitPhoton(x,(y0+yS0)/2,e.l);e.done=true}}
+    else if(e.ph==="nr"){const f=Math.min(1,e.t/.5);y=yX+(yS0-yX)*f;wiggle(x,yX,x,y,"#ff7a6b",LAB.t);if(f>=1)e.done=true}
+    if(!e.done)dot(x,y,"#fff")});
+}
+function drawTADF(dt){const M=LAB.M;const yS0=ey(0),yS1=ey(M.S1+.4),yT1=ey(M.S1+.4-3*LAB.p.dE),yA=ey(M.Eabs+.3);
+  const xS=170,xT=470;ctx.lineWidth=2;
+  [[xS,yS0,"#cfc8b8","S₀",420],[xS,yS1,"#4fd1c5","S₁（¹(M+X)LCT）",150],[xT,yT1,"#f0a640","T₁（³(M+X)LCT）",150],[xS,yA,"rgba(207,200,184,.45)","高激发态",150]].forEach(([x,y,c,t,w])=>{ctx.strokeStyle=c;ctx.beginPath();ctx.moveTo(x-60,y);ctx.lineTo(x-60+w,y);ctx.stroke();label(t,x-60,y-7,c)});
+  arrow(xS+95,yS1+6,xT-65,yT1+4,"rgba(240,166,64,.7)",1.5,"");label("ISC",(xS+xT)/2-30,(yS1+yT1)/2+26,"#f0a640",11);
+  ctx.globalAlpha=.2+.8*M.fDF;arrow(xT-65,yT1-16,xS+95,yS1-14,"#4fd1c5",1+4*M.fDF);ctx.globalAlpha=1;label("RISC",(xS+xT)/2-10,Math.min(yS1,yT1)-34,"#4fd1c5",11);
+  ctx.strokeStyle="rgba(241,217,160,.6)";ctx.setLineDash([2,3]);ctx.beginPath();ctx.moveTo(xT+100,yS1);ctx.lineTo(xT+100,yT1);ctx.moveTo(xS+90,yS1);ctx.lineTo(xT+100,yS1);ctx.stroke();ctx.setLineDash([]);
+  label(`ΔE_ST = ${LAB.p.dE.toFixed(2)} eV`,xT+108,(yS1+yT1)/2+4,"#f1d9a0",13);label("×3 放大",xT+108,(yS1+yT1)/2+20,"#8d8a82",10);
+  LAB.els.forEach(e=>{e.t+=dt;if(e.t<0)return;let x=xS-20,y;
+    if(e.ph==="up"){const f=Math.min(1,e.t/.3);y=yS0+(yA-yS0)*f;arrow(x,yS0,x,y,"#b48cff",2);if(f>=1){e.ph="toS1";e.t=0}}
+    else if(e.ph==="toS1"){const f=Math.min(1,e.t/.3);y=yA+(yS1-yA)*f;if(f>=1){e.ph="isc";e.t=0}}
+    else if(e.ph==="isc"){const f=Math.min(1,e.t/.4);x=x+(xT-x)*f;y=yS1+(yT1-yS1)*f;if(f>=1){e.t=0;if(Math.random()>M.plqy)e.ph="nr";else{const df=Math.random()<M.fDF;e.ph=df?"risc":"emT";const E=df?M.S1:M.T1;e.l=e2l(E+gauss()*.32/2.355)}}}
+    else if(e.ph==="risc"){const f=Math.min(1,e.t/.4);x=xT+(xS-20-xT)*f;y=yT1+(yS1-yT1)*f;if(f>=1){e.ph="emS";e.t=0}}
+    else if(e.ph==="emS"||e.ph==="emT"){const x0=e.ph==="emS"?xS-20:xT,y0=e.ph==="emS"?yS1:yT1;x=x0;const f=Math.min(1,e.t/.25);y=y0+(yS0-y0)*f;arrow(x0,y0,x0,y,lamRGB(e.l),3);if(f>=1){emitPhoton(x0,(y0+yS0)/2,e.l);e.done=true}}
+    else if(e.ph==="nr"){x=xT;const f=Math.min(1,e.t/.5);y=yT1+(yS0-yT1)*f;wiggle(xT,yT1,x,y,"#ff7a6b",LAB.t);if(f>=1)e.done=true}
+    if(!e.done)dot(x,y,"#fff")});
+}
+function drawSpec(){const S=LAB.S,M=LAB.M;sctx.clearRect(0,0,SW,SH);const x0=50,x1=740,y0=160,y1=18;const lx=l=>x0+(l-300)/500*(x1-x0);
+  // 可见光色带
+  for(let l=380;l<=780;l+=4){sctx.fillStyle=lamRGB(l);sctx.globalAlpha=.12;sctx.fillRect(lx(l),y1,lx(l+4)-lx(l),y0-y1)}sctx.globalAlpha=1;
+  sctx.strokeStyle="rgba(184,147,90,.5)";sctx.beginPath();sctx.moveTo(x0,y0);sctx.lineTo(x1,y0);sctx.stroke();
+  sctx.fillStyle="#8d8a82";sctx.font="11px sans-serif";for(let l=300;l<=800;l+=50){sctx.fillText(l,lx(l)-10,y0+14)}sctx.fillText("波长 / nm",x1-50,y0+28);
+  // 吸收
+  const la=e2l(M.Eabs);sctx.beginPath();for(let l=250;l<=800;l+=2){const v=Math.exp(-.5*((e2l(l)-M.Eabs)/.12)**2);const X=lx(l),Y=y0-v*(y0-y1)*.85;l===250?sctx.moveTo(X,Y):sctx.lineTo(X,Y)}sctx.strokeStyle="rgba(180,140,255,.8)";sctx.setLineDash([4,3]);sctx.stroke();sctx.setLineDash([]);
+  // 发射（按 PLQY 缩放）
+  const mx=Math.max(...S.map(s=>s[1]),1e-6),norm=Math.max(mx,1);
+  for(let i=0;i<S.length-1;i++){const [l,v]=S[i];const h=v/norm*(y0-y1)*.95;sctx.fillStyle=lamRGB(l);sctx.globalAlpha=.85;sctx.fillRect(lx(l),y0-h,lx(S[i+1][0])-lx(l)+.5,h)}sctx.globalAlpha=1;
+  // 光子计数直方
+  const hk=Object.keys(LAB.hist),hm=Math.max(1,...Object.values(LAB.hist));hk.forEach(k=>{const l=+k,h=LAB.hist[k]/hm*30;sctx.fillStyle="#fff";sctx.globalAlpha=.7;sctx.fillRect(lx(l)-1.5,y1+2,3,h)});sctx.globalAlpha=1;
+  const pk=peakOf(S)[0];sctx.strokeStyle="#f1d9a0";sctx.lineWidth=1.2;sctx.beginPath();sctx.moveTo(lx(la),y1+46);sctx.lineTo(lx(pk),y1+46);sctx.stroke();
+  [[lx(la),1],[lx(pk),-1]].forEach(([x,d])=>{sctx.beginPath();sctx.moveTo(x,y1+46);sctx.lineTo(x+6*d,y1+42);sctx.lineTo(x+6*d,y1+50);sctx.fillStyle="#f1d9a0";sctx.fill()});
+  sctx.fillStyle="#f1d9a0";sctx.font="12px sans-serif";sctx.fillText(`斯托克斯位移 ${(pk-la).toFixed(0)} nm`,(lx(la)+lx(pk))/2-50,y1+40);
+  sctx.fillStyle="#b48cff";sctx.fillText("吸收",lx(la)-12,y0-4-(y0-y1)*.85);
+  sctx.fillStyle="#8d8a82";sctx.fillText("白条 = 发出的光子",x0,y1-4);
+}
+let last=performance.now();
+function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;LAB.t+=dt;
+  if(document.getElementById("s-intro").classList.contains("on"))introTick(dt);
+  if(document.getElementById("s-lab").classList.contains("on")){
+    ctx.clearRect(0,0,W,H);ctx.fillStyle="#090b10";ctx.fillRect(0,0,W,H);
+    if(LAB.mode==="ste")drawSTE(dt);else if(LAB.mode==="cc")drawCC(dt);else drawTADF(dt);
+    LAB.els=LAB.els.filter(e=>!e.done);
+    LAB.photons.forEach(p=>{p.x+=p.vx*60*dt;p.y+=p.vy*60*dt;p.life-=dt*.8;ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=lamRGB(p.l);ctx.shadowColor=lamRGB(p.l);ctx.shadowBlur=12;ctx.beginPath();ctx.arc(p.x,p.y,3.2,0,7);ctx.fill();ctx.shadowBlur=0});ctx.globalAlpha=1;
+    LAB.photons=LAB.photons.filter(p=>p.life>0&&p.x<W+10);
+    ctx.fillStyle="rgba(240,166,64,.85)";ctx.font="11px sans-serif";ctx.fillText("示意",W-40,18);
+    drawSpec();
+  }
+  requestAnimationFrame(loop)}
+setMode("ste");requestAnimationFrame(loop);
+/* ================= 拼装台逻辑（自由拼装，直接看结果） ================= */
+let pick={core:"Cu4I4",org:"carb",form:"hostguest"};
+const ORGCOL={tea:"#9fb7ff",mtp:"#e7c66b",chiral:"#ff8fb1",carb:"#4fd1c5",dmpz:"#7ddc9a",pyr:"#c6a0ff"};
+function renderSlots(){
+  const col=(key,arr,title)=>`<div class="slot"><h4>${title}</h4>${arr.map(a=>`<button class="chip ${pick[key]===a.k?'on':''}" data-s="${key}" data-k="${a.k}">${a.n}</button>`).join("")}</div>`;
+  document.getElementById("slots").innerHTML=col("core",CORES,"无机核")+col("org",ORGS,"有机部分")+col("form",FORMS,"形态");
+  document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{pick[c.dataset.s]=c.dataset.k;renderSlots()});
+  drawForge();renderResult();}
+function renderResult(){const hit=APPS.filter(a=>["core","org","form"].every(k=>a.ok[k].includes(pick[k])));
+  const box=document.getElementById("forgeRes");
+  if(hit.length){hit.forEach(h=>{const key="a"+APPS.indexOf(h);if(!ST.forge[key]){ST.forge[key]=1;gain(2)}});
+    box.innerHTML=hit.map(h=>`<svg viewBox="0 0 60 60" style="width:56px;height:56px">${icon(h.a)}</svg><div style="font-family:var(--serif);font-size:20px;color:var(--gold2)">→ ${h.t}</div>${h.r.map(x=>`<div class="kn" style="font-size:14px;margin-top:8px">${x}</div>`).join("")}<div class="note" style="margin-top:12px">${h.refs.map(cite).join("<br>")}</div>`).join('<div class="rule"></div>');return}
+  const best=APPS.map(a=>({a,n:["core","org","form"].filter(k=>a.ok[k].includes(pick[k])).length})).sort((x,y)=>y.n-x.n)[0].a;
+  box.innerHTML=`<div class="note">文献里还没见到这个组合</div><div style="margin-top:14px;color:#8d8a82;font-size:13px">最接近的做法</div><div style="font-family:var(--serif);font-size:18px;color:var(--gold2);margin-top:4px">${best.t}</div>${best.r.map(x=>`<div class="kn" style="margin-top:6px">${x}</div>`).join("")}<div class="note" style="margin-top:10px">${best.refs.map(cite).join("<br>")}</div>`;}
+function drawForge(){let s="";const c=pick.core;
+  if(pick.form==="film")s+=`<path d="M40 200 C200 150, 400 240, 560 180" fill="none" stroke="rgba(231,198,107,.35)" stroke-width="26"/>`;
+  if(pick.form==="hostguest")s+=[0,1,2,3].map(i=>`<rect x="120" y="${30+i*44}" width="360" height="36" fill="none" stroke="${["#4fd1c5","#b48cff","#f0a640","#4fd1c5"][i]}" stroke-opacity=".35"/>`).join("");
+  if(pick.form==="phosphor")s+=`<rect x="230" y="196" width="140" height="18" fill="rgba(180,140,255,.25)" stroke="#b48cff"/>`;
+  if(pick.form==="ink")s+=`<path d="M90 190 L200 140 L300 180 L420 120 L520 170" fill="none" stroke="#ff8a5b" stroke-width="3" stroke-dasharray="6 4"/>`;
+  if(pick.org){const n=8;for(let i=0;i<n;i++){const t=i/n*Math.PI*2;const x=300+150*Math.cos(t),y=110+78*Math.sin(t);s+=`<circle cx="${x}" cy="${y}" r="13" fill="none" stroke="${ORGCOL[pick.org]}" stroke-width="1.5"/><text x="${x}" y="${y+4}" fill="${ORGCOL[pick.org]}" font-size="10" text-anchor="middle">${pick.org==="chiral"?(i%2?"R":"R*"):"+"}</text>`}}
+  if(c)s+=`<g transform="translate(200,40)">${motifSVG(c)}</g>`;
+  document.getElementById("forgeArt").innerHTML=s;}
+renderSlots();
+
+/* ================= 总结地图 ================= */
+(function(){const svg=document.getElementById("mapSvg");const colX=[20,320,620,900],w=[260,260,240,260],hh=46,gap=72,top=60;
+  const heads=["结构","机理","性能","应用"],hc=["#d8b46a","#6fa8ff","#f0a640","#e7c66b"];
+  let s=heads.map((h,i)=>`<text x="${colX[i]}" y="32" fill="${hc[i]}" font-size="16" font-family="serif" letter-spacing="4">${h}</text><line x1="${colX[i]}" y1="40" x2="${colX[i]+w[i]}" y2="40" stroke="${hc[i]}" stroke-opacity=".5"/>`).join("");
+  const pos={};Object.entries(MAPN).forEach(([k,n])=>{pos[k]={x:colX[n.c],y:top+n.r*gap,w:w[n.c]}});
+  s+=MAPL.map(([a,b])=>{const A=pos[a],B=pos[b];let x1=A.x+A.w,y1=A.y+hh/2,x2=B.x,y2=B.y+hh/2;
+    if(MAPN[a].c===MAPN[b].c){x1=A.x+A.w-20;y1=A.y+hh;x2=B.x+B.w-20;y2=B.y}
+    const mx=(x1+x2)/2;return `<path class="lk" data-a="${a}" data-b="${b}" d="M${x1} ${y1} C${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}"/>`}).join("");
+  s+=Object.entries(MAPN).map(([k,n])=>{const P=pos[k];return `<g class="mn" data-k="${k}" style="cursor:pointer"><rect x="${P.x}" y="${P.y}" width="${P.w}" height="${hh}" rx="2"/><rect x="${P.x}" y="${P.y}" width="3" height="${hh}" fill="${hc[n.c]}" stroke="none"/><foreignObject x="${P.x+10}" y="${P.y+4}" width="${P.w-16}" height="${hh-8}"><div xmlns="http://www.w3.org/1999/xhtml" style="font-size:12.5px;line-height:1.35;color:#e8e2d4;display:flex;align-items:center;height:${hh-8}px">${n.t}</div></foreignObject></g>`}).join("");
+  svg.innerHTML=s;
+  function related(k){const set=new Set([k]);let ch=true;// 上下游
+    const up=[k],dn=[k];while(up.length){const x=up.pop();MAPL.forEach(([a,b])=>{if(b===x&&!set.has(a)){set.add(a);up.push(a)}})}
+    while(dn.length){const x=dn.pop();MAPL.forEach(([a,b])=>{if(a===x&&!set.has(b)){set.add(b);dn.push(b)}})}return set}
+  function hl(k){const R=k?related(k):null;svg.querySelectorAll(".mn").forEach(g=>{g.classList.toggle("hl",!!R&&g.dataset.k===k);g.classList.toggle("fade",!!R&&!R.has(g.dataset.k))});
+    svg.querySelectorAll("path.lk").forEach(p=>{const on=R&&R.has(p.dataset.a)&&R.has(p.dataset.b);p.classList.toggle("hl",!!on);p.classList.toggle("fade",!!R&&!on)})}
+  svg.querySelectorAll(".mn").forEach(g=>{g.onmouseenter=()=>hl(g.dataset.k);g.onmouseleave=()=>hl(null);
+    g.onclick=()=>{const n=MAPN[g.dataset.k];document.getElementById("mapInfo").innerHTML=`<h3 style="color:var(--gold2)">${n.t}</h3><p style="margin:6px 0">${n.e}</p><div class="note">${n.refs.map(cite).join("；")}</div>`}});
+})();
+
+/* ================= 参考文献 ================= */
+document.getElementById("refList").innerHTML=`<ol>${REF_ORDER.map(k=>{const r=REFS[k];return `<li>${r.au} ${r.t}. <i>${r.j}</i> <b>${r.y}</b>, ${r.v}.${r.kind?` <span class="tag t-mute">${r.kind}</span>`:""}${r.dag?" †":""}<br><span class="d">DOI：<a href="https://doi.org/${r.doi}" target="_blank" rel="noopener">${r.doi}</a></span></li>`}).join("")}</ol>`;
+</script>
+</body>
+</html>
